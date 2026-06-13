@@ -1,0 +1,26 @@
+# Godot 4
+.godot/
+.import/
+*.translation
+
+# Godot-specific
+*.import
+
+# Export builds
+Build/
+Export/
+*.exe
+*.pck
+*.zip
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Logs and temp
+*.log
+*.tmp

@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="GameConfig" load_steps=2 format=3 uid="uid://bgameconfig001"]
+
+[ext_resource type="Script" path="res://Resources/GameConfig.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+game_title = "ProjectClanker"
+target_fps = 60
