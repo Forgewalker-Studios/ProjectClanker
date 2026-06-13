@@ -1,0 +1,52 @@
+# Chunk claiming and status automation.
+# Adds guidance when chunk-labeled issues are opened or claimed.
+
+name: Chunk Workflow
+
+on:
+  issues:
+    types: [opened, labeled, assigned]
+
+jobs:
+  chunk-claim-hint:
+    if: contains(github.event.issue.labels.*.name, 'chunk')
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+    steps:
+      - name: Post claiming instructions
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const labels = issue.labels.map((label) => label.name);
+            const hasStatus = labels.some((name) => name.startsWith('status:'));
+
+            if (context.payload.action === 'opened' && !hasStatus) {
+              await github.rest.issues.addLabels({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                labels: ['status:available']
+              });
+            }
+
+            if (context.payload.action === 'assigned' && issue.assignee) {
+              const body = [
+                `Thanks @${issue.assignee.login} — chunk claimed.`,
+                '',
+                'Next steps:',
+                '1. Remove `status:available`, add `status:in-progress`.',
+                '2. Branch from `main`: `chunk/NN-short-name`.',
+                '3. Paste the acceptance checklist into your PR and link this issue.',
+                '',
+                'Workflow doc: [Docs/ChunkWorkflow.md](https://github.com/Forgewalker-Studios/ProjectClanker/blob/main/Docs/ChunkWorkflow.md)'
+              ].join('\n');
+
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: issue.number,
+                body
+              });
+            }

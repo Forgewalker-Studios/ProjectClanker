@@ -1,6 +1,8 @@
-# ProjectClanker
+# ProjectClanker — The Door Remembers
 
-A GDScript Godot 4 game project scaffolded to follow the project's standard layout and coding conventions.
+A short 2D metroidvania-style platformer for a one-week Godot jam. You play a small maintenance robot (**Clanker**) exploring an ashen factory while a sentient door (**D-0R1**) asks for help recovering its memory.
+
+Design docs: [Docs/GDD.md](Docs/GDD.md) · Chunk workflow: [Docs/ChunkWorkflow.md](Docs/ChunkWorkflow.md)
 
 ## Requirements
 

@@ -1,0 +1,63 @@
+name: Chunk Task
+description: Propose or track a gated development chunk
+title: "[Chunk NN] "
+labels: ["chunk"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Use this template only for **new** chunk proposals. Existing Chunks 1–12 are already filed as issues.
+        See [Docs/ChunkWorkflow.md](https://github.com/Forgewalker-Studios/ProjectClanker/blob/main/Docs/ChunkWorkflow.md).
+
+  - type: input
+    id: chunk-number
+    attributes:
+      label: Chunk number
+      placeholder: "13"
+    validations:
+      required: true
+
+  - type: input
+    id: chunk-name
+    attributes:
+      label: Chunk name
+      placeholder: Short descriptive name
+    validations:
+      required: true
+
+  - type: textarea
+    id: depends-on
+    attributes:
+      label: Depends on
+      description: List chunk numbers or issues that must be done first
+      placeholder: "Chunk 5, #42"
+    validations:
+      required: true
+
+  - type: textarea
+    id: blocks
+    attributes:
+      label: Blocks
+      description: What this chunk unlocks
+    validations:
+      required: true
+
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria (yes/no checklist)
+      description: Each item must be verifiable in-game or in project files
+      value: |
+        1. [ ] 
+        2. [ ] 
+        3. [ ] 
+    validations:
+      required: true
+
+  - type: checkboxes
+    id: claim-intent
+    attributes:
+      label: Claiming
+      options:
+        - label: I intend to claim this chunk after it is approved
+          required: false
