@@ -1,27 +1,164 @@
-[gd_scene load_steps=2 format=3 uid="uid://bmainscene001"]
+[gd_scene load_steps=4 format=3 uid="uid://bmainscene001"]
 
 [ext_resource type="Script" path="res://Scripts/Main.gd" id="1_main"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_player"]
 
-[node name="Main" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[sub_resource type="RectangleShape2D" id="rect_shape"]
+size = Vector2(64, 64)
+
+[sub_resource type="RectangleShape2D" id="floor_shape"]
+size = Vector2(4000, 128)
+
+[sub_resource type="RectangleShape2D" id="wall_shape"]
+size = Vector2(128, 960)
+
+[sub_resource type="RectangleShape2D" id="platform_shape"]
+size = Vector2(160, 16)
+
+[node name="Main" type="Node2D"]
 script = ExtResource("1_main")
 
-[node name="Background" type="ColorRect" parent="."]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+[node name="WorldBackground" type="Sprite2D" parent="."]
+position = Vector2(1024, 360)
+scale = Vector2(500, 300)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(1024, 560)
+
+[node name="Sprite2D" type="Sprite2D" parent="Floor"]
+scale = Vector2(250, 8)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("floor_shape")
+
+[node name="LeftWall" type="StaticBody2D" parent="."]
+position = Vector2(-800, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="LeftWall"]
+scale = Vector2(8, 60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall"]
+shape = SubResource("wall_shape")
+
+[node name="RightWall" type="StaticBody2D" parent="."]
+position = Vector2(2848, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="RightWall"]
+scale = Vector2(8, 60)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall"]
+shape = SubResource("wall_shape")
+
+[node name="Platform1" type="StaticBody2D" parent="."]
+position = Vector2(200, 480)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform1"]
+self_scale = null
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform1"]
+shape = SubResource("platform_shape")
+
+[node name="Platform2" type="StaticBody2D" parent="."]
+position = Vector2(360, 420)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform2"]
+self_modulate = Color(0.2, 0.8, 1, 1)
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2"]
+shape = SubResource("platform_shape")
+
+[node name="Platform3" type="StaticBody2D" parent="."]
+position = Vector2(560, 360)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform3"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3"]
+shape = SubResource("platform_shape")
+
+[node name="Platform4" type="StaticBody2D" parent="."]
+position = Vector2(760, 300)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform4"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform4"]
+shape = SubResource("platform_shape")
+
+[node name="Platform5" type="StaticBody2D" parent="."]
+position = Vector2(980, 380)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform5"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform5"]
+shape = SubResource("platform_shape")
+
+[node name="Platform6" type="StaticBody2D" parent="."]
+position = Vector2(1180, 440)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform6"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform6"]
+shape = SubResource("platform_shape")
+
+[node name="Platform7" type="StaticBody2D" parent="."]
+position = Vector2(1380, 320)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform7"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7"]
+shape = SubResource("platform_shape")
+
+[node name="Platform8" type="StaticBody2D" parent="."]
+position = Vector2(1580, 400)
+
+[node name="Sprite2D" type="Sprite2D" parent="Platform8"]
+scale = Vector2(10, 1)
+self_modulate = Color(0.2, 0.8, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8"]
+shape = SubResource("platform_shape")
+
+[node name="Player" type="CharacterBody2D" parent="."]
+position = Vector2(200, 460)
+script = ExtResource("2_player")
+[node name="Outline" type="Sprite2D" parent="Player"]
+scale = Vector2(4.4, 4.4)
+self_modulate = Color(0, 1, 0, 1)
+z_index = -1
+[node name="Sprite2D" type="Sprite2D" parent="Player"]
+scale = Vector2(4, 4)
+self_modulate = Color(1, 1, 1, 1)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+shape = SubResource("rect_shape")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+enabled = true
+zoom = Vector2(1.5, 1.5)
+
+[node name="UI" type="CanvasLayer" parent="."]
+layer = 10
+
+[node name="Background" type="ColorRect" parent="UI"]
+visible = false
+offset_right = 1024.0
+offset_bottom = 600.0
 color = Color(0.105882, 0.121569, 0.141176, 1)
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 1
+[node name="MarginContainer" type="MarginContainer" parent="UI"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -32,28 +169,28 @@ theme_override_constants/margin_top = 48
 theme_override_constants/margin_right = 48
 theme_override_constants/margin_bottom = 48
 
-[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="UI/MarginContainer"]
 layout_mode = 2
 theme_override_constants/separation = 16
 
-[node name="TitleLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="TitleLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 32
 text = "ProjectClanker"
 
-[node name="VersionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="VersionLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
 text = "ProjectClanker v0.0.0.0"
 
-[node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="StatusLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 16
 text = "Running"
 
-[node name="HintLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+[node name="HintLabel" type="Label" parent="UI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.74902, 1)
-text = "Open Docs/GDD.md to begin design. Run Tests/Scenes/TestRunner.tscn for tests."
+text = "Move with Arrow Keys or WASD. Press Escape to pause."
