@@ -1,6 +1,6 @@
-extends Control
+extends Node2D
 
-## Main scene entry point. Displays project info and handles pause input.
+## Main scene entry point for 2D gameplay. Handles pause input and game state.
 
 
 @onready var _version_label: Label = %VersionLabel
@@ -9,7 +9,7 @@ extends Control
 
 func _ready() -> void:
 	_version_label.text = "ProjectClanker v%s" % GameServices.get_version_string()
-	_status_label.text = "Press Escape to pause. Run Tests/Scenes/TestRunner.tscn for unit tests."
+	_status_label.text = "Running — Press Escape to pause."
 	GameServices.pause_changed.connect(_on_pause_changed)
 
 
