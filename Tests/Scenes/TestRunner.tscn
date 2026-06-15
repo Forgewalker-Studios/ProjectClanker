@@ -23,6 +23,7 @@ offset_bottom = 722.0
 color = Color(0, 0, 0, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=924628778]
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=375815636]
 position = Vector2(440.25, 682)
@@ -35,10 +36,13 @@ scale = Vector2(1.29941, 1)
 polygon = PackedVector2Array(735, 766, 736.09125, 806.9202, 737, 841, 61, 841, 59, 763)
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1173550141]
+visibility_layer = 2
 position = Vector2(299, 607)
+collision_layer = 2
 script = ExtResource("2_b5lsa")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1187254505]
+visibility_layer = 2
 position = Vector2(-0.99998474, 0)
 scale = Vector2(-23.578949, 25.5)
 texture = SubResource("PlaceholderTexture2D_b5lsa")
