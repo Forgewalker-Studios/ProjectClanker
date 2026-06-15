@@ -1,6 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://btestrunner001"]
+[gd_scene format=3 uid="uid://c5ii34pd15m53"]
 
-[ext_resource type="Script" path="res://Tests/Scripts/TestRunner.gd" id="1_test"]
+[ext_resource type="Script" uid="uid://d0w88ukya30pv" path="res://Tests/Scripts/TestRunner.gd" id="1_test"]
+[ext_resource type="Script" uid="uid://ce261niey2in3" path="res://Tests/Scenes/player.gd" id="2_b5lsa"]
 
-[node name="TestRunner" type="Node"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3wv7x"]
+size = Vector2(879.5, 68)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b5lsa"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_c422r"]
+size = Vector2(24, 26)
+
+[node name="TestRunner" type="Node" unique_id=459398892]
 script = ExtResource("1_test")
+
+[node name="Background" type="CanvasLayer" parent="." unique_id=298108877]
+layer = -1
+
+[node name="Fill" type="ColorRect" parent="Background" unique_id=1676605133]
+offset_right = 1286.0
+offset_bottom = 722.0
+color = Color(0, 0, 0, 1)
+
+[node name="Floor" type="StaticBody2D" parent="." unique_id=924628778]
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=375815636]
+position = Vector2(440.25, 682)
+shape = SubResource("RectangleShape2D_3wv7x")
+debug_color = Color(1, 1, 1, 0.41960785)
+
+[node name="Polygon2D" type="Polygon2D" parent="Floor" unique_id=1875867575]
+position = Vector2(-76.66519, -120)
+scale = Vector2(1.29941, 1)
+polygon = PackedVector2Array(735, 766, 736.09125, 806.9202, 737, 841, 61, 841, 59, 763)
+
+[node name="Player" type="CharacterBody2D" parent="." unique_id=1173550141]
+visibility_layer = 2
+position = Vector2(299, 607)
+collision_layer = 2
+script = ExtResource("2_b5lsa")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1187254505]
+visibility_layer = 2
+position = Vector2(-0.99998474, 0)
+scale = Vector2(-23.578949, 25.5)
+texture = SubResource("PlaceholderTexture2D_b5lsa")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=147906435]
+position = Vector2(-1, 0)
+shape = SubResource("RectangleShape2D_c422r")
+
+[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1863071342]
+position = Vector2(-1, -130)
