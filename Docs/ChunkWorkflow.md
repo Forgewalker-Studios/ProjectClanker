@@ -55,7 +55,7 @@ If two people claim the same chunk, **first comment + assignee wins**. The secon
 1. Read the issue acceptance checklist and the matching GDD section.
 2. Work only within the chunk scope. If you discover required work outside scope, open a separate issue or discuss in the chunk issue first.
 3. Follow project conventions (typed GDScript, snake_case functions, no ternaries, engine-first configuration).
-4. Run the test runner (`Tests/Scenes/TestRunner.tscn`) when touching logic.
+4. Run unit tests (`Tests/Scenes/UnitTestRunner.tscn`) when touching logic. Use `Tests/Scenes/TestRunner.tscn` or `Tests/Scenes/Testing.tscn` for manual play verification.
 5. Keep the Godot project warning-free on startup.
 6. Document collision layers, controls, or inspector setup in code comments or existing docs when the chunk requires it.
 

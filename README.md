@@ -26,7 +26,9 @@ Design docs: [Docs/GDD.md](Docs/GDD.md) · Chunk workflow: [Docs/ChunkWorkflow.m
 
 1. Open the project folder in Godot 4.4+.
 2. Press **F5** to run the main scene (`Scenes/Main.tscn`).
-3. To run unit tests, open and run `Tests/Scenes/TestRunner.tscn`.
+3. To run unit tests, open and run `Tests/Scenes/UnitTestRunner.tscn`.
+4. To play-test movement in a small sandbox, run `Tests/Scenes/TestRunner.tscn`.
+5. For the full combat/health test level, run `Tests/Scenes/Testing.tscn`.
 
 ## Input map
 

@@ -9,7 +9,7 @@ extends Control
 
 func _ready() -> void:
 	_version_label.text = "ProjectClanker v%s" % GameServices.get_version_string()
-	_status_label.text = "Press Escape to pause. Run Tests/Scenes/TestRunner.tscn for unit tests."
+	_status_label.text = "Press Escape to pause. Run Tests/Scenes/UnitTestRunner.tscn for unit tests."
 	GameServices.pause_changed.connect(_on_pause_changed)
 
 

@@ -56,4 +56,4 @@ text = "Running"
 [node name="HintLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.74902, 1)
-text = "Open Docs/GDD.md to begin design. Run Tests/Scenes/TestRunner.tscn for tests."
+text = "Open Docs/GDD.md to begin design. Run Tests/Scenes/UnitTestRunner.tscn for unit tests."

@@ -18,7 +18,7 @@ var heal_flash_tween: Tween
 ##Tied to health_changed from Player.gd
 func _ready() -> void:
 	if player == null:
-		print("HUD Error: Player is not assigned.")
+		push_error("HUD: Player is not assigned.")
 		return
 
 	if player.has_signal("health_changed"):

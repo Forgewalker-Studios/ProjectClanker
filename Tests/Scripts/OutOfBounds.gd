@@ -16,5 +16,4 @@ func _ready() -> void:
 ##Specifically tied to Character2DBody and player layer
 func _on_body_entered(body: CharacterBody2D) -> void:
 	if body.has_method("respawn_at") and spawn_point != null:
-		print("Out of Bounds: Respawn at Checkpoint")
 		body.respawn_at(spawn_point.global_position)

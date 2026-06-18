@@ -1,14 +1,15 @@
 [gd_scene format=3 uid="uid://c5ii34pd15m53"]
 
+[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="1_player"]
+[ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="2_idle"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wv7x"]
 size = Vector2(879.5, 68)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_b5lsa"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c422r"]
-size = Vector2(24, 26)
+size = Vector2(35.125, 53.125)
 
-[node name="TestRunner" type="Node" unique_id=459398892]
+[node name="TestRunner" type="Node2D" unique_id=459398892]
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=298108877]
 layer = -1
@@ -16,7 +17,7 @@ layer = -1
 [node name="Fill" type="ColorRect" parent="Background" unique_id=1676605133]
 offset_right = 1286.0
 offset_bottom = 722.0
-color = Color(0, 0, 0, 1)
+color = Color(0.57409495, 0.7135087, 1, 1)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=924628778]
 collision_mask = 2
@@ -35,16 +36,29 @@ polygon = PackedVector2Array(735, 766, 736.09125, 806.9202, 737, 841, 61, 841, 5
 visibility_layer = 2
 position = Vector2(299, 607)
 collision_layer = 2
+script = ExtResource("1_player")
 
-[node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1187254505]
+[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1187254505]
 visibility_layer = 2
-position = Vector2(-0.99998474, 0)
-scale = Vector2(-23.578949, 25.5)
-texture = SubResource("PlaceholderTexture2D_b5lsa")
+position = Vector2(26.5625, -1.4375)
+scale = Vector2(0.24463204, 0.20583448)
+texture = ExtResource("2_idle")
+flip_h = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=147906435]
-position = Vector2(-1, 0)
+position = Vector2(26.5625, -1.4375)
 shape = SubResource("RectangleShape2D_c422r")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1863071342]
-position = Vector2(-1, -130)
+position = Vector2(28, -159)
+
+[node name="Controls" type="Label" parent="." unique_id=870245668]
+offset_left = 1070.0
+offset_top = 40.0
+offset_right = 1270.0
+offset_bottom = 140.0
+text = "Play test sandbox
+Movement - A/D
+Jump - W/Space
+Unit tests - Tests/Scenes/UnitTestRunner.tscn"
+horizontal_alignment = 2

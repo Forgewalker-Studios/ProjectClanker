@@ -3,7 +3,7 @@
 [ext_resource type="Script" uid="uid://dni8jddo41o6p" path="res://Tests/Scripts/HUD.gd" id="1_pn6e5"]
 [ext_resource type="Script" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
 [ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_pn6e5"]
-[ext_resource type="Script" uid="uid://bwr8ewf22w4s6" path="res://Tests/Scripts/Player.gd" id="3_1fv2d"]
+[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="3_1fv2d"]
 [ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pn6e5"]
@@ -82,10 +82,10 @@ offset_bottom = -360.0
 text = "Pause - ESC
 Movement - A/D
 Jump - W/Space
-Take Damage - H
-Die - G
-Heal - J
-Full Heal - K"
+Take Damage - U
+Die - P
+Heal - I
+Full Heal - O"
 horizontal_alignment = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=525464851]
