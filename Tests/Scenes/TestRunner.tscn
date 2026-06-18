@@ -1,8 +1,5 @@
 [gd_scene format=3 uid="uid://c5ii34pd15m53"]
 
-[ext_resource type="Script" uid="uid://d0w88ukya30pv" path="res://Tests/Scripts/TestRunner.gd" id="1_test"]
-[ext_resource type="Script" uid="uid://ce261niey2in3" path="res://Tests/Scenes/player.gd" id="2_b5lsa"]
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wv7x"]
 size = Vector2(879.5, 68)
 
@@ -12,7 +9,6 @@ size = Vector2(879.5, 68)
 size = Vector2(24, 26)
 
 [node name="TestRunner" type="Node" unique_id=459398892]
-script = ExtResource("1_test")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=298108877]
 layer = -1
@@ -39,7 +35,6 @@ polygon = PackedVector2Array(735, 766, 736.09125, 806.9202, 737, 841, 61, 841, 5
 visibility_layer = 2
 position = Vector2(299, 607)
 collision_layer = 2
-script = ExtResource("2_b5lsa")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=1187254505]
 visibility_layer = 2
