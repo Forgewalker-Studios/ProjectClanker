@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueSet" load_steps=4 format=3 uid="uid://dlgsetarea1"]
+
+[ext_resource type="Script" path="res://Resources/DialogueSet.gd" id="1"]
+[ext_resource type="Script" path="res://Resources/DialogueEntry.gd" id="2"]
+
+[sub_resource type="Resource" id="e1"]
+script = ExtResource("2")
+text = "You're back already? Area 1 still needs you."
+
+[sub_resource type="Resource" id="e2"]
+script = ExtResource("2")
+text = "Please finish the wing and bring back what you learn."
+
+[resource]
+script = ExtResource("1")
+dialogue_entries = [SubResource("e1"), SubResource("e2")]

@@ -27,6 +27,8 @@ func _run_all_tests() -> void:
 	await _test_player_take_damage_reduces_health()
 	await _test_player_heal_restores_health()
 	await _test_player_lethal_damage_skips_invulnerability()
+	_test_dialogue_registry_maps_start_state()
+	_test_dialogue_set_linear_advance()
 
 
 func _test_game_services_version_string() -> void:
@@ -68,6 +70,40 @@ func _test_player_lethal_damage_skips_invulnerability() -> void:
 	var passed: bool = player.is_dead and not player.is_invulnerable
 	_record_result("Player.take_damage skips invulnerability on lethal damage", passed)
 	player.queue_free()
+
+
+func _test_dialogue_registry_maps_start_state() -> void:
+	var registry: DialogueRegistry = load("res://Resources/DialogueRegistry.tres") as DialogueRegistry
+	const ProgressionStateScript = preload("res://Autoload/ProgressionState.gd")
+	var dialogue_set: DialogueSet = registry.get_dialogue_set(ProgressionStateScript.State.START)
+	var passed: bool = (
+		registry != null
+		and dialogue_set != null
+		and dialogue_set.get_entry_count() > 0
+		and dialogue_set.get_entry(0).text.length() > 0
+	)
+	_record_result("DialogueRegistry returns start dialogue set from resource", passed)
+
+
+func _test_dialogue_set_linear_advance() -> void:
+	var dialogue_set: DialogueSet = DialogueSet.new()
+	var first_entry: DialogueEntry = DialogueEntry.new()
+	first_entry.text = "Line one."
+	var second_entry: DialogueEntry = DialogueEntry.new()
+	second_entry.text = "Line two."
+	dialogue_set.dialogue_entries = [first_entry, second_entry]
+
+	var advance_result: DialogueSet.DialogueAdvanceResult = dialogue_set.resolve_advance(0, -1)
+	var passed: bool = (
+		not advance_result.is_finished
+		and advance_result.next_set == dialogue_set
+		and advance_result.next_entry_index == 1
+	)
+	_record_result("DialogueSet.resolve_advance advances linearly without choices", passed)
+
+	var finish_result: DialogueSet.DialogueAdvanceResult = dialogue_set.resolve_advance(1, -1)
+	var finish_passed: bool = finish_result.is_finished
+	_record_result("DialogueSet.resolve_advance finishes after the last entry", finish_passed)
 
 
 ## Build a Player node with the children required by its onready references.

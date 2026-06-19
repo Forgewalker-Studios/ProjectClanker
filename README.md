@@ -29,6 +29,13 @@ Design docs: [Docs/GDD.md](Docs/GDD.md) · Chunk workflow: [Docs/ChunkWorkflow.m
 3. To run unit tests, open and run `Tests/Scenes/UnitTestRunner.tscn`.
 4. To play-test movement in a small sandbox, run `Tests/Scenes/TestRunner.tscn`.
 5. For the full combat/health test level, run `Tests/Scenes/Testing.tscn`.
+6. For the door hub and dialogue chunk, run `Scenes/Hub/DoorHub.tscn`.
+
+## Hub and dialogue (Chunk 4)
+
+See [Docs/ChunkWorkflow.md](Docs/ChunkWorkflow.md) § *Chunk 4 — Door Hub and Dialogue* for architecture, route unlock table, and acceptance verification.
+
+**Quick test:** F6 → `Scenes/Hub/DoorHub.tscn` → **E** at D-0R1 → **E** through lines until the panel closes → **`[`** to advance story phase for route/dialogue checks.
 
 ## Input map
 
@@ -42,10 +49,11 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 - `test_heal` — I
 - `test_full_heal` — O
 - `test_death` — P
+- `debug_advance_state` — `[` (hub debug: advance `Progression` one phase)
 
 ## Version
 
-See [VERSION.md](VERSION.md) for release history. Current version: **0.0.0.0**.
+See [VERSION.md](VERSION.md) for release history. Current version: **0.0.1.0**.
 
 ## License
 

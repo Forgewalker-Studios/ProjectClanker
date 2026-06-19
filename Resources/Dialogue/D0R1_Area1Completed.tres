@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="DialogueSet" load_steps=5 format=3 uid="uid://dlgsetarea1done"]
+
+[ext_resource type="Script" path="res://Resources/DialogueSet.gd" id="1"]
+[ext_resource type="Script" path="res://Resources/DialogueEntry.gd" id="2"]
+
+[sub_resource type="Resource" id="e1"]
+script = ExtResource("2")
+text = "You did it! I remember access protocols now."
+
+[sub_resource type="Resource" id="e2"]
+script = ExtResource("2")
+text = "Area 2 can open. Production systems are waking up again."
+
+[resource]
+script = ExtResource("1")
+dialogue_entries = [SubResource("e1"), SubResource("e2")]

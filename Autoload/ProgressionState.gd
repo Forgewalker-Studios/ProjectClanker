@@ -1,4 +1,3 @@
-class_name ProgressionState
 extends Node
 
 enum State {
@@ -18,52 +17,65 @@ signal state_changed(new_state: State)
 
 var state: State = State.START
 
+
 func _ready() -> void:
 	pass
 
-## Set the state
-## @param new_state: The new state to set
+
+## Set the progression state and notify listeners.
+## @param new_state: The new state to set.
 func set_state(new_state: State) -> void:
 	if state == new_state:
 		return
 	state = new_state
 	state_changed.emit(state)
 
-## Get the next state
-## @param current_state: The current state
-## @return: The next state
-func get_next_state(current_state: State) -> void:
+
+## Get the next state after the current one.
+## @param current_state: The current state.
+## @return: The next state, or the current state when already at the end.
+func get_next_state(current_state: State) -> State:
 	match current_state:
 		State.START:
-			set_state(State.START_COMPLETED)
+			return State.START_COMPLETED
 		State.START_COMPLETED:
-			set_state(State.AREA_1)
+			return State.AREA_1
 		State.AREA_1:
-			set_state(State.AREA_1_COMPLETED)
+			return State.AREA_1_COMPLETED
 		State.AREA_1_COMPLETED:
-			set_state(State.AREA_2)
+			return State.AREA_2
 		State.AREA_2:
-			set_state(State.AREA_2_COMPLETED)
+			return State.AREA_2_COMPLETED
 		State.AREA_2_COMPLETED:
-			set_state(State.AREA_3)
+			return State.AREA_3
 		State.AREA_3:
-			set_state(State.AREA_3_COMPLETED)
+			return State.AREA_3_COMPLETED
 		State.AREA_3_COMPLETED:
-			set_state(State.FINAL)
+			return State.FINAL
 		State.FINAL:
-			set_state(State.FINAL_COMPLETED)
+			return State.FINAL_COMPLETED
 		State.FINAL_COMPLETED:
-			pass
+			return State.FINAL_COMPLETED
+		_:
+			push_error("ProgressionState.get_next_state: unhandled state %d" % int(current_state))
+			return current_state
 
-## Save the state to a string
-## @param state: The state to save
-## @return: The saved state as a string
-func to_save(state: State) -> String:
-	return JSON.stringify({"state": state})
 
-## Load the state from a string
-## @param save_data: The saved state as a string
-## @return: The loaded state
+## Advance to the next progression state in sequence.
+func advance_state() -> void:
+	set_state(get_next_state(state))
+
+
+## Save the state to a string.
+## @param save_state: The state to save.
+## @return: The saved state as a string.
+func to_save(save_state: State) -> String:
+	return JSON.stringify({"state": save_state})
+
+
+## Load the state from a string.
+## @param save_data: The saved state as a string.
+## @return: The loaded state.
 func from_save(save_data: String) -> State:
 	var parsed: Variant = JSON.parse_string(save_data)
 	if parsed == null:

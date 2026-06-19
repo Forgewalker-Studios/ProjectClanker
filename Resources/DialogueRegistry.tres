@@ -1,0 +1,26 @@
+[gd_resource type="Resource" script_class="DialogueRegistry" load_steps=13 format=3 uid="uid://dlgregistry01"]
+
+[ext_resource type="Script" path="res://Resources/DialogueRegistry.gd" id="1"]
+[ext_resource type="Resource" uid="uid://dlgsetstart01" path="res://Resources/Dialogue/D0R1_Start.tres" id="2"]
+[ext_resource type="Resource" uid="uid://dlgsetstartcomp" path="res://Resources/Dialogue/D0R1_StartCompleted.tres" id="3"]
+[ext_resource type="Resource" uid="uid://dlgsetarea1" path="res://Resources/Dialogue/D0R1_Area1.tres" id="4"]
+[ext_resource type="Resource" uid="uid://dlgsetarea1done" path="res://Resources/Dialogue/D0R1_Area1Completed.tres" id="5"]
+[ext_resource type="Resource" uid="uid://dlgsetarea2" path="res://Resources/Dialogue/D0R1_Area2.tres" id="6"]
+[ext_resource type="Resource" uid="uid://dlgsetarea2done" path="res://Resources/Dialogue/D0R1_Area2Completed.tres" id="7"]
+[ext_resource type="Resource" uid="uid://dlgsetarea3" path="res://Resources/Dialogue/D0R1_Area3.tres" id="8"]
+[ext_resource type="Resource" uid="uid://dlgsetarea3done" path="res://Resources/Dialogue/D0R1_Area3Completed.tres" id="9"]
+[ext_resource type="Resource" uid="uid://dlgsetfinal01" path="res://Resources/Dialogue/D0R1_Final.tres" id="10"]
+[ext_resource type="Resource" uid="uid://dlgsetfinaldone" path="res://Resources/Dialogue/D0R1_FinalCompleted.tres" id="11"]
+
+[resource]
+script = ExtResource("1")
+dialogue_start = ExtResource("2")
+dialogue_start_completed = ExtResource("3")
+dialogue_area_1 = ExtResource("4")
+dialogue_area_1_completed = ExtResource("5")
+dialogue_area_2 = ExtResource("6")
+dialogue_area_2_completed = ExtResource("7")
+dialogue_area_3 = ExtResource("8")
+dialogue_area_3_completed = ExtResource("9")
+dialogue_final = ExtResource("10")
+dialogue_final_completed = ExtResource("11")

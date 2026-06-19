@@ -34,9 +34,13 @@ var current_state: PlayerState = PlayerState.IDLE
 var facing_direction: float = 1.0
 var is_invulnerable: bool = false
 var is_dead: bool = false
+var dialogue_movement_locked: bool = false
+
+var _interact_target: Interactable2D = null
 
 
 func _ready() -> void:
+	add_to_group("player")
 	start_position = global_position
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
@@ -66,6 +70,11 @@ func _physics_process(delta: float) -> void:
 	if is_dead:
 		return
 
+	if dialogue_movement_locked:
+		velocity = Vector2.ZERO
+		move_and_slide()
+		return
+
 	if not is_on_floor():
 		velocity.y += GRAVITY * delta
 
@@ -89,6 +98,9 @@ func _physics_process(delta: float) -> void:
 		heal(1)
 	if Input.is_action_just_pressed("test_full_heal"):
 		heal(max_health)
+
+	if Input.is_action_just_pressed("interact"):
+		_try_interact()
 
 	move_and_slide()
 	update_state()
@@ -241,3 +253,39 @@ func respawn_at(respawn_position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	if respawn_position != start_position:
 		player_left_bounds.emit()
+
+
+## Lock or unlock movement while dialogue is active.
+## @param locked: True when dialogue should freeze movement.
+func set_dialogue_movement_locked(locked: bool) -> void:
+	dialogue_movement_locked = locked
+	if locked:
+		velocity = Vector2.ZERO
+
+
+## Register the interactable currently in range.
+## @param target: Interactable area the player entered.
+func set_interact_target(target: Interactable2D) -> void:
+	_interact_target = target
+
+
+## Clear the interactable when the player leaves its area.
+## @param target: Interactable area the player exited.
+func clear_interact_target(target: Interactable2D) -> void:
+	if _interact_target == target:
+		_interact_target = null
+
+
+## Return the active interact prompt, if any.
+## @return: Prompt text or an empty string.
+func get_interact_prompt() -> String:
+	if _interact_target == null:
+		return ""
+	return _interact_target.get_prompt_text()
+
+
+## Trigger interaction on the current target.
+func _try_interact() -> void:
+	if _interact_target == null:
+		return
+	_interact_target.interact(self )

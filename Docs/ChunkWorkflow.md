@@ -157,6 +157,59 @@ Then link the repo and add chunk issues with `gh project item-add`.
 | 11 | [#11 Menu, UI, and Settings](https://github.com/Forgewalker-Studios/ProjectClanker/issues/11) | 1 |
 | 12 | [#12 Full Playthrough and Build](https://github.com/Forgewalker-Studios/ProjectClanker/issues/12) | 1–8 (11 recommended) |
 
+## Chunk 4 — Door Hub and Dialogue (implementation)
+
+**Play scene:** `Scenes/Hub/DoorHub.tscn` (F6)
+
+### Architecture
+
+| Piece | Location | Role |
+|-------|----------|------|
+| Progression autoload | `Autoload/ProgressionState.gd` (singleton name: `Progression`) | Story phase enum, `state_changed` signal, save/load helpers |
+| Dialogue lines | `Resources/DialogueEntry.gd`, `Resources/DialogueSet.gd` | Inspector-authored line data; `resolve_advance()` for linear flow |
+| Phase → dialogue map | `Resources/DialogueRegistry.gd`, `Resources/DialogueRegistry.tres` | Picks dialogue set and D-0R1 expression per `Progression.State` |
+| Per-phase content | `Resources/Dialogue/D0R1_*.tres` | Eleven linear sets (one per progression state); **no JSON** |
+| Dialogue UI | `Scenes/UI/DialogueBox.tscn`, `Scripts/DialogueBox.gd` | Bottom panel; **E** emits `advance_requested` |
+| Flow controller | `Scripts/DialogueController.gd` | Steps entries, closes on last line |
+| D-0R1 actor | `Scripts/D0R1.gd` on hub scene | Interact zone, face primitives, starts dialogue from registry |
+| Hub routes | `Scripts/HubRoute.gd` | Locked doors unlock when `Progression.state` reaches `required_state` |
+| Hub wiring | `Scripts/DoorHub.gd` | Binds `DialogueController` ↔ `DialogueBox` ↔ `D0R1` in `_enter_tree` |
+
+### Input (hub test scene)
+
+| Action | Key | Notes |
+|--------|-----|-------|
+| Move | A/D | Player movement |
+| Jump | W / Space | |
+| Interact / advance dialogue | E | Near D-0R1: start talk. During dialogue: **only** `DialogueBox` handles E (player interact is disabled while `dialogue_movement_locked`) |
+| Advance progression (debug) | `[` | `debug_advance_state` — cycles `Progression.advance_state()` for route/dialogue testing |
+
+### Route unlock thresholds
+
+| Route | Unlocks when `Progression.state` is at least |
+|-------|-----------------------------------------------|
+| Area 1 | `START_COMPLETED` (after first D-0R1 conversation ends) |
+| Area 2 | `AREA_1_COMPLETED` |
+| Area 3 | `AREA_2_COMPLETED` |
+| Final | `AREA_3_COMPLETED` |
+
+### Progression side effects
+
+- First conversation at `START` sets `START_COMPLETED` when dialogue **finishes** (not on first line).
+- Dialogue is linear only (no choice branches in UI yet); `DialogueEntry.choice_*` fields exist for future use.
+
+### Manual verification checklist (Chunk 4)
+
+1. D-0R1 visible in hub (primitive door + face panel).
+2. **E** near door shows dialogue; **E** steps lines; panel **closes** after the last line (does not immediately restart).
+3. Talk again at `START_COMPLETED` — different lines; Area 1 route turns green and is passable.
+4. **`[`** advances phase — dialogue and expressions change; routes unlock in order above.
+5. Final route stays locked until `AREA_3_COMPLETED`.
+
+### Tests
+
+Run `Tests/Scenes/UnitTestRunner.tscn` — includes `DialogueRegistry` load, `DialogueSet.resolve_advance`, and dialogue-finish cases.
+
 ## Branch and commit conventions
 
 - Branch: `chunk/NN-short-name`

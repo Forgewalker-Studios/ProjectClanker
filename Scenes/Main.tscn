@@ -45,7 +45,7 @@ text = "ProjectClanker"
 unique_name_in_owner = true
 layout_mode = 2
 theme_override_font_sizes/font_size = 18
-text = "ProjectClanker v0.0.0.0"
+text = "ProjectClanker v0.0.1.0"
 
 [node name="StatusLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
@@ -56,4 +56,4 @@ text = "Running"
 [node name="HintLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 theme_override_colors/font_color = Color(0.701961, 0.72549, 0.74902, 1)
-text = "Open Docs/GDD.md to begin design. Run Tests/Scenes/UnitTestRunner.tscn for unit tests."
+text = "Open Docs/GDD.md to begin design. F6 Scenes/Hub/DoorHub.tscn for the hub chunk."

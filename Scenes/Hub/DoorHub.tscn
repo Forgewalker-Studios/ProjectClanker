@@ -1,0 +1,279 @@
+[gd_scene format=3 uid="uid://doorhubscene01"]
+
+[ext_resource type="Script" path="res://Scripts/DoorHub.gd" id="1_hub"]
+[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="3_idle"]
+[ext_resource type="Script" path="res://Scripts/D0R1.gd" id="4_d0r1"]
+[ext_resource type="Resource" uid="uid://dlgregistry01" path="res://Resources/DialogueRegistry.tres" id="5_registry"]
+[ext_resource type="Script" path="res://Scripts/DialogueController.gd" id="6_controller"]
+[ext_resource type="PackedScene" uid="uid://dialoguebox001" path="res://Scenes/UI/DialogueBox.tscn" id="7_dialogue_box"]
+[ext_resource type="Script" path="res://Scripts/HubRoute.gd" id="8_route"]
+[ext_resource type="Script" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
+[ext_resource type="Script" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
+
+[sub_resource type="RectangleShape2D" id="floor_shape"]
+size = Vector2(1200, 40)
+
+[sub_resource type="RectangleShape2D" id="player_shape"]
+size = Vector2(35.125, 53.125)
+
+[sub_resource type="RectangleShape2D" id="d0r1_interact"]
+size = Vector2(120, 140)
+
+[sub_resource type="RectangleShape2D" id="route_blocker"]
+size = Vector2(48, 120)
+
+[node name="DoorHub" type="Node2D"]
+script = ExtResource("1_hub")
+
+[node name="Background" type="ColorRect" parent="."]
+offset_right = 1280.0
+offset_bottom = 720.0
+color = Color(0.2, 0.22, 0.28, 1)
+
+[node name="Floor" type="StaticBody2D" parent="."]
+position = Vector2(640, 650)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor"]
+shape = SubResource("floor_shape")
+
+[node name="FloorVisual" type="Polygon2D" parent="Floor"]
+color = Color(0.35, 0.38, 0.45, 1)
+polygon = PackedVector2Array(-600, -20, 600, -20, 600, 20, -600, 20)
+
+[node name="Player" type="CharacterBody2D" parent="." groups=["player"]]
+position = Vector2(220, 580)
+collision_layer = 2
+script = ExtResource("2_player")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player"]
+position = Vector2(26.5625, -1.4375)
+scale = Vector2(0.24463204, 0.20583448)
+texture = ExtResource("3_idle")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player"]
+position = Vector2(26.5625, -1.4375)
+shape = SubResource("player_shape")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position = Vector2(26, -120)
+
+[node name="D0R1" type="Area2D" parent="."]
+position = Vector2(640, 520)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("4_d0r1")
+dialogue_registry = ExtResource("5_registry")
+
+[node name="DoorFrame" type="Polygon2D" parent="D0R1"]
+color = Color(0.55, 0.58, 0.65, 1)
+polygon = PackedVector2Array(-80, -120, 80, -120, 80, 120, -80, 120)
+
+[node name="FacePanel" type="ColorRect" parent="D0R1"]
+offset_left = -50.0
+offset_top = -70.0
+offset_right = 50.0
+offset_bottom = 30.0
+color = Color(0.95, 0.75, 0.35, 1)
+
+[node name="LeftEye" type="Label" parent="D0R1/FacePanel"]
+layout_mode = 0
+offset_left = 8.0
+offset_top = 12.0
+offset_right = 32.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "o"
+horizontal_alignment = 1
+
+[node name="RightEye" type="Label" parent="D0R1/FacePanel"]
+layout_mode = 0
+offset_left = 68.0
+offset_top = 12.0
+offset_right = 92.0
+offset_bottom = 40.0
+theme_override_font_sizes/font_size = 24
+text = "o"
+horizontal_alignment = 1
+
+[node name="Mouth" type="Label" parent="D0R1/FacePanel"]
+layout_mode = 0
+offset_left = 30.0
+offset_top = 52.0
+offset_right = 70.0
+offset_bottom = 80.0
+theme_override_font_sizes/font_size = 24
+text = "o"
+horizontal_alignment = 1
+
+[node name="NameLabel" type="Label" parent="D0R1"]
+offset_left = -40.0
+offset_top = -145.0
+offset_right = 40.0
+offset_bottom = -120.0
+text = "D-0R1"
+horizontal_alignment = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="D0R1"]
+position = Vector2(0, 10)
+shape = SubResource("d0r1_interact")
+
+[node name="BlinkTimer" type="Timer" parent="D0R1"]
+wait_time = 3.0
+autostart = true
+
+[node name="RouteArea1" type="StaticBody2D" parent="."]
+position = Vector2(120, 560)
+script = ExtResource("8_route")
+required_state = 1
+route_label = "Area 1"
+
+[node name="Blocker" type="CollisionShape2D" parent="RouteArea1"]
+shape = SubResource("route_blocker")
+
+[node name="LockedSign" type="Label" parent="RouteArea1"]
+offset_left = -40.0
+offset_top = -150.0
+offset_right = 40.0
+offset_bottom = -120.0
+text = "LOCKED"
+horizontal_alignment = 1
+
+[node name="RouteSign" type="Label" parent="RouteArea1"]
+offset_left = -40.0
+offset_top = -180.0
+offset_right = 40.0
+offset_bottom = -150.0
+text = "Area 1"
+horizontal_alignment = 1
+
+[node name="DoorPrimitive" type="Polygon2D" parent="RouteArea1"]
+color = Color(0.45, 0.3, 0.3, 1)
+polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
+
+[node name="RouteArea2" type="StaticBody2D" parent="."]
+position = Vector2(640, 280)
+script = ExtResource("8_route")
+required_state = 3
+route_label = "Area 2"
+
+[node name="Blocker" type="CollisionShape2D" parent="RouteArea2"]
+shape = SubResource("route_blocker")
+
+[node name="LockedSign" type="Label" parent="RouteArea2"]
+offset_left = -40.0
+offset_top = -150.0
+offset_right = 40.0
+offset_bottom = -120.0
+text = "LOCKED"
+horizontal_alignment = 1
+
+[node name="RouteSign" type="Label" parent="RouteArea2"]
+offset_left = -40.0
+offset_top = -180.0
+offset_right = 40.0
+offset_bottom = -150.0
+text = "Area 2"
+horizontal_alignment = 1
+
+[node name="DoorPrimitive" type="Polygon2D" parent="RouteArea2"]
+color = Color(0.45, 0.3, 0.3, 1)
+polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
+
+[node name="RouteArea3" type="StaticBody2D" parent="."]
+position = Vector2(1160, 560)
+script = ExtResource("8_route")
+required_state = 5
+route_label = "Area 3"
+
+[node name="Blocker" type="CollisionShape2D" parent="RouteArea3"]
+shape = SubResource("route_blocker")
+
+[node name="LockedSign" type="Label" parent="RouteArea3"]
+offset_left = -40.0
+offset_top = -150.0
+offset_right = 40.0
+offset_bottom = -120.0
+text = "LOCKED"
+horizontal_alignment = 1
+
+[node name="RouteSign" type="Label" parent="RouteArea3"]
+offset_left = -40.0
+offset_top = -180.0
+offset_right = 40.0
+offset_bottom = -150.0
+text = "Area 3"
+horizontal_alignment = 1
+
+[node name="DoorPrimitive" type="Polygon2D" parent="RouteArea3"]
+color = Color(0.45, 0.3, 0.3, 1)
+polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
+
+[node name="RouteFinal" type="StaticBody2D" parent="."]
+position = Vector2(980, 280)
+script = ExtResource("8_route")
+required_state = 7
+route_label = "Final"
+
+[node name="Blocker" type="CollisionShape2D" parent="RouteFinal"]
+shape = SubResource("route_blocker")
+
+[node name="LockedSign" type="Label" parent="RouteFinal"]
+offset_left = -40.0
+offset_top = -150.0
+offset_right = 40.0
+offset_bottom = -120.0
+text = "LOCKED"
+horizontal_alignment = 1
+
+[node name="RouteSign" type="Label" parent="RouteFinal"]
+offset_left = -40.0
+offset_top = -180.0
+offset_right = 40.0
+offset_bottom = -150.0
+text = "Final"
+horizontal_alignment = 1
+
+[node name="DoorPrimitive" type="Polygon2D" parent="RouteFinal"]
+color = Color(0.5, 0.2, 0.55, 1)
+polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
+
+[node name="DialogueController" type="Node" parent="."]
+script = ExtResource("6_controller")
+
+[node name="DialogueBox" parent="." instance=ExtResource("7_dialogue_box")]
+
+[node name="HubProgressionDebug" type="CanvasLayer" parent="."]
+script = ExtResource("9_debug")
+
+[node name="Panel" type="PanelContainer" parent="HubProgressionDebug"]
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 420.0
+offset_bottom = 96.0
+
+[node name="VBox" type="VBoxContainer" parent="HubProgressionDebug/Panel"]
+
+[node name="StateLabel" type="Label" parent="HubProgressionDebug/Panel/VBox"]
+text = "Progression: START"
+
+[node name="HintLabel" type="Label" parent="HubProgressionDebug/Panel/VBox"]
+theme_override_colors/font_color = Color(0.75, 0.8, 0.85, 1)
+text = "[ ] Advance state (debug)"
+
+[node name="HubInteractPrompt" type="CanvasLayer" parent="."]
+script = ExtResource("10_prompt")
+
+[node name="PromptLabel" type="Label" parent="HubInteractPrompt"]
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -200.0
+offset_top = -48.0
+offset_right = 200.0
+offset_bottom = -20.0
+grow_horizontal = 2
+grow_vertical = 0
+horizontal_alignment = 1
