@@ -1,0 +1,173 @@
+[gd_scene load_steps=3 format=3 uid="uid://mainmenuclanker"]
+
+[ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_menu"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_title"]
+font_size = 40
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_menu")
+
+[node name="Background" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.08, 0.09, 0.11, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 64
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 64
+
+[node name="CenterColumn" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/separation = 14
+
+[node name="TitleLabel" type="Label" parent="MarginContainer/CenterColumn"]
+layout_mode = 2
+text = "ProjectClanker"
+label_settings = SubResource("LabelSettings_title")
+horizontal_alignment = 1
+
+[node name="SubtitleLabel" type="Label" parent="MarginContainer/CenterColumn"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.75, 0.78, 0.82, 1)
+text = "The Door Remembers"
+horizontal_alignment = 1
+
+[node name="StartButton" type="Button" parent="MarginContainer/CenterColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Start Game"
+
+[node name="SettingsButton" type="Button" parent="MarginContainer/CenterColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Settings"
+
+[node name="ControlsButton" type="Button" parent="MarginContainer/CenterColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Controls"
+
+[node name="QuitButton" type="Button" parent="MarginContainer/CenterColumn"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Quit"
+
+[node name="SettingsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -220.0
+offset_top = -160.0
+offset_right = 220.0
+offset_bottom = 160.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="SettingsVBox" type="VBoxContainer" parent="SettingsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 10
+
+[node name="SettingsTitle" type="Label" parent="SettingsPanel/SettingsVBox"]
+layout_mode = 2
+text = "Audio Settings"
+horizontal_alignment = 1
+
+[node name="MusicLabel" type="Label" parent="SettingsPanel/SettingsVBox"]
+layout_mode = 2
+text = "Music Volume"
+
+[node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.02
+value = 0.65
+
+[node name="SfxLabel" type="Label" parent="SettingsPanel/SettingsVBox"]
+layout_mode = 2
+text = "SFX Volume"
+
+[node name="SfxSlider" type="HSlider" parent="SettingsPanel/SettingsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+max_value = 1.0
+step = 0.02
+value = 0.75
+
+[node name="MuteButton" type="Button" parent="SettingsPanel/SettingsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Mute all"
+
+[node name="SettingsBackButton" type="Button" parent="SettingsPanel/SettingsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"
+
+[node name="ControlsPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -280.0
+offset_top = -180.0
+offset_right = 280.0
+offset_bottom = 180.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ControlsVBox" type="VBoxContainer" parent="ControlsPanel"]
+layout_mode = 2
+theme_override_constants/separation = 8
+
+[node name="ControlsTitle" type="Label" parent="ControlsPanel/ControlsVBox"]
+layout_mode = 2
+text = "Controls"
+horizontal_alignment = 1
+
+[node name="ControlsBody" type="Label" parent="ControlsPanel/ControlsVBox"]
+layout_mode = 2
+text = "Move: A / D or Arrow Keys
+Jump: W / Space
+Interact: E
+Attack: J
+Pause: Escape
+Debug progression: ["
+autowrap_mode = 2
+
+[node name="ControlsBackButton" type="Button" parent="ControlsPanel/ControlsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Back"

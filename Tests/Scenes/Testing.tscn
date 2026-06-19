@@ -1,10 +1,13 @@
 [gd_scene format=3 uid="uid://b11mtqvr6d240"]
 
-[ext_resource type="Script" uid="uid://dni8jddo41o6p" path="res://Tests/Scripts/HUD.gd" id="1_pn6e5"]
-[ext_resource type="Script" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
+[ext_resource type="Script" path="res://Tests/Scripts/TestingScene.gd" id="1_testing"]
 [ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_pn6e5"]
 [ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="3_1fv2d"]
 [ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/PauseMenu.tscn" id="6_pause"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/GameplayHUD.tscn" id="7_hud"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/BossHealthBar.tscn" id="8_bossbar"]
+[ext_resource type="Script" path="res://Scripts/BossHealthTarget.gd" id="9_boss"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pn6e5"]
 
@@ -34,26 +37,7 @@ size = Vector2(25, 147.54813)
 size = Vector2(357, 35)
 
 [node name="Testing" type="Node2D" unique_id=424177803]
-
-[node name="Pause" type="CanvasLayer" parent="." unique_id=961585534]
-process_mode = 3
-script = ExtResource("1_q3xu1")
-
-[node name="DimOverlay" type="ColorRect" parent="Pause" unique_id=505568911]
-offset_left = -27.0
-offset_top = -11.0
-offset_right = 1290.0
-offset_bottom = 733.0
-color = Color(0, 0, 0, 0)
-
-[node name="Pause" type="Label" parent="Pause" unique_id=1020444964]
-offset_left = -1.0
-offset_top = -1.0
-offset_right = 1285.0
-offset_bottom = 723.0
-text = "PAUSE"
-horizontal_alignment = 1
-vertical_alignment = 1
+script = ExtResource("1_testing")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=1141769864]
 layer = -1
@@ -62,68 +46,6 @@ layer = -1
 offset_right = 1286.0
 offset_bottom = 722.0
 color = Color(0.57409495, 0.7135087, 1, 1)
-
-[node name="HUD" type="CanvasLayer" parent="." unique_id=1125944773 node_paths=PackedStringArray("player")]
-script = ExtResource("1_pn6e5")
-player = NodePath("../Player")
-
-[node name="Controls" type="Label" parent="HUD" unique_id=870245667]
-light_mask = 4
-visibility_layer = 4
-anchors_preset = -1
-anchor_left = 0.055000003
-anchor_top = 0.625
-anchor_right = 0.055000003
-anchor_bottom = 0.625
-offset_left = 1070.6
-offset_top = -435.0
-offset_right = 1196.6
-offset_bottom = -360.0
-text = "Pause - ESC
-Movement - A/D
-Jump - W/Space
-Take Damage - U
-Die - P
-Heal - I
-Full Heal - O"
-horizontal_alignment = 2
-
-[node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=525464851]
-light_mask = 4
-visibility_layer = 4
-material = SubResource("CanvasItemMaterial_pn6e5")
-offset_left = 16.0
-offset_top = 684.0
-offset_right = 292.0
-offset_bottom = 711.0
-show_percentage = false
-
-[node name="HealthValue" type="Label" parent="HUD" unique_id=335768953]
-light_mask = 4
-visibility_layer = 4
-offset_left = 104.0
-offset_top = 686.0
-offset_right = 202.0
-offset_bottom = 709.0
-label_settings = SubResource("LabelSettings_pn6e5")
-horizontal_alignment = 1
-
-[node name="DamageFlash" type="ColorRect" parent="HUD" unique_id=740906534]
-light_mask = 5
-visibility_layer = 5
-offset_left = -5.0
-offset_top = -4.0
-offset_right = 1286.0
-offset_bottom = 727.0
-mouse_filter = 2
-color = Color(0.45490196, 0.09411765, 0.07450981, 0)
-
-[node name="HealFlash" type="ColorRect" parent="HUD" unique_id=555135697]
-offset_left = -11.0
-offset_right = 1287.0
-offset_bottom = 727.0
-mouse_filter = 2
-color = Color(0.26666668, 0.95686275, 0.36078432, 0)
 
 [node name="OutofBoundsSpawn01" type="Marker2D" parent="." unique_id=1851291884]
 position = Vector2(800, 814)
@@ -452,3 +374,15 @@ shape = SubResource("RectangleShape2D_bfqo8")
 [node name="Polygon2D" type="Polygon2D" parent="Floor6" unique_id=660723817]
 position = Vector2(16, -2)
 polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
+
+[node name="PauseMenu" parent="." instance=ExtResource("6_pause")]
+
+[node name="GameplayHUD" parent="." instance=ExtResource("7_hud")]
+
+[node name="BossHealthBar" parent="." instance=ExtResource("8_bossbar")]
+
+[node name="DemoBoss" type="Node2D" parent="."]
+position = Vector2(900, 500)
+script = ExtResource("9_boss")
+display_name = "Test Boss"
+demo_damage_interval_sec = 2.0

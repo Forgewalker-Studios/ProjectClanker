@@ -67,6 +67,8 @@ Maintain both if you use the registry pattern; at minimum keep **this** file upd
 
 **Setup:** Add node to scene, call `configure()`, then `start_with_tracks()` with your streams.
 
+**ProjectClanker:** Wired via `Autoload/AudioDirector.gd` for menu, exploration, boss, and ending playlists.
+
 ---
 
 ## AudioMixControlSystem
@@ -85,6 +87,8 @@ Maintain both if you use the registry pattern; at minimum keep **this** file upd
 **Dependencies:** Project must define buses (e.g. `Music`, `SFX`, `Master`) in `default_bus_layout` or equivalent.
 
 **Setup:** Build UI with two sliders and a button; pass nodes into `setup()`. Override mute button text externally if you need localization.
+
+**ProjectClanker:** Wired in `Scripts/MainMenu.gd` settings panel; volumes persist through `ClankerSettings`.
 
 ---
 
@@ -335,7 +339,9 @@ Future migration requires explicit approval and must preserve the characterizati
 
 **API summary:** `configure_defaults`, `get_value`, `set_value`, `reset_to_defaults`, `export_state`, `import_state`.
 
-**Migration status:** Created and tested. Not wired into Project Harvest production code.
+**ProjectClanker:** Wired via `Autoload/ClankerSettings.gd` with `JsonFileStoreSystem` persistence.
+
+**Migration status:** Wired into ProjectClanker audio settings glue.
 
 ---
 

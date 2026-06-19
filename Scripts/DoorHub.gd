@@ -3,6 +3,10 @@ extends Node2D
 ## Wires hub dialogue nodes before child scripts finish _ready.
 
 
+func _ready() -> void:
+	AudioDirector.set_music_context(AudioDirector.MusicContext.EXPLORATION)
+
+
 func _enter_tree() -> void:
 	var dialogue_controller: DialogueController = $DialogueController as DialogueController
 	var dialogue_box: DialogueBox = $DialogueBox as DialogueBox

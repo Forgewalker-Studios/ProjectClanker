@@ -1,6 +1,15 @@
 # Version History
 
-Current version: **0.0.1.0**
+Current version: **0.0.2.0**
+
+## 0.0.2.0 — Audio, menu, and settings (Chunks 10–11)
+
+- Wired `Systems/` modules into game autoloads: `AudioDirector`, `ClankerSettings`, `SceneTransition`.
+- Main menu (`Scenes/UI/MainMenu.tscn`) with Start, Settings (music/SFX/mute via `AudioMixControlSystem`), Controls, and Quit.
+- Procedural placeholder audio for music, ambience, SFX, boss, and ending cues; Music/SFX buses in `Audio/default_bus_layout.tres`.
+- Imported CC0 SFX/ambience (Freesound) and licensed music tracks (`Audio/*.ogg`); see `Docs/Assets.md`.
+- Gameplay HUD, pause menu, boss health bar, ending screen, and high-contrast interaction prompts.
+- `BossHealthTarget` demo boss in `Tests/Scenes/Testing.tscn` for boss UI/audio verification.
 
 ## 0.0.1.0 — Door hub and dialogue (Chunk 4)
 

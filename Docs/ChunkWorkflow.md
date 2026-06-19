@@ -210,6 +210,37 @@ Then link the repo and add chunk issues with `gh project item-add`.
 
 Run `Tests/Scenes/UnitTestRunner.tscn` — includes `DialogueRegistry` load, `DialogueSet.resolve_advance`, and dialogue-finish cases.
 
+## Chunk 10 — Audio and Music System (implementation)
+
+**Systems used:** `AudioJukeboxSystem`, `RandomCueSchedulerSystem` (glue: `Autoload/AudioDirector.gd`)
+
+| Piece | Location | Role |
+|-------|----------|------|
+| Music playlists | `AudioDirector` | Menu, exploration, boss, ending contexts; no restart when context unchanged |
+| Exploration ambience | `AudioDirector` + `RandomCueSchedulerSystem` | Random low-volume one-shots between 10–22s |
+| SFX | `AudioDirector` | Jump, attack (**J**), hurt, door interact, ending stinger |
+| Placeholder audio | `Scripts/ProceduralAudioFactory.gd` | Procedural WAV until real assets land |
+| Buses | `Audio/default_bus_layout.tres` | `Master`, `Music` (-6 dB), `SFX` (-3 dB) |
+
+**Manual verification:** F5 → menu music → Start → hub exploration music → **J** attack SFX → **E** door SFX → `Testing.tscn` demo boss swaps to boss music and shows boss bar → **`[`** to `FINAL_COMPLETED` for ending audio.
+
+## Chunk 11 — Menu, UI, and Settings (implementation)
+
+**Systems used:** `AudioMixControlSystem`, `SettingsPersistenceSystem`, `JsonFileStoreSystem`, `SceneFadeTransitionSystem`
+
+| Piece | Location | Role |
+|-------|----------|------|
+| Main menu | `Scenes/UI/MainMenu.tscn` | Start → `DoorHub`, Quit, Settings, Controls |
+| Settings persistence | `Autoload/ClankerSettings.gd` | Saves to `user://clanker_settings.json` |
+| Scene fades | `Autoload/SceneTransition` | Fade out/in on scene changes |
+| Gameplay HUD | `Scenes/UI/GameplayHUD.tscn` | Health bar + controls hint (outlined text) |
+| Pause menu | `Scenes/UI/PauseMenu.tscn` | Resume, restart level, quit to menu (**Esc**) |
+| Boss bar | `Scenes/UI/BossHealthBar.tscn` | Tracks nodes in group `boss` |
+| Ending overlay | `Scenes/UI/EndingScreen.tscn` | Readable text at `FINAL_COMPLETED` |
+| Interact prompt | `Scripts/HubInteractPrompt.gd` | Outlined **[E]** prompt near interactables |
+
+**Manual verification:** F5 main menu → Start → health HUD visible → Esc pause → Settings sliders persist after restart → boss bar in `Testing.tscn`.
+
 ## Branch and commit conventions
 
 - Branch: `chunk/NN-short-name`

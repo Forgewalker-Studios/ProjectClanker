@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://endingscreenclanker"]
+
+[ext_resource type="Script" path="res://Scripts/EndingScreen.gd" id="1_ending"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_ending"]
+font_size = 22
+outline_size = 6
+outline_color = Color(0, 0, 0, 1)
+
+[node name="EndingScreen" type="CanvasLayer"]
+layer = 20
+script = ExtResource("1_ending")
+
+[node name="EndingPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="EndingBodyLabel" type="Label" parent="EndingPanel"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+text = "Ending"
+label_settings = SubResource("LabelSettings_ending")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2

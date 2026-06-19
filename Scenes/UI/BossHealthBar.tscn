@@ -1,0 +1,40 @@
+[gd_scene load_steps=3 format=3 uid="uid://bosshealthbarclanker"]
+
+[ext_resource type="Script" path="res://Scripts/BossHealthBar.gd" id="1_bossbar"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_boss"]
+outline_size = 4
+outline_color = Color(0, 0, 0, 1)
+
+[node name="BossHealthBar" type="CanvasLayer"]
+script = ExtResource("1_bossbar")
+
+[node name="BossPanel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -220.0
+offset_top = 16.0
+offset_right = 220.0
+offset_bottom = 72.0
+grow_horizontal = 2
+
+[node name="BossVBox" type="VBoxContainer" parent="BossPanel"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="BossNameLabel" type="Label" parent="BossPanel/BossVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Boss"
+label_settings = SubResource("LabelSettings_boss")
+horizontal_alignment = 1
+
+[node name="BossHealthBar" type="ProgressBar" parent="BossPanel/BossVBox"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(360, 20)
+layout_mode = 2
+max_value = 20.0
+value = 20.0
+show_percentage = false

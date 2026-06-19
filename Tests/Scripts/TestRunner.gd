@@ -29,6 +29,42 @@ func _run_all_tests() -> void:
 	await _test_player_lethal_damage_skips_invulnerability()
 	_test_dialogue_registry_maps_start_state()
 	_test_dialogue_set_linear_advance()
+	_test_scene_fade_transition_sequence()
+	_test_clanker_settings_round_trip()
+
+
+func _test_scene_fade_transition_sequence() -> void:
+	var transition: SceneFadeTransitionSystem = SceneFadeTransitionSystem.new()
+	var accepted: bool = transition.request_transition("res://Scenes/UI/MainMenu.tscn", 0.2, 0.0, 0.2)
+	var step_one: Dictionary = transition.next_step()
+	var step_two: Dictionary = transition.next_step()
+	var passed: bool = (
+		accepted
+		and String(step_one.get("phase", "")) == "fade_out_requested"
+		and String(step_two.get("phase", "")) == "scene_change_requested"
+	)
+	_record_result("SceneFadeTransitionSystem advances fade then scene change", passed)
+
+
+func _test_clanker_settings_round_trip() -> void:
+	var settings: SettingsPersistenceSystem = SettingsPersistenceSystem.new()
+	settings.configure_defaults(
+		{
+			"audio": {
+				"music_volume": 0.5,
+				"sfx_volume": 0.6,
+				"master_muted": false,
+			},
+		},
+		1
+	)
+	settings.set_value("audio", "music_volume", 0.42)
+	var exported: Dictionary = settings.export_state()
+	var reloaded: SettingsPersistenceSystem = SettingsPersistenceSystem.new()
+	reloaded.configure_defaults({"audio": {"music_volume": 0.5, "sfx_volume": 0.6, "master_muted": false}}, 1)
+	reloaded.import_state(exported, true)
+	var passed: bool = float(reloaded.get_value("audio", "music_volume", 0.0)) == 0.42
+	_record_result("SettingsPersistenceSystem preserves updated audio volume", passed)
 
 
 func _test_game_services_version_string() -> void:

@@ -25,7 +25,7 @@ Design docs: [Docs/GDD.md](Docs/GDD.md) · Chunk workflow: [Docs/ChunkWorkflow.m
 ## Getting started
 
 1. Open the project folder in Godot 4.4+.
-2. Press **F5** to run the main scene (`Scenes/Main.tscn`).
+2. Press **F5** to run the main scene (`Scenes/UI/MainMenu.tscn`).
 3. To run unit tests, open and run `Tests/Scenes/UnitTestRunner.tscn`.
 4. To play-test movement in a small sandbox, run `Tests/Scenes/TestRunner.tscn`.
 5. For the full combat/health test level, run `Tests/Scenes/Testing.tscn`.
@@ -44,6 +44,7 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 - `move_left`, `move_right` — AD / Arrow Keys
 - `jump` — W / Space
 - `interact` — E
+- `attack` — J
 - `pause` — Escape
 - `test_damage` — U
 - `test_heal` — I
@@ -53,7 +54,19 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 
 ## Version
 
-See [VERSION.md](VERSION.md) for release history. Current version: **0.0.1.0**.
+See [VERSION.md](VERSION.md) for release history. Current version: **0.0.2.0**.
+
+## Systems integration
+
+Reusable modules live in `Systems/`. Game glue autoloads:
+
+| Autoload | Systems used |
+|----------|----------------|
+| `AudioDirector` | `AudioJukeboxSystem`, `RandomCueSchedulerSystem` |
+| `ClankerSettings` | `SettingsPersistenceSystem`, `JsonFileStoreSystem` |
+| `SceneTransition` | `SceneFadeTransitionSystem` |
+
+Menu settings UI uses `AudioMixControlSystem` via `Scripts/MainMenu.gd`.
 
 ## License
 

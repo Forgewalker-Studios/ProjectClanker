@@ -44,6 +44,8 @@ func _on_interact_requested(player: Player) -> void:
 	if dialogue_controller.is_active():
 		return
 
+	AudioDirector.play_door_interact()
+
 	var dialogue_set: DialogueSet = dialogue_registry.get_dialogue_set(Progression.state)
 	if dialogue_set == null:
 		push_error("D0R1: no dialogue set for state %d" % int(Progression.state))

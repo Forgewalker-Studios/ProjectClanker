@@ -80,6 +80,7 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
+		AudioDirector.play_jump()
 
 	var direction: float = Input.get_axis("move_left", "move_right")
 	if direction:
@@ -101,6 +102,9 @@ func _physics_process(delta: float) -> void:
 
 	if Input.is_action_just_pressed("interact"):
 		_try_interact()
+
+	if Input.is_action_just_pressed("attack"):
+		AudioDirector.play_attack()
 
 	move_and_slide()
 	update_state()
@@ -160,6 +164,7 @@ func take_damage(amount: int) -> void:
 
 	health_changed.emit(current_health, max_health)
 	damage_taken.emit(amount)
+	AudioDirector.play_hurt()
 
 	if current_health <= 0:
 		die()

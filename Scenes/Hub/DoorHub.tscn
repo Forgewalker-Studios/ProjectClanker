@@ -10,6 +10,10 @@
 [ext_resource type="Script" path="res://Scripts/HubRoute.gd" id="8_route"]
 [ext_resource type="Script" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
 [ext_resource type="Script" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/PauseMenu.tscn" id="11_pause"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/GameplayHUD.tscn" id="12_hud"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
+[ext_resource type="PackedScene" path="res://Scenes/UI/EndingScreen.tscn" id="14_ending"]
 
 [sub_resource type="RectangleShape2D" id="floor_shape"]
 size = Vector2(1200, 40)
@@ -277,3 +281,11 @@ offset_bottom = -20.0
 grow_horizontal = 2
 grow_vertical = 0
 horizontal_alignment = 1
+
+[node name="PauseMenu" parent="." instance=ExtResource("11_pause")]
+
+[node name="GameplayHUD" parent="." instance=ExtResource("12_hud")]
+
+[node name="BossHealthBar" parent="." instance=ExtResource("13_bossbar")]
+
+[node name="EndingScreen" parent="." instance=ExtResource("14_ending")]
