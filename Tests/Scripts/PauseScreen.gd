@@ -32,7 +32,7 @@ func _input(event: InputEvent) -> void:
 ##Only pause functions during pause state
 ##Processes outside of pause are halted
 func toggle_pause() -> void:
-	var should_pause := not get_tree().paused
+	var should_pause = not get_tree().paused
 	
 	get_tree().paused = should_pause
 	visible = should_pause

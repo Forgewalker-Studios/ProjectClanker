@@ -1,3 +1,4 @@
+class_name Player
 extends CharacterBody2D
 
 
@@ -12,26 +13,49 @@ enum PlayerState {
 	MOVE,
 	JUMP,
 	FALL,
+	MELEE,
+	DOWN,
+	DOWNFALL
 }
 
 signal health_changed(current_health: int, max_health: int)
 signal damage_taken(amount: int)
 signal health_healed(amount: int)
-signal player_died
+
+##To be implemented into a game over screen
+signal player_respawned
+
+##Likely to become a checkpoint respawn
 signal player_left_bounds
 
+##Player parameters
 @export var max_health: int = 10
-@export var invulnerability_time: float = 1.0
+
+##iframe parameters and visuals
+@export var invulnerability_time: float = .5
 @export var blink_interval: float = 0.1
 
+##Melee attack parameters
+@export var melee_damage: int = 1
+@export var melee_active_time: float = 0.12
+@export var melee_recovery_time: float = 0.18
+
+
+@onready var melee: Node2D = $Melee
+@onready var hit_detection: Area2D = $Melee/HitDetection
+@onready var hit_box: CollisionShape2D = $Melee/HitDetection/HitBox
+@onready var melee_visual: Sprite2D = $Melee/MeleeVisual
+
 @onready var sprite: Sprite2D = $PlayerSprite
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
+
 
 var start_position: Vector2
 var current_health: int
 var current_state: PlayerState = PlayerState.IDLE
 var facing_direction: float = 1.0
 var is_invulnerable: bool = false
+var is_attacking: bool = false
+var hit_targets: Array[Node] = []
 var is_dead: bool = false
 
 
@@ -40,24 +64,33 @@ func _ready() -> void:
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
 	
-	##Auto-scales sprite to match collision hitbox
-	##Provided by Claude Haiku 4.5
-	if collision_shape.shape is RectangleShape2D and sprite.texture:
-		var rect_shape: RectangleShape2D = collision_shape.shape as RectangleShape2D
-		var extents: Vector2 = rect_shape.extents
-		var tex_size: Vector2 = sprite.texture.get_size()
-		var target_size: Vector2 = extents * 2
-		
-		sprite.scale = target_size / tex_size
-		sprite.centered = true
-		##Aligns the sprite and collision shape
-		sprite.position = collision_shape.position
+	hit_detection.monitoring = false
+	hit_box.disabled = true
+	
+	melee_visual.texture = preload("res://Art/Placeholders/PlayerStates/VFX/ATTACK.png")
+	melee_visual.visible = false
+
+	hit_detection.body_entered.connect(_on_attack_area_body_entered)
+	hit_detection.area_entered.connect(_on_attack_area_area_entered)
+
 
 ##Establishes physics according to above values
 ##Includes movement rules/inputs and excludes momentum
 ##Includes dead/alive state
+##Gravity functions during dead state and differentiates downed states
 func _physics_process(delta: float) -> void:
 	if is_dead:
+		if not is_on_floor():
+			velocity.y += GRAVITY * delta
+
+		velocity.x = 0.0
+		move_and_slide()
+
+		if is_on_floor():
+			change_state(PlayerState.DOWN)
+		else:
+			change_state(PlayerState.DOWNFALL)
+
 		return
 
 	if not is_on_floor():
@@ -73,8 +106,11 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	# Flip sprite to face left/right based on last input
-	sprite.flip_h = facing_direction < 0
+	##Flip sprite to face left/right based on last input
+	sprite.flip_h = facing_direction > 0
+	
+	if Input.is_action_just_pressed("melee_attack"):
+		melee_attack()
 
 ##Testing tools for health
 	if Input.is_action_just_pressed("test_damage"):
@@ -90,9 +126,108 @@ func _physics_process(delta: float) -> void:
 	update_state()
 
 
+##Starts a short attack window
+##Turns on the attack hitbox and visual effect temporarily.
+func melee_attack() -> void:
+	##Prevents attacking while dead
+	if is_dead:
+		return
+
+	##Prevents attack spam
+	if is_attacking:
+		return
+
+	is_attacking = true
+	hit_targets.clear()
+
+	melee.scale.x = facing_direction
+
+	change_state(PlayerState.MELEE)
+
+	##Activates attack
+	hit_detection.monitoring = true
+	hit_box.set_deferred("disabled", false)
+	melee_visual.visible = true
+
+	await get_tree().physics_frame
+	check_current_attack_overlaps()
+
+	await get_tree().create_timer(melee_active_time).timeout
+
+	##Deactivates attack
+	hit_detection.monitoring = false
+	hit_box.set_deferred("disabled", true)
+	melee_visual.visible = false
+
+	await get_tree().create_timer(melee_recovery_time).timeout
+
+	##Return to default state
+	is_attacking = false
+	update_state()
+
+
+##Registers bodies inside the hit_detection when func attack is activated
+func check_current_attack_overlaps() -> void:
+	var overlapping_bodies: Array[Node2D] = hit_detection.get_overlapping_bodies()
+	var overlapping_areas: Array[Area2D] = hit_detection.get_overlapping_areas()
+
+	for body: Node2D in overlapping_bodies:
+		try_hit_target(body)
+
+	for area: Area2D in overlapping_areas:
+		try_hit_area(area)
+
+
+##Activates when the hitbox comes into contact with a body
+func _on_attack_area_body_entered(body: Node2D) -> void:
+	try_hit_target(body)
+
+
+##Activates when the hitbox comes into contact with an area
+func _on_attack_area_area_entered(area: Area2D) -> void:
+	try_hit_area(area)
+
+
+##Hit detection function
+##Attempts to damage an Area2D or its parent 
+func try_hit_area(area: Area2D) -> void:
+	if area.has_method("take_damage"):
+		try_hit_target(area)
+		return
+
+	var parent: Node = area.get_parent()
+
+	if parent == null:
+		return
+
+	try_hit_target(parent)
+
+
+##Result of connected hit detection
+##Damages once per hit
+##Applies damage to any with the take_damage(amount: int) func
+func try_hit_target(target: Node) -> void:
+	if not is_attacking:
+		return
+
+	if hit_targets.has(target):
+		return
+
+	if not target.has_method("take_damage"):
+		return
+
+	hit_targets.append(target)
+	target.call("take_damage", melee_damage)
+
+
 ##Conditions to be met to update PlayerState
 func update_state() -> void:
 	var new_state: PlayerState
+	if is_dead:
+		return
+		
+	if is_attacking:
+		return
 
 	if not is_on_floor():
 		if velocity.y < 0:
@@ -124,15 +259,30 @@ func _update_state_visuals() -> void:
 		PlayerState.IDLE:
 			print("State: Idle")
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/IDLE.png")
+			
 		PlayerState.MOVE:
 			print("State: Move")
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/MOVE.png")
+			
 		PlayerState.JUMP:
 			print("State: Jump")
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/JUMP.png")
+			
 		PlayerState.FALL:
 			print("State: Fall")
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/FALL.png")
+			
+		PlayerState.MELEE:
+			print("State: Melee Attack")
+			sprite.texture = preload("res://Art/Placeholders/PlayerStates/MELEE.png")
+			
+		PlayerState.DOWN:
+			print("State: Downed")
+			sprite.texture = preload("res://Art/Placeholders/PlayerStates/DOWNED.png")
+			
+		PlayerState.DOWNFALL:
+			print("State: Downed")
+			sprite.texture = preload("res://Art/Placeholders/PlayerStates/FREEFALL.png")
 
 
 ##
@@ -147,7 +297,7 @@ func take_damage(amount: int) -> void:
 
 	current_health -= amount
 	current_health = clampi(current_health, 0, max_health)
-	
+
 	print("Damage Taken: ", amount)
 	print("Health: ", current_health, " / ", max_health)
 
@@ -156,8 +306,27 @@ func take_damage(amount: int) -> void:
 
 	if current_health <= 0:
 		die()
+		return
 
+	show_hit_sprite()
 	start_invulnerability()
+
+
+##Additional visual feedback for taking damage
+##Also returns the visual to the current state
+func show_hit_sprite() -> void:
+	if is_dead:
+		return
+
+	sprite.texture = preload("res://Art/Placeholders/PlayerStates/HIT.png")
+
+	await get_tree().create_timer(0.2).timeout
+
+	if is_dead:
+		return
+
+	update_state()
+	_update_state_visuals()
 
 ##Provides invulnerability when damage is taken
 ##Also provides blink visual to convey invulnerability
@@ -195,20 +364,39 @@ func heal(amount: int) -> void:
 
 
 ##Tied to the take_damage condition
+##Gravity functions during dead state
 ##Triggers death animation
 ##Resets health to full
 ##Emits signal and respawns at start position
 func die() -> void:
 	print("Player Died")
 	is_dead = true
-	velocity = Vector2.ZERO
-	player_died.emit()
+	
+	velocity.x = 0.0
+	
+	if velocity.y < 0:
+		velocity.y = 0.0
+	
+	if is_on_floor():
+		change_state(PlayerState.DOWN)
+	else:
+		change_state(PlayerState.DOWNFALL)
+	
 	var fade_data: Dictionary = await fade_to_black()
+	
 	current_health = max_health
 	health_changed.emit(current_health, max_health)
+	
 	respawn_at(start_position)
-	await fade_back_in(fade_data)
+	
+	player_respawned.emit()
+	
 	is_dead = false
+		
+	current_state = PlayerState.IDLE
+	_update_state_visuals()
+	
+	await fade_back_in(fade_data)
 
 
 ##Death animation 1/2: fade to black
@@ -247,6 +435,13 @@ func fade_back_in(fade_data: Dictionary) -> void:
 	await tween.finished
 
 	overlay.queue_free()
+
+
+##Deactivates the OutOfBounds.gd if in the dead state
+func can_trigger_out_of_bounds() -> bool:
+	return not is_dead \
+		and current_state != PlayerState.DOWN \
+		and current_state != PlayerState.DOWNFALL
 
 
 ##Tied to out of bounds for respawning

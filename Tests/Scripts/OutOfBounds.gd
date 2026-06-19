@@ -14,7 +14,13 @@ func _ready() -> void:
 
 ##Entry of player to Area2D moves player to spawn
 ##Specifically tied to Character2DBody and player layer
+##Now also distinguishes from DOWN and DOWNFALL states
 func _on_body_entered(body: CharacterBody2D) -> void:
+	if body.has_method("can_trigger_out_of_bounds"):
+		if not body.can_trigger_out_of_bounds():
+			print("Out of Bounds ignored: Player is downed/dead.")
+			return
+
 	if body.has_method("respawn_at") and spawn_point != null:
 		print("Out of Bounds: Respawn at Checkpoint")
 		body.respawn_at(spawn_point.global_position)

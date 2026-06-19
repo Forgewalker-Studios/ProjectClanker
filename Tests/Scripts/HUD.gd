@@ -1,7 +1,7 @@
 extends CanvasLayer
 
 
-@export var player: CharacterBody2D
+@export var player: Player
 
 ##Contains visual information for the player on the screen
 ##Currently includes: health

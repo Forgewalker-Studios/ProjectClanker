@@ -1,10 +1,15 @@
 [gd_scene format=3 uid="uid://b11mtqvr6d240"]
 
+[ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Tests/Scripts/Reset.gd" id="1_4apoi"]
 [ext_resource type="Script" uid="uid://dni8jddo41o6p" path="res://Tests/Scripts/HUD.gd" id="1_pn6e5"]
-[ext_resource type="Script" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
+[ext_resource type="Script" uid="uid://dvdenf2idix5c" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
 [ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_pn6e5"]
 [ext_resource type="Script" uid="uid://bwr8ewf22w4s6" path="res://Tests/Scripts/Player.gd" id="3_1fv2d"]
-[ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
+[ext_resource type="Script" uid="uid://ds2sxsl10lska" path="res://Tests/Scripts/PlayerCamera.gd" id="4_x5rqh"]
+[ext_resource type="Texture2D" uid="uid://bosw1cgjauclu" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
+[ext_resource type="Texture2D" uid="uid://cnjt2gfldl613" path="res://Art/Placeholders/EnemyStates/IDLE.png" id="7_02cn6"]
+[ext_resource type="Script" uid="uid://dc3wt1l7s6qd2" path="res://Tests/Scripts/TestDummy.gd" id="7_68dvf"]
+[ext_resource type="Texture2D" uid="uid://bdknjmyckkdu5" path="res://Art/Placeholders/PlayerStates/VFX/ATTACK.png" id="7_bfqo8"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pn6e5"]
 
@@ -12,34 +17,46 @@
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn6e5"]
-size = Vector2(3218.25, 271.875)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfqo8"]
+radius = 9.0
+height = 56.0
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_02cn6"]
-size = Vector2(2189, 229)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_1fv2d"]
-size = Vector2(35.125, 53.125)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_02cn6"]
+radius = 25.0
+height = 86.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4i77v"]
 size = Vector2(879.5, 68)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5rqh"]
+size = Vector2(25, 147.54813)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_q3xu1"]
 size = Vector2(84.5, 13)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_x5rqh"]
-size = Vector2(25, 147.54813)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_68dvf"]
+radius = 13.0
+height = 88.0
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pn6e5"]
+size = Vector2(3218.25, 271.875)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bfqo8"]
 size = Vector2(357, 35)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_02cn6"]
+size = Vector2(2189, 229)
+
 [node name="Testing" type="Node2D" unique_id=424177803]
+script = ExtResource("1_4apoi")
 
 [node name="Pause" type="CanvasLayer" parent="." unique_id=961585534]
 process_mode = 3
 script = ExtResource("1_q3xu1")
 
 [node name="DimOverlay" type="ColorRect" parent="Pause" unique_id=505568911]
+light_mask = 8
+visibility_layer = 8
 offset_left = -27.0
 offset_top = -11.0
 offset_right = 1290.0
@@ -47,6 +64,8 @@ offset_bottom = 733.0
 color = Color(0, 0, 0, 0)
 
 [node name="Pause" type="Label" parent="Pause" unique_id=1020444964]
+light_mask = 8
+visibility_layer = 8
 offset_left = -1.0
 offset_top = -1.0
 offset_right = 1285.0
@@ -68,29 +87,30 @@ script = ExtResource("1_pn6e5")
 player = NodePath("../Player")
 
 [node name="Controls" type="Label" parent="HUD" unique_id=870245667]
-light_mask = 4
-visibility_layer = 4
+light_mask = 8
+visibility_layer = 8
 anchors_preset = -1
 anchor_left = 0.055000003
 anchor_top = 0.625
 anchor_right = 0.055000003
 anchor_bottom = 0.625
-offset_left = 1070.6
-offset_top = -435.0
-offset_right = 1196.6
-offset_bottom = -360.0
+offset_left = 884.6
+offset_top = -436.0
+offset_right = 1191.6
+offset_bottom = -257.0
 text = "Pause - ESC
-Movement - A/D
-Jump - W/Space
-Take Damage - H
-Die - G
-Heal - J
-Full Heal - K"
+Movement - A/D - Left/Right Arrow Keys
+Jump - Space - W - Up Arrow Key
+Melee Attack - Left Click
+Take Damage - U
+Heal - I
+Full Heal - O
+Die - P"
 horizontal_alignment = 2
 
 [node name="HealthBar" type="ProgressBar" parent="HUD" unique_id=525464851]
-light_mask = 4
-visibility_layer = 4
+light_mask = 8
+visibility_layer = 8
 material = SubResource("CanvasItemMaterial_pn6e5")
 offset_left = 16.0
 offset_top = 684.0
@@ -99,8 +119,8 @@ offset_bottom = 711.0
 show_percentage = false
 
 [node name="HealthValue" type="Label" parent="HUD" unique_id=335768953]
-light_mask = 4
-visibility_layer = 4
+light_mask = 8
+visibility_layer = 8
 offset_left = 104.0
 offset_top = 686.0
 offset_right = 202.0
@@ -109,8 +129,8 @@ label_settings = SubResource("LabelSettings_pn6e5")
 horizontal_alignment = 1
 
 [node name="DamageFlash" type="ColorRect" parent="HUD" unique_id=740906534]
-light_mask = 5
-visibility_layer = 5
+light_mask = 8
+visibility_layer = 8
 offset_left = -5.0
 offset_top = -4.0
 offset_right = 1286.0
@@ -119,336 +139,427 @@ mouse_filter = 2
 color = Color(0.45490196, 0.09411765, 0.07450981, 0)
 
 [node name="HealFlash" type="ColorRect" parent="HUD" unique_id=555135697]
+light_mask = 8
+visibility_layer = 8
 offset_left = -11.0
 offset_right = 1287.0
 offset_bottom = 727.0
 mouse_filter = 2
 color = Color(0.26666668, 0.95686275, 0.36078432, 0)
 
-[node name="OutofBoundsSpawn01" type="Marker2D" parent="." unique_id=1851291884]
-position = Vector2(800, 814)
+[node name="PlayerRespawnPoint" type="Marker2D" parent="." unique_id=444527319]
+position = Vector2(148, 365)
 
-[node name="OutofBoundsSpawn02" type="Marker2D" parent="." unique_id=458295227]
-position = Vector2(1612, -32)
-
-[node name="OutofBounds01" type="Area2D" parent="." unique_id=1810724131 node_paths=PackedStringArray("spawn_point")]
-position = Vector2(689, 1902)
-collision_mask = 2
-script = ExtResource("2_pn6e5")
-spawn_point = NodePath("../OutofBoundsSpawn01")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OutofBounds01" unique_id=1243362400]
-position = Vector2(84, -7)
-shape = SubResource("RectangleShape2D_pn6e5")
-
-[node name="OutofBounds02" type="Area2D" parent="." unique_id=1792973016 node_paths=PackedStringArray("spawn_point")]
-position = Vector2(2725, 454)
-collision_mask = 2
-script = ExtResource("2_pn6e5")
-spawn_point = NodePath("../OutofBoundsSpawn02")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="OutofBounds02" unique_id=394145817]
-position = Vector2(37, 162)
-shape = SubResource("RectangleShape2D_02cn6")
+[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1822755806 node_paths=PackedStringArray("player")]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(95, 463)
+script = ExtResource("4_x5rqh")
+player = NodePath("../Player")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=98949055]
 visibility_layer = 2
-position = Vector2(67, 622)
+position = Vector2(121, 621)
 collision_layer = 2
+collision_mask = 5
 script = ExtResource("3_1fv2d")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1449577693]
 visibility_layer = 2
-position = Vector2(27.70099, -1.8970666)
+position = Vector2(27.000002, -2.9999719)
 scale = Vector2(-0.24463204, 0.20583448)
 texture = ExtResource("5_q3xu1")
 flip_h = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1166859059]
-position = Vector2(26.5625, -1.4375)
-shape = SubResource("RectangleShape2D_1fv2d")
+[node name="PlayerHitbox" type="CollisionShape2D" parent="Player" unique_id=1166859059]
+position = Vector2(27, -6)
+shape = SubResource("CapsuleShape2D_bfqo8")
 
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1822755806]
-position = Vector2(28, -159)
+[node name="Melee" type="Node2D" parent="Player" unique_id=1033342873]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(27, -8)
 
-[node name="Floor" type="StaticBody2D" parent="." unique_id=1834002313]
+[node name="HitDetection" type="Area2D" parent="Player/Melee" unique_id=795971812]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, -10)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="HitBox" type="CollisionShape2D" parent="Player/Melee/HitDetection" unique_id=300999532]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(27, 11)
+rotation = -1.571273
+shape = SubResource("CapsuleShape2D_02cn6")
+
+[node name="MeleeVisual" type="Sprite2D" parent="Player/Melee" unique_id=274753036]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(20, 0.9999971)
+rotation = 3.1415927
+scale = Vector2(0.5461928, 0.46667486)
+texture = ExtResource("7_bfqo8")
+
+[node name="Level" type="Node" parent="." unique_id=1171510683]
+
+[node name="ROOM1" type="Node" parent="Level" unique_id=240079509]
+
+[node name="GEO" type="Node" parent="Level/ROOM1" unique_id=989626734]
+
+[node name="Floor" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=1834002313]
 position = Vector2(434, 686)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor" unique_id=1783096548]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Floor" unique_id=1783096548]
 position = Vector2(54.25, -2)
 shape = SubResource("RectangleShape2D_4i77v")
 debug_color = Color(1, 1, 1, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="Floor" unique_id=182687934]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Floor" unique_id=182687934]
 position = Vector2(-462.6652, -739.3077)
 scale = Vector2(1.29941, 0.9230769)
 polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
 
-[node name="LeftWall" type="StaticBody2D" parent="." unique_id=1713106443]
+[node name="LWall" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=1713106443]
 position = Vector2(-22.000008, 231)
 rotation = 1.4940019
+scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="LeftWall" unique_id=30444686]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/LWall" unique_id=30444686]
 position = Vector2(54.25, -2)
 shape = SubResource("RectangleShape2D_4i77v")
 debug_color = Color(1, 1, 1, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="LeftWall" unique_id=1333994537]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/LWall" unique_id=1333994537]
 position = Vector2(-462.6652, -739.3077)
 scale = Vector2(1.29941, 0.9230769)
 polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
 
-[node name="RightWall" type="StaticBody2D" parent="." unique_id=1991020928]
+[node name="RWall" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=1991020928]
 position = Vector2(1096, 241.00002)
 rotation = 1.7435839
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall" unique_id=1765702292]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/RWall" unique_id=1765702292]
 position = Vector2(54.25, -2)
 shape = SubResource("RectangleShape2D_4i77v")
 debug_color = Color(1, 1, 1, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="RightWall" unique_id=166318117]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/RWall" unique_id=166318117]
 position = Vector2(-462.6652, -739.3077)
 scale = Vector2(1.29941, 0.9230769)
 polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
 
-[node name="Platform" type="StaticBody2D" parent="." unique_id=2009076088]
-position = Vector2(251, 412)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform" unique_id=1474816027]
-position = Vector2(16, -1)
-shape = SubResource("RectangleShape2D_q3xu1")
-
-[node name="Polygon2D" type="Polygon2D" parent="Platform" unique_id=1887501625]
-position = Vector2(1.9073486e-06, 0)
-polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
-
-[node name="Platform2" type="StaticBody2D" parent="." unique_id=253286436]
-position = Vector2(448, 494)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform2" unique_id=770271771]
-position = Vector2(16, -1)
-shape = SubResource("RectangleShape2D_q3xu1")
-
-[node name="Polygon2D" type="Polygon2D" parent="Platform2" unique_id=1192562718]
-position = Vector2(1.9073486e-06, 0)
-polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
-
-[node name="Platform3" type="StaticBody2D" parent="." unique_id=1710046565]
-position = Vector2(250, 578)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform3" unique_id=1156333350]
-position = Vector2(16, -1)
-shape = SubResource("RectangleShape2D_q3xu1")
-
-[node name="Polygon2D" type="Polygon2D" parent="Platform3" unique_id=191962541]
-position = Vector2(1.9073486e-06, 0)
-polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
-
-[node name="Platform7" type="StaticBody2D" parent="." unique_id=134374793]
-position = Vector2(638, 333)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform7" unique_id=178814675]
-position = Vector2(16, -1)
-shape = SubResource("RectangleShape2D_q3xu1")
-
-[node name="Polygon2D" type="Polygon2D" parent="Platform7" unique_id=819575376]
-position = Vector2(1.9073486e-06, 0)
-polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
-
-[node name="Platform8" type="StaticBody2D" parent="." unique_id=597813821]
-position = Vector2(427, 333)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform8" unique_id=475557559]
-position = Vector2(16, -1)
-shape = SubResource("RectangleShape2D_q3xu1")
-
-[node name="Polygon2D" type="Polygon2D" parent="Platform8" unique_id=800402978]
-position = Vector2(1.9073486e-06, 0)
-polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
-
-[node name="ShortWall" type="StaticBody2D" parent="." unique_id=1391410698]
+[node name="ShortWall" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=1391410698]
 position = Vector2(793.00006, 608.99994)
 rotation = 0.37350047
-scale = Vector2(0.99999994, 0.99999994)
+scale = Vector2(0.9999999, 0.9999999)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="ShortWall" unique_id=669460641]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/ShortWall" unique_id=669460641]
 position = Vector2(0, -22.024109)
 shape = SubResource("RectangleShape2D_x5rqh")
 
-[node name="Polygon2D" type="Polygon2D" parent="ShortWall" unique_id=1872915716]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/ShortWall" unique_id=1872915716]
 position = Vector2(-0.0655241, -11.054474)
 scale = Vector2(1.0050403, 1.2122397)
 polygon = PackedVector2Array(-13.495789, -69.62812, -13.495789, 52.08487, 13, 52, 13, -70, -0.23370361, -69.814255)
 
-[node name="Floor2" type="StaticBody2D" parent="." unique_id=1982207345]
+[node name="Plat1" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=1710046565]
+position = Vector2(250, 578)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Plat1" unique_id=1156333350]
+position = Vector2(16, -1)
+shape = SubResource("RectangleShape2D_q3xu1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Plat1" unique_id=191962541]
+position = Vector2(1.9073486e-06, 0)
+polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
+
+[node name="Plat2" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=253286436]
+position = Vector2(448, 494)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Plat2" unique_id=770271771]
+position = Vector2(16, -1)
+shape = SubResource("RectangleShape2D_q3xu1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Plat2" unique_id=1192562718]
+position = Vector2(1.9073486e-06, 0)
+polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
+
+[node name="Plat3" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=2009076088]
+position = Vector2(251, 412)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Plat3" unique_id=1474816027]
+position = Vector2(16, -1)
+shape = SubResource("RectangleShape2D_q3xu1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Plat3" unique_id=1887501625]
+position = Vector2(1.9073486e-06, 0)
+polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
+
+[node name="Plat4" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=597813821]
+position = Vector2(427, 333)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Plat4" unique_id=475557559]
+position = Vector2(16, -1)
+shape = SubResource("RectangleShape2D_q3xu1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Plat4" unique_id=800402978]
+position = Vector2(1.9073486e-06, 0)
+polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
+
+[node name="Plat5" type="StaticBody2D" parent="Level/ROOM1/GEO" unique_id=134374793]
+position = Vector2(638, 333)
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/GEO/Plat5" unique_id=178814675]
+position = Vector2(16, -1)
+shape = SubResource("RectangleShape2D_q3xu1")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM1/GEO/Plat5" unique_id=819575376]
+position = Vector2(1.9073486e-06, 0)
+polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
+
+[node name="ENEMY" type="Node" parent="Level/ROOM1" unique_id=1264675406]
+
+[node name="TestDummy" type="CharacterBody2D" parent="Level/ROOM1/ENEMY" unique_id=1048224883]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(611, 607)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("7_68dvf")
+max_health = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/ROOM1/ENEMY/TestDummy" unique_id=1284077468]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(0.29500002, 0.27625)
+texture = ExtResource("7_02cn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM1/ENEMY/TestDummy" unique_id=2015989229]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-3, -1)
+shape = SubResource("CapsuleShape2D_68dvf")
+
+[node name="ROOM2" type="Node" parent="Level" unique_id=922950731]
+
+[node name="FEAT" type="Node" parent="Level/ROOM2" unique_id=183305942]
+
+[node name="OutofBoundsSpawn" type="Marker2D" parent="Level/ROOM2/FEAT" unique_id=1851291884]
+position = Vector2(800, 814)
+
+[node name="OutofBounds" type="Area2D" parent="Level/ROOM2/FEAT" unique_id=1810724131 node_paths=PackedStringArray("spawn_point")]
+position = Vector2(689, 1902)
+collision_mask = 2
+script = ExtResource("2_pn6e5")
+spawn_point = NodePath("../OutofBoundsSpawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/FEAT/OutofBounds" unique_id=1243362400]
+position = Vector2(84, -7)
+shape = SubResource("RectangleShape2D_pn6e5")
+
+[node name="GEO" type="Node" parent="Level/ROOM2" unique_id=83125351]
+
+[node name="Floor" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=1982207345]
 position = Vector2(1142, 914)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor2" unique_id=561758597]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Floor" unique_id=561758597]
 position = Vector2(54.25, -2)
 shape = SubResource("RectangleShape2D_4i77v")
 debug_color = Color(1, 1, 1, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="Floor2" unique_id=1919899540]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Floor" unique_id=1919899540]
 position = Vector2(-462.6652, -739.3077)
 scale = Vector2(1.29941, 0.9230769)
 polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
 
-[node name="RightWall2" type="StaticBody2D" parent="." unique_id=319632068]
+[node name="Wall" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=319632068]
 position = Vector2(1628.9999, 454.99997)
 rotation = 1.4940019
+scale = Vector2(0.99999994, 0.99999994)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RightWall2" unique_id=976868207]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Wall" unique_id=976868207]
 position = Vector2(54.25, -2)
 shape = SubResource("RectangleShape2D_4i77v")
 debug_color = Color(1, 1, 1, 0.41960785)
 
-[node name="Polygon2D" type="Polygon2D" parent="RightWall2" unique_id=714825223]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Wall" unique_id=714825223]
 position = Vector2(-462.6652, -739.3077)
 scale = Vector2(1.29941, 0.9230769)
 polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
 
-[node name="Floor3" type="StaticBody2D" parent="." unique_id=1279383700]
-position = Vector2(1142, 914)
-collision_mask = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor3" unique_id=1087790055]
-position = Vector2(54.25, -2)
-shape = SubResource("RectangleShape2D_4i77v")
-debug_color = Color(1, 1, 1, 0.41960785)
-
-[node name="Polygon2D" type="Polygon2D" parent="Floor3" unique_id=1360385188]
-position = Vector2(-462.6652, -739.3077)
-scale = Vector2(1.29941, 0.9230769)
-polygon = PackedVector2Array(737.7696, 761.91656, 736.09125, 806.9202, 737, 841, 59, 840.9999, 55.92168, 761.91656)
-
-[node name="Floor4" type="StaticBody2D" parent="." unique_id=1386053624]
+[node name="Floor2" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=1386053624]
 position = Vector2(1206.0001, 740.00006)
 rotation = 0.12391838
+scale = Vector2(0.99999994, 0.99999994)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor4" unique_id=821421713]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Floor2" unique_id=821421713]
 position = Vector2(16, -2)
 shape = SubResource("RectangleShape2D_bfqo8")
 
-[node name="Polygon2D" type="Polygon2D" parent="Floor4" unique_id=805699740]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Floor2" unique_id=805699740]
 position = Vector2(16, -2)
 polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
 
-[node name="Platform9" type="StaticBody2D" parent="." unique_id=1624589712]
+[node name="Floor3" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=961748303]
+position = Vector2(1445.0001, 579)
+rotation = -0.1256637
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Floor3" unique_id=392308553]
+position = Vector2(16, -2)
+shape = SubResource("RectangleShape2D_bfqo8")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Floor3" unique_id=2129987764]
+position = Vector2(16, -2)
+polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
+
+[node name="Floor4" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=170824006]
+position = Vector2(1519.0002, 64.00002)
+rotation = -0.12391838
+scale = Vector2(0.99999994, 0.99999994)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Floor4" unique_id=1262381322]
+position = Vector2(16, -2)
+shape = SubResource("RectangleShape2D_bfqo8")
+
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Floor4" unique_id=660723817]
+position = Vector2(16, -2)
+polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
+
+[node name="Plat1" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=1624589712]
 position = Vector2(1568, 794)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform9" unique_id=376331587]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat1" unique_id=376331587]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform9" unique_id=1184153440]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat1" unique_id=1184153440]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Floor5" type="StaticBody2D" parent="." unique_id=961748303]
-position = Vector2(1445.0001, 579)
-rotation = -0.12566371
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor5" unique_id=392308553]
-position = Vector2(16, -2)
-shape = SubResource("RectangleShape2D_bfqo8")
-
-[node name="Polygon2D" type="Polygon2D" parent="Floor5" unique_id=2129987764]
-position = Vector2(16, -2)
-polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
-
-[node name="Platform10" type="StaticBody2D" parent="." unique_id=1743621375]
+[node name="Plat2" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=1743621375]
 position = Vector2(1068, 651)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform10" unique_id=1313944946]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat2" unique_id=1313944946]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform10" unique_id=1218472690]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat2" unique_id=1218472690]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Platform11" type="StaticBody2D" parent="." unique_id=2105663956]
+[node name="Plat3" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=2105663956]
 position = Vector2(1547, 482)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform11" unique_id=973268337]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat3" unique_id=973268337]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform11" unique_id=1097181494]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat3" unique_id=1097181494]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Platform12" type="StaticBody2D" parent="." unique_id=191894571]
+[node name="Plat4" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=191894571]
 position = Vector2(1340, 404)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform12" unique_id=955324853]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat4" unique_id=955324853]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform12" unique_id=324156351]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat4" unique_id=324156351]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Platform13" type="StaticBody2D" parent="." unique_id=1650839015]
+[node name="Plat5" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=1650839015]
 position = Vector2(1136, 330)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform13" unique_id=590721522]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat5" unique_id=590721522]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform13" unique_id=544490158]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat5" unique_id=544490158]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Platform14" type="StaticBody2D" parent="." unique_id=2027094215]
+[node name="Plat6" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=2027094215]
 position = Vector2(1305, 249)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform14" unique_id=250245011]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat6" unique_id=250245011]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform14" unique_id=549104582]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat6" unique_id=549104582]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Platform15" type="StaticBody2D" parent="." unique_id=2081620363]
+[node name="Plat7" type="StaticBody2D" parent="Level/ROOM2/GEO" unique_id=2081620363]
 position = Vector2(1123, 167)
 collision_mask = 2
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Platform15" unique_id=575156901]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/GEO/Plat7" unique_id=575156901]
 position = Vector2(16, -1)
 shape = SubResource("RectangleShape2D_q3xu1")
 
-[node name="Polygon2D" type="Polygon2D" parent="Platform15" unique_id=1609596661]
+[node name="Polygon2D" type="Polygon2D" parent="Level/ROOM2/GEO/Plat7" unique_id=1609596661]
 position = Vector2(1.9073486e-06, 0)
 polygon = PackedVector2Array(-26, -8, -26, -1, -26, 6, 59, 6, 59, -8)
 
-[node name="Floor6" type="StaticBody2D" parent="." unique_id=170824006]
-position = Vector2(1519.0002, 64.00002)
-rotation = -0.12391838
+[node name="ENEMY" type="Node" parent="Level/ROOM2" unique_id=1857439532]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Floor6" unique_id=1262381322]
-position = Vector2(16, -2)
-shape = SubResource("RectangleShape2D_bfqo8")
+[node name="TestDummy" type="CharacterBody2D" parent="Level/ROOM2/ENEMY" unique_id=1667484876]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(866, 837)
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("7_68dvf")
+max_health = 5
 
-[node name="Polygon2D" type="Polygon2D" parent="Floor6" unique_id=660723817]
-position = Vector2(16, -2)
-polygon = PackedVector2Array(-178, -18, -178, 18, 180, 18, 180, -18)
+[node name="Sprite2D" type="Sprite2D" parent="Level/ROOM2/ENEMY/TestDummy" unique_id=1372058671]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(0.29500002, 0.27625)
+texture = ExtResource("7_02cn6")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM2/ENEMY/TestDummy" unique_id=808050315]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-3, -1)
+shape = SubResource("CapsuleShape2D_68dvf")
+
+[node name="ROOM3" type="Node" parent="Level" unique_id=289994185]
+
+[node name="FEAT" type="Node" parent="Level/ROOM3" unique_id=1378371459]
+
+[node name="OutofBoundsSpawn" type="Marker2D" parent="Level/ROOM3/FEAT" unique_id=458295227]
+position = Vector2(1612, -32)
+
+[node name="OutofBounds" type="Area2D" parent="Level/ROOM3/FEAT" unique_id=1792973016 node_paths=PackedStringArray("spawn_point")]
+position = Vector2(2725, 454)
+collision_mask = 2
+script = ExtResource("2_pn6e5")
+spawn_point = NodePath("../OutofBoundsSpawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/ROOM3/FEAT/OutofBounds" unique_id=394145817]
+position = Vector2(37, 162)
+shape = SubResource("RectangleShape2D_02cn6")

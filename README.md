@@ -32,9 +32,10 @@ Design docs: [Docs/GDD.md](Docs/GDD.md) · Chunk workflow: [Docs/ChunkWorkflow.m
 
 Movement and interaction actions are defined in **Project Settings → Input Map**:
 
-- `move_left`, `move_right` — AD / Arrow Keys
-- `jump` — W / Space
+- `move_left`, `move_right` — A/D / Left/Right Arrow Keys
+- `jump` — Space/W / Up Arrow Key
 - `interact` — E
+- `melee_attack` — Left Mouse Click
 - `pause` — Escape
 - `test_damage` — U
 - `test_heal` — I

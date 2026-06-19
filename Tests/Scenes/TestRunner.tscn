@@ -1,5 +1,7 @@
 [gd_scene format=3 uid="uid://c5ii34pd15m53"]
 
+[ext_resource type="Script" uid="uid://d0w88ukya30pv" path="res://Tests/Scripts/TestRunner.gd" id="1_3wv7x"]
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wv7x"]
 size = Vector2(879.5, 68)
 
@@ -9,6 +11,7 @@ size = Vector2(879.5, 68)
 size = Vector2(24, 26)
 
 [node name="TestRunner" type="Node" unique_id=459398892]
+script = ExtResource("1_3wv7x")
 
 [node name="Background" type="CanvasLayer" parent="." unique_id=298108877]
 layer = -1
