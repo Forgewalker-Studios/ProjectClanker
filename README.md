@@ -44,7 +44,7 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 - `move_left`, `move_right` — AD / Arrow Keys
 - `jump` — W / Space
 - `interact` — E
-- `attack` — J
+- `melee_attack` — J
 - `pause` — Escape
 - `test_damage` — U
 - `test_heal` — I
