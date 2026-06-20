@@ -21,6 +21,10 @@ run/main_scene="res://Scenes/UI/MainMenu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Art/Icon.svg"
 
+[audio]
+
+buses/default_bus_layout="res://Audio/default_bus_layout.tres"
+
 [autoload]
 
 GameServices="*res://Autoload/GameServices.gd"
@@ -28,10 +32,6 @@ Progression="*res://Autoload/ProgressionState.gd"
 ClankerSettings="*res://Autoload/ClankerSettings.gd"
 AudioDirector="*res://Autoload/AudioDirector.gd"
 SceneTransition="*res://Scripts/SceneTransitionController.gd"
-
-[audio]
-
-buses/default_bus_layout="res://Audio/default_bus_layout.tres"
 
 [display]
 

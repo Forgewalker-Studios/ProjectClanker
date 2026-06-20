@@ -1,15 +1,15 @@
 [gd_scene format=3 uid="uid://b11mtqvr6d240"]
 
-[ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Tests/Scripts/Reset.gd" id="1_4apoi"]
+[ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Scripts/Reset.gd" id="1_4apoi"]
 [ext_resource type="Script" uid="uid://dni8jddo41o6p" path="res://Tests/Scripts/HUD.gd" id="1_pn6e5"]
 [ext_resource type="Script" uid="uid://dvdenf2idix5c" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
 [ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_pn6e5"]
-[ext_resource type="Script" uid="uid://bwr8ewf22w4s6" path="res://Tests/Scripts/Player.gd" id="3_1fv2d"]
-[ext_resource type="Script" uid="uid://ds2sxsl10lska" path="res://Tests/Scripts/PlayerCamera.gd" id="4_x5rqh"]
+[ext_resource type="Script" uid="uid://ds2sxsl10lska" path="res://Scripts/PlayerCamera.gd" id="4_x5rqh"]
+[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="5_71f0m"]
 [ext_resource type="Texture2D" uid="uid://bosw1cgjauclu" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
 [ext_resource type="Texture2D" uid="uid://cnjt2gfldl613" path="res://Art/Placeholders/EnemyStates/IDLE.png" id="7_02cn6"]
-[ext_resource type="Script" uid="uid://dc3wt1l7s6qd2" path="res://Tests/Scripts/TestDummy.gd" id="7_68dvf"]
 [ext_resource type="Texture2D" uid="uid://bdknjmyckkdu5" path="res://Art/Placeholders/PlayerStates/VFX/ATTACK.png" id="7_bfqo8"]
+[ext_resource type="Script" uid="uid://dc3wt1l7s6qd2" path="res://Scripts/TestDummy.gd" id="8_l85ih"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pn6e5"]
 
@@ -99,9 +99,9 @@ offset_top = -436.0
 offset_right = 1191.6
 offset_bottom = -257.0
 text = "Pause - ESC
-Movement - A/D - Left/Right Arrow Keys
-Jump - Space - W - Up Arrow Key
-Melee Attack - Left Click
+Movement - AD
+Jump - Space / W
+Melee Attack - J
 Take Damage - U
 Heal - I
 Full Heal - O
@@ -162,7 +162,7 @@ visibility_layer = 2
 position = Vector2(121, 621)
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("3_1fv2d")
+script = ExtResource("5_71f0m")
 
 [node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1449577693]
 visibility_layer = 2
@@ -338,8 +338,7 @@ visibility_layer = 4
 position = Vector2(611, 607)
 collision_layer = 4
 collision_mask = 3
-script = ExtResource("7_68dvf")
-max_health = 5
+script = ExtResource("8_l85ih")
 
 [node name="Sprite2D" type="Sprite2D" parent="Level/ROOM1/ENEMY/TestDummy" unique_id=1284077468]
 light_mask = 4
@@ -532,8 +531,7 @@ visibility_layer = 4
 position = Vector2(866, 837)
 collision_layer = 4
 collision_mask = 3
-script = ExtResource("7_68dvf")
-max_health = 5
+script = ExtResource("8_l85ih")
 
 [node name="Sprite2D" type="Sprite2D" parent="Level/ROOM2/ENEMY/TestDummy" unique_id=1372058671]
 light_mask = 4

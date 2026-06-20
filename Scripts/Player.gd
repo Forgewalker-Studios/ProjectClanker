@@ -35,7 +35,6 @@ signal player_left_bounds
 @export var melee_recovery_time: float = 0.18
 
 @onready var sprite: Sprite2D = $PlayerSprite
-@onready var collision_shape: CollisionShape2D = $CollisionShape2D
 @onready var melee: Node2D = $Melee
 @onready var hit_detection: Area2D = $Melee/HitDetection
 @onready var hit_box: CollisionShape2D = $Melee/HitDetection/HitBox
@@ -106,7 +105,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
-	sprite.flip_h = facing_direction < 0
+	sprite.flip_h = facing_direction > 0
 
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_attack()
@@ -259,7 +258,7 @@ func _update_state_visuals() -> void:
 		PlayerState.FALL:
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/FALL.png")
 		PlayerState.MELEE:
-			sprite.texture = preload("res://Art/Placeholders/PlayerStates/MELEE.png")
+			sprite.texture = preload("res://Art/Placeholders/PlayerStates/ATTACK.png")
 		PlayerState.DOWN:
 			sprite.texture = preload("res://Art/Placeholders/PlayerStates/DOWNED.png")
 		PlayerState.DOWNFALL:

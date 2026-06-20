@@ -7,7 +7,7 @@ extends Node2D
 
 
 func _ready() -> void:
-	player.player_respawned.connect(player_died)
+	player.player_died.connect(player_died)
 
 
 func player_died() -> void:
