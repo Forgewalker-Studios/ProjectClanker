@@ -1,29 +1,19 @@
 [gd_scene format=3 uid="uid://b11mtqvr6d240"]
 
-[ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Scripts/Reset.gd" id="1_4apoi"]
+[ext_resource type="Script" path="res://Scripts/Reset.gd" id="1_4apoi"]
 [ext_resource type="Script" uid="uid://dni8jddo41o6p" path="res://Tests/Scripts/HUD.gd" id="1_pn6e5"]
 [ext_resource type="Script" uid="uid://dvdenf2idix5c" path="res://Tests/Scripts/PauseScreen.gd" id="1_q3xu1"]
 [ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_pn6e5"]
-[ext_resource type="Script" uid="uid://ds2sxsl10lska" path="res://Scripts/PlayerCamera.gd" id="4_x5rqh"]
-[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="5_71f0m"]
-[ext_resource type="Texture2D" uid="uid://bosw1cgjauclu" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="5_q3xu1"]
+[ext_resource type="Script" path="res://Scripts/PlayerCamera.gd" id="4_x5rqh"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="5_02cn6"]
 [ext_resource type="Texture2D" uid="uid://cnjt2gfldl613" path="res://Art/Placeholders/EnemyStates/IDLE.png" id="7_02cn6"]
-[ext_resource type="Texture2D" uid="uid://bdknjmyckkdu5" path="res://Art/Placeholders/PlayerStates/VFX/ATTACK.png" id="7_bfqo8"]
-[ext_resource type="Script" uid="uid://dc3wt1l7s6qd2" path="res://Scripts/TestDummy.gd" id="8_l85ih"]
+[ext_resource type="Script" path="res://Scripts/TestDummy.gd" id="8_l85ih"]
 
 [sub_resource type="CanvasItemMaterial" id="CanvasItemMaterial_pn6e5"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_pn6e5"]
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfqo8"]
-radius = 9.0
-height = 56.0
-
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_02cn6"]
-radius = 25.0
-height = 86.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_4i77v"]
 size = Vector2(879.5, 68)
@@ -84,7 +74,7 @@ color = Color(0.57409495, 0.7135087, 1, 1)
 
 [node name="HUD" type="CanvasLayer" parent="." unique_id=1125944773 node_paths=PackedStringArray("player")]
 script = ExtResource("1_pn6e5")
-player = NodePath("../Player")
+player = NodePath("")
 
 [node name="Controls" type="Label" parent="HUD" unique_id=870245667]
 light_mask = 8
@@ -155,54 +145,10 @@ light_mask = 4
 visibility_layer = 4
 position = Vector2(95, 463)
 script = ExtResource("4_x5rqh")
-player = NodePath("../Player")
+player = NodePath("")
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=98949055]
-visibility_layer = 2
+[node name="Player" parent="." unique_id=879303707 instance=ExtResource("5_02cn6")]
 position = Vector2(121, 621)
-collision_layer = 2
-collision_mask = 5
-script = ExtResource("5_71f0m")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1449577693]
-visibility_layer = 2
-position = Vector2(27.000002, -2.9999719)
-scale = Vector2(-0.24463204, 0.20583448)
-texture = ExtResource("5_q3xu1")
-flip_h = true
-
-[node name="PlayerHitbox" type="CollisionShape2D" parent="Player" unique_id=1166859059]
-position = Vector2(27, -6)
-shape = SubResource("CapsuleShape2D_bfqo8")
-
-[node name="Melee" type="Node2D" parent="Player" unique_id=1033342873]
-light_mask = 8
-visibility_layer = 8
-position = Vector2(27, -8)
-
-[node name="HitDetection" type="Area2D" parent="Player/Melee" unique_id=795971812]
-light_mask = 4
-visibility_layer = 4
-position = Vector2(0, -10)
-collision_layer = 0
-collision_mask = 4
-monitoring = false
-monitorable = false
-
-[node name="HitBox" type="CollisionShape2D" parent="Player/Melee/HitDetection" unique_id=300999532]
-light_mask = 4
-visibility_layer = 4
-position = Vector2(27, 11)
-rotation = -1.571273
-shape = SubResource("CapsuleShape2D_02cn6")
-
-[node name="MeleeVisual" type="Sprite2D" parent="Player/Melee" unique_id=274753036]
-light_mask = 16
-visibility_layer = 16
-position = Vector2(20, 0.9999971)
-rotation = 3.1415927
-scale = Vector2(0.5461928, 0.46667486)
-texture = ExtResource("7_bfqo8")
 
 [node name="Level" type="Node" parent="." unique_id=1171510683]
 

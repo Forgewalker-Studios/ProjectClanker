@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c8unittrunner01"]
+[gd_scene format=3 uid="uid://c87n2d1pbs7b5"]
 
 [ext_resource type="Script" uid="uid://d0w88ukya30pv" path="res://Tests/Scripts/TestRunner.gd" id="1_unit_test"]
 

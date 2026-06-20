@@ -1,0 +1,11 @@
+[gd_scene format=3 uid="uid://b8mrjhmy4akav"]
+
+[ext_resource type="Texture2D" uid="uid://b358dxe2loi32" path="res://Assets/dori.png" id="1_i0wwx"]
+
+[node name="Dori" type="Node2D" unique_id=1139305506]
+
+[node name="Dori" type="Sprite2D" parent="." unique_id=1634289352]
+position = Vector2(244, 272)
+texture = ExtResource("1_i0wwx")
+hframes = 3
+vframes = 2

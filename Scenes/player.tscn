@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://m08ydqcdcoxp"]
+
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="1_6t5aa"]
+[ext_resource type="Texture2D" uid="uid://w6pg1vyiwyh8" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="2_vgqql"]
+[ext_resource type="Texture2D" uid="uid://bdknjmyckkdu5" path="res://Art/Placeholders/PlayerStates/VFX/ATTACK.png" id="3_fkybt"]
+[ext_resource type="Script" path="res://Scripts/PlayerCamera.gd" id="4_vgqql"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_bfqo8"]
+radius = 9.0
+height = 56.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_02cn6"]
+radius = 25.0
+height = 86.0
+
+[node name="Player" type="CharacterBody2D" unique_id=879303707]
+visibility_layer = 2
+position = Vector2(23, 43)
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_6t5aa")
+
+[node name="PlayerSprite" type="Sprite2D" parent="." unique_id=142486113]
+visibility_layer = 2
+position = Vector2(27.000002, -2.9999719)
+scale = Vector2(-0.24463204, 0.20583448)
+texture = ExtResource("2_vgqql")
+flip_h = true
+
+[node name="PlayerHitbox" type="CollisionShape2D" parent="." unique_id=1127113309]
+position = Vector2(27, -6)
+shape = SubResource("CapsuleShape2D_bfqo8")
+
+[node name="Melee" type="Node2D" parent="." unique_id=1437269542]
+light_mask = 8
+visibility_layer = 8
+position = Vector2(27, -8)
+
+[node name="HitDetection" type="Area2D" parent="Melee" unique_id=28561118]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(0, -10)
+collision_layer = 0
+collision_mask = 4
+monitoring = false
+monitorable = false
+
+[node name="HitBox" type="CollisionShape2D" parent="Melee/HitDetection" unique_id=1498059299]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(27, 11)
+rotation = -1.571273
+shape = SubResource("CapsuleShape2D_02cn6")
+
+[node name="MeleeVisual" type="Sprite2D" parent="Melee" unique_id=1711833273]
+light_mask = 16
+visibility_layer = 16
+position = Vector2(20, 0.9999971)
+rotation = 3.1415927
+scale = Vector2(0.5461928, 0.46667486)
+texture = ExtResource("3_fkybt")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=975852279]
+script = ExtResource("4_vgqql")

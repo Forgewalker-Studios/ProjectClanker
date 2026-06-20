@@ -1,16 +1,17 @@
 [gd_scene format=3 uid="uid://qjd5l7rgk5a3"]
 
-[ext_resource type="Script" uid="uid://dcooidyp8hla7" path="res://Scripts/DoorHub.gd" id="1_hub"]
-[ext_resource type="Script" uid="uid://ds2sxsl10lska" path="res://Scripts/PlayerCamera.gd" id="2_c6qae"]
-[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="2_player"]
-[ext_resource type="Texture2D" uid="uid://bosw1cgjauclu" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="3_idle"]
-[ext_resource type="Script" uid="uid://dobcui0r3k6fi" path="res://Scripts/D0R1.gd" id="4_d0r1"]
+[ext_resource type="Script" path="res://Scripts/DoorHub.gd" id="1_hub"]
+[ext_resource type="Script" path="res://Scripts/PlayerCamera.gd" id="2_c6qae"]
+[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_player"]
+[ext_resource type="Texture2D" uid="uid://w6pg1vyiwyh8" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="3_idle"]
+[ext_resource type="Script" path="res://Scripts/D0R1.gd" id="4_d0r1"]
 [ext_resource type="Resource" uid="uid://dlgregistry01" path="res://Resources/DialogueRegistry.tres" id="5_registry"]
-[ext_resource type="Script" uid="uid://crcoeg0stpqpu" path="res://Scripts/DialogueController.gd" id="6_controller"]
+[ext_resource type="Script" path="res://Scripts/DialogueController.gd" id="6_controller"]
 [ext_resource type="PackedScene" uid="uid://b16bxam8vbism" path="res://Scenes/UI/DialogueBox.tscn" id="7_dialogue_box"]
-[ext_resource type="Script" uid="uid://d08amcqw6utoc" path="res://Scripts/HubRoute.gd" id="8_route"]
-[ext_resource type="Script" uid="uid://bujasesh8wtai" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
-[ext_resource type="Script" uid="uid://c3miqtvopwy8b" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
+[ext_resource type="PackedScene" uid="uid://b8mrjhmy4akav" path="res://Scenes/Dori.tscn" id="7_t5kqx"]
+[ext_resource type="Script" path="res://Scripts/HubRoute.gd" id="8_route"]
+[ext_resource type="Script" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
+[ext_resource type="Script" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
 [ext_resource type="PackedScene" uid="uid://w4n8b7evjpm4" path="res://Scenes/UI/PauseMenu.tscn" id="11_pause"]
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="12_hud"]
 [ext_resource type="PackedScene" uid="uid://drx85hfsav11f" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
@@ -32,9 +33,10 @@ size = Vector2(48, 120)
 script = ExtResource("1_hub")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1130390120]
+visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
-color = Color(0.2, 0.22, 0.28, 1)
+color = Color(0.2, 0.21960784, 0.2784314, 0)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=479023472]
 position = Vector2(640, 650)
@@ -75,42 +77,10 @@ dialogue_registry = ExtResource("5_registry")
 color = Color(0.55, 0.58, 0.65, 1)
 polygon = PackedVector2Array(-80, -120, 80, -120, 80, 120, -80, 120)
 
-[node name="FacePanel" type="ColorRect" parent="D0R1" unique_id=1454216117]
-offset_left = -50.0
-offset_top = -70.0
-offset_right = 50.0
-offset_bottom = 30.0
-color = Color(0.95, 0.75, 0.35, 1)
-
-[node name="LeftEye" type="Label" parent="D0R1/FacePanel" unique_id=399627212]
-layout_mode = 0
-offset_left = 8.0
-offset_top = 12.0
-offset_right = 32.0
-offset_bottom = 40.0
-theme_override_font_sizes/font_size = 24
-text = "o"
-horizontal_alignment = 1
-
-[node name="RightEye" type="Label" parent="D0R1/FacePanel" unique_id=409340582]
-layout_mode = 0
-offset_left = 68.0
-offset_top = 12.0
-offset_right = 92.0
-offset_bottom = 40.0
-theme_override_font_sizes/font_size = 24
-text = "o"
-horizontal_alignment = 1
-
-[node name="Mouth" type="Label" parent="D0R1/FacePanel" unique_id=720735903]
-layout_mode = 0
-offset_left = 30.0
-offset_top = 52.0
-offset_right = 70.0
-offset_bottom = 80.0
-theme_override_font_sizes/font_size = 24
-text = "o"
-horizontal_alignment = 1
+[node name="Dori" parent="D0R1" unique_id=1139305506 instance=ExtResource("7_t5kqx")]
+z_index = 1
+position = Vector2(-123, -132)
+scale = Vector2(0.5, 0.5)
 
 [node name="NameLabel" type="Label" parent="D0R1" unique_id=425616406]
 offset_left = -40.0

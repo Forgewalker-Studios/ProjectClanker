@@ -7,7 +7,7 @@ Track external assets used in ProjectClanker. Update this file before committing
 | Godot default icon (adapted) | Godot Engine | MIT | `Art/Icon.svg` | Placeholder project icon |
 | 2D Sci-Fi Industrial Platform Builder | [XCF Studio / itch.io asset pack](Assets/2d-sci-fi-industrial-platform-builder/) | See pack license in source folder | `Assets/2d-sci-fi-industrial-platform-builder/` | Third-party environment tiles and props; silhouettes derived in `Art/Environment/Silhouettes/` |
 | Industrial Parallax Background | See pack in `Assets/industrial-parallax-background/` | See pack license in source folder | `Assets/industrial-parallax-background/` | Parallax layer source; `bg.png` remapped to grayscale in `Art/Environment/Parallax/BgLevelPaint.png` |
-| Midground industrial silhouettes | Project art / user-provided | Project-owned | `Assets/midground.png` | Source art; transparent sky cutout in `Art/Environment/Parallax/MidgroundLevel.png` |
+| Midground industrial silhouettes | Project art / user-provided | Project-owned | `Assets/midground.png` | Source art; white-keyed output in `Art/Environment/Parallax/MidgroundLevel.png` |
 | Boss and enemy sprite sheet | AI-assisted procedural generation (Cursor) | Project-owned | `Assets/baddies.png` | 64×64 grid silhouettes for bosses, minions, and VFX |
 | D-0R1 expression sheet | AI-assisted procedural generation (Cursor) | Project-owned | `Assets/dori.png` | 128×128 grid door terminal expressions |
 | Complete UI Essential Pack (Free) | See pack in `Assets/complete-ui-essential-pack/` | See pack license in source folder | `Assets/complete-ui-essential-pack/` | Flat UI sprites for menus and HUD |
