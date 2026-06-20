@@ -24,3 +24,10 @@ Thumbs.db
 # Logs and temp
 *.log
 *.tmp
+
+# Asset pack receipts, zip debris, and source masters (runtime PNG/OGG committed)
+**/__MACOSX/
+**/.itch/
+**/*.psd
+**/*.xcf
+**/*.aseprite

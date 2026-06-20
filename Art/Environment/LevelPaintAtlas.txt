@@ -1,0 +1,53 @@
+# LevelPaint atlas tile index
+# Cell size: 64x64
+
+0: Environment Extras/Background Tile1.png
+1: Environment Extras/Background Tile2.png
+2: Environment Extras/Background Tile3.png
+3: Environment Extras/Column1.png
+4: Environment Extras/Column2.png
+5: Environment Extras/Cover Tile.png
+6: Environment Extras/Elevator Door_Closed.png
+7: Environment Extras/Elevator Door_Open.png
+8: Environment Extras/ElevatorDoorBottom.png
+9: Environment Extras/ElevatorDoorTop.png
+10: Environment Extras/Emergency Light.png
+11: Environment Extras/Emergency Lighting_Spin.png
+12: Environment Extras/Floor Light Projection.png
+13: Environment Extras/Floor Light_Off.png
+14: Environment Extras/Floor Light_On.png
+15: Environment Extras/FloorTile Hinge.png
+16: Environment Extras/Large Pipe-Bend.png
+17: Environment Extras/Large Pipe-Bend_Valvebase.png
+18: Environment Extras/Large Pipe-Bend_Valvefull.png
+19: Environment Extras/Large Pipe-Straight.png
+20: Environment Extras/Large Pipe-Straight_Valvebase.png
+21: Environment Extras/Large Pipe-Straight_Valvefull.png
+22: Environment Extras/PedSwitch_Blank.png
+23: Environment Extras/PedSwitch_Off.png
+24: Environment Extras/PedSwitch_On.png
+25: Environment Extras/Railing1.png
+26: Environment Extras/Railing2.png
+27: Environment Extras/Small Door.png
+28: Environment Extras/Small Door_Closed.png
+29: Environment Extras/Small Door_Frame.png
+30: Environment Extras/Sprite Sheets/Emergency Light_Blink.png
+31: Environment Extras/Switch_Off Button.png
+32: Environment Extras/Switch_On Button.png
+33: Environment Extras/Valve Base.png
+34: Environment Extras/Valve Wheel.png
+35: Environment Extras/Wall Sign.png
+36: Floor System/MainFloorSection_0.png
+37: Floor System/MainFloorSection_1.png
+38: Floor System/MainFloorSection_2.png
+39: Floor System/MainFloorSection_3.png
+40: Floor System/MainFloorSection_4.png
+41: Floor System/Slant1.png
+42: Floor System/Slant2.png
+43: Objects/Barrel1.png
+44: Objects/Barrel2.png
+45: Objects/Barrel3.png
+46: Objects/Crate1.png
+47: Objects/Crate2.png
+48: Objects/Crate3.png
+49: Objects/Forklift.png

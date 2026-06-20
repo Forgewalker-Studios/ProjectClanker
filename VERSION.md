@@ -1,6 +1,14 @@
 # Version History
 
-Current version: **0.0.2.0**
+Current version: **0.0.3.0**
+
+## 0.0.3.0 — Silhouette art and Level1 paint scene
+
+- Added boss, enemy, and D-0R1 silhouette sprite sheets (`Assets/baddies.png`, `Assets/dori.png`).
+- Imported industrial platform-builder, parallax, UI, and sci-fi music asset packs under `Assets/`.
+- Generated environment silhouettes, paint atlas, and parallax midground cutout in `Art/Environment/`.
+- Added `Scenes/Level1.tscn` with 10:3 paint grid, gradient sky, and parallax midground.
+- Added art generation and TileSet build tools under `Tools/`.
 
 ## 0.0.2.0 — Audio, menu, and settings (Chunks 10–11)
 

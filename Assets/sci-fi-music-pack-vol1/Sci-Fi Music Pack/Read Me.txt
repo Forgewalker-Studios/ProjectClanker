@@ -1,0 +1,22 @@
+10 original tracks for sci-fi game environments, cyberpunk cities, AI horror sequences, and technology that has gone too far.
+
+Industrial rhythms, synthetic textures, and electronic structures that feel like systems observing you. Not retro synthwave — this pack is colder and stranger. Music for the parts of your game where the world feels engineered rather than built.
+
+All tracks are provided as .ogg files — the recommended format for music in Godot for optimal streaming performance and file size.
+
+TRACKS INCLUDED
+1. Tears of Oil — mechanical grief and synthetic tension, Cm
+2. We the Machines — systems asserting dominance, Gm
+3. Discourse Between 1 and 0 — binary conflict and cold logic, Em
+4. Bit Rate Pawns — degraded digital atmosphere, Dm
+5. Breaking Beat — fractured industrial rhythm, F#
+6. Through — relentless processing energy, Em
+7. Bolted Lug Nuts — heavy mechanical drive, C
+8. Sick Pump — aggressive blown-out 808 energy, Db
+9. Static Abyss — digital void and signal decay, Dm
+10. Frameworks — structural cold ambience, Em
+
+LICENSE
+Free to use in any Godot project with attribution. Credit "Music: Talon Trueblood" in your game credits or itch.io page. Commercial use permitted with credit.
+
+Part of the Talon catalog — 203 original tracks across themed packs, all free with attribution.
