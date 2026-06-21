@@ -1,6 +1,6 @@
 [gd_resource type="TileSet" format=3 uid="uid://c0uyoqdtodlbf"]
 
-[ext_resource type="Texture2D" uid="uid://uvlrxeomsw21" path="res://Art/Environment/LevelPaintAtlas.png" id="1_shmix"]
+[ext_resource type="Texture2D" uid="uid://dplu0qfxpncn1" path="res://Art/Environment/LevelPaintAtlas.png" id="1_shmix"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_gu4uu"]
 texture = ExtResource("1_shmix")

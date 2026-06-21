@@ -1,17 +1,12 @@
 [gd_scene format=3 uid="uid://qjd5l7rgk5a3"]
 
-[ext_resource type="Script" path="res://Scripts/DoorHub.gd" id="1_hub"]
-[ext_resource type="Script" path="res://Scripts/PlayerCamera.gd" id="2_c6qae"]
-[ext_resource type="Script" path="res://Scripts/Player.gd" id="2_player"]
-[ext_resource type="Texture2D" uid="uid://w6pg1vyiwyh8" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="3_idle"]
-[ext_resource type="Script" path="res://Scripts/D0R1.gd" id="4_d0r1"]
-[ext_resource type="Resource" uid="uid://dlgregistry01" path="res://Resources/DialogueRegistry.tres" id="5_registry"]
-[ext_resource type="Script" path="res://Scripts/DialogueController.gd" id="6_controller"]
+[ext_resource type="Script" uid="uid://dcooidyp8hla7" path="res://Scripts/DoorHub.gd" id="1_hub"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="2_3mox2"]
+[ext_resource type="Script" uid="uid://crcoeg0stpqpu" path="res://Scripts/DialogueController.gd" id="6_controller"]
 [ext_resource type="PackedScene" uid="uid://b16bxam8vbism" path="res://Scenes/UI/DialogueBox.tscn" id="7_dialogue_box"]
-[ext_resource type="PackedScene" uid="uid://b8mrjhmy4akav" path="res://Scenes/Dori.tscn" id="7_t5kqx"]
-[ext_resource type="Script" path="res://Scripts/HubRoute.gd" id="8_route"]
-[ext_resource type="Script" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
-[ext_resource type="Script" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
+[ext_resource type="Script" uid="uid://d08amcqw6utoc" path="res://Scripts/HubRoute.gd" id="8_route"]
+[ext_resource type="Script" uid="uid://bujasesh8wtai" path="res://Scripts/HubProgressionDebug.gd" id="9_debug"]
+[ext_resource type="Script" uid="uid://c3miqtvopwy8b" path="res://Scripts/HubInteractPrompt.gd" id="10_prompt"]
 [ext_resource type="PackedScene" uid="uid://w4n8b7evjpm4" path="res://Scenes/UI/PauseMenu.tscn" id="11_pause"]
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="12_hud"]
 [ext_resource type="PackedScene" uid="uid://drx85hfsav11f" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
@@ -19,12 +14,6 @@
 
 [sub_resource type="RectangleShape2D" id="floor_shape"]
 size = Vector2(1200, 40)
-
-[sub_resource type="RectangleShape2D" id="player_shape"]
-size = Vector2(35.125, 53.125)
-
-[sub_resource type="RectangleShape2D" id="d0r1_interact"]
-size = Vector2(120, 140)
 
 [sub_resource type="RectangleShape2D" id="route_blocker"]
 size = Vector2(48, 120)
@@ -48,55 +37,8 @@ shape = SubResource("floor_shape")
 color = Color(0.35, 0.38, 0.45, 1)
 polygon = PackedVector2Array(-600, -20, 600, -20, 600, 20, -600, 20)
 
-[node name="PlayerCamera" type="Camera2D" parent="." unique_id=1731500632]
-position = Vector2(246, 460)
-script = ExtResource("2_c6qae")
-
-[node name="Player" type="CharacterBody2D" parent="." unique_id=873340851 groups=["player"]]
-position = Vector2(220, 580)
-collision_layer = 2
-script = ExtResource("2_player")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=89075513]
-position = Vector2(26.5625, -1.4375)
-scale = Vector2(0.24463204, 0.20583448)
-texture = ExtResource("3_idle")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1884425234]
-position = Vector2(26.5625, -1.4375)
-shape = SubResource("player_shape")
-
-[node name="D0R1" type="Area2D" parent="." unique_id=250477028]
-position = Vector2(640, 520)
-collision_layer = 0
-collision_mask = 2
-script = ExtResource("4_d0r1")
-dialogue_registry = ExtResource("5_registry")
-
-[node name="DoorFrame" type="Polygon2D" parent="D0R1" unique_id=161726927]
-color = Color(0.55, 0.58, 0.65, 1)
-polygon = PackedVector2Array(-80, -120, 80, -120, 80, 120, -80, 120)
-
-[node name="Dori" parent="D0R1" unique_id=1139305506 instance=ExtResource("7_t5kqx")]
-z_index = 1
-position = Vector2(-123, -132)
-scale = Vector2(0.5, 0.5)
-
-[node name="NameLabel" type="Label" parent="D0R1" unique_id=425616406]
-offset_left = -40.0
-offset_top = -145.0
-offset_right = 40.0
-offset_bottom = -120.0
-text = "D-0R1"
-horizontal_alignment = 1
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="D0R1" unique_id=101837444]
-position = Vector2(0, 10)
-shape = SubResource("d0r1_interact")
-
-[node name="BlinkTimer" type="Timer" parent="D0R1" unique_id=732970838]
-wait_time = 3.0
-autostart = true
+[node name="Player" parent="." unique_id=879303707 instance=ExtResource("2_3mox2")]
+position = Vector2(331, 603)
 
 [node name="RouteArea1" type="StaticBody2D" parent="." unique_id=1578328176]
 position = Vector2(120, 560)
@@ -217,6 +159,7 @@ polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
 script = ExtResource("6_controller")
 
 [node name="DialogueBox" parent="." unique_id=1891235703 instance=ExtResource("7_dialogue_box")]
+visible = false
 
 [node name="HubProgressionDebug" type="CanvasLayer" parent="." unique_id=1244332669]
 script = ExtResource("9_debug")
@@ -257,9 +200,11 @@ grow_vertical = 0
 horizontal_alignment = 1
 
 [node name="PauseMenu" parent="." unique_id=1552720419 instance=ExtResource("11_pause")]
+visible = false
 
 [node name="GameplayHUD" parent="." unique_id=317113366 instance=ExtResource("12_hud")]
 
 [node name="BossHealthBar" parent="." unique_id=706923893 instance=ExtResource("13_bossbar")]
 
 [node name="EndingScreen" parent="." unique_id=520873193 instance=ExtResource("14_ending")]
+visible = false

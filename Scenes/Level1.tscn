@@ -1,14 +1,20 @@
 [gd_scene format=4 uid="uid://d2iidvx55h8ae"]
 
-[ext_resource type="Script" path="res://Scripts/Reset.gd" id="1_4apoi"]
+[ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Scripts/Reset.gd" id="1_4apoi"]
 [ext_resource type="Script" uid="uid://dkfe0ah2ixx7r" path="res://Scripts/LevelPaintBackground.gd" id="1_bg"]
-[ext_resource type="Script" path="res://Scripts/LevelPaintGrid.gd" id="1_grid"]
+[ext_resource type="Script" uid="uid://dtvov58f6a244" path="res://Scripts/LevelPaintGrid.gd" id="1_grid"]
 [ext_resource type="TileSet" uid="uid://c0uyoqdtodlbf" path="res://Resources/TileSets/LevelPaintTileSet.tres" id="1_tileset"]
-[ext_resource type="Texture2D" uid="uid://csc1kivav533e" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="2_midground"]
-[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="6_t3or0"]
+[ext_resource type="Texture2D" uid="uid://bsomst7msvj52" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="2_midground"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="6_t3or0"]
+[ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="7_ysn8j"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_ysn8j"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_t3or0"]
 size = Vector2(336, 62)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6ll4n"]
+size = Vector2(1529.5, 195)
 
 [node name="LevelPaint" type="Node2D" unique_id=424177803]
 script = ExtResource("1_4apoi")
@@ -62,6 +68,7 @@ tile_set = ExtResource("1_tileset")
 collision_enabled = false
 
 [node name="RigidBody2D" type="RigidBody2D" parent="LevelPaint" unique_id=2041071105]
+physics_material_override = SubResource("PhysicsMaterial_ysn8j")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="LevelPaint/RigidBody2D" unique_id=425292170]
 position = Vector2(287, 343)
@@ -71,3 +78,16 @@ shape = SubResource("RectangleShape2D_t3or0")
 
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
 position = Vector2(153, 178)
+
+[node name="OutofBounds" type="Area2D" parent="." unique_id=633745339 node_paths=PackedStringArray("spawn_point")]
+position = Vector2(-179, 774)
+collision_mask = 2
+script = ExtResource("7_ysn8j")
+spawn_point = NodePath("OutofBoundsSpawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutofBounds" unique_id=1363511830]
+position = Vector2(462.75, 168.25)
+shape = SubResource("RectangleShape2D_6ll4n")
+
+[node name="OutofBoundsSpawn" type="Marker2D" parent="OutofBounds" unique_id=365904392]
+position = Vector2(392, -496)

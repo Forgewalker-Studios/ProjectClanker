@@ -1,13 +1,13 @@
 [gd_scene format=3 uid="uid://c5ii34pd15m53"]
 
-[ext_resource type="Script" uid="uid://dmfpuitpxvki5" path="res://Scripts/Player.gd" id="1_player"]
-[ext_resource type="Texture2D" uid="uid://c2nqfcfvxw1dd" path="res://Art/Placeholders/PlayerStates/IDLE.png" id="2_idle"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="1_3wv7x"]
+[ext_resource type="Script" uid="uid://ca1w73q7co01f" path="res://Tests/Scripts/OutOfBounds.gd" id="2_b5lsa"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3wv7x"]
 size = Vector2(879.5, 68)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c422r"]
-size = Vector2(35.125, 53.125)
+size = Vector2(1529.5, 195)
 
 [node name="TestRunner" type="Node2D" unique_id=459398892]
 
@@ -32,33 +32,42 @@ position = Vector2(-76.66519, -120)
 scale = Vector2(1.29941, 1)
 polygon = PackedVector2Array(735, 766, 736.09125, 806.9202, 737, 841, 61, 841, 59, 763)
 
-[node name="Player" type="CharacterBody2D" parent="." unique_id=1173550141]
-visibility_layer = 2
-position = Vector2(299, 607)
-collision_layer = 2
-script = ExtResource("1_player")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player" unique_id=1187254505]
-visibility_layer = 2
-position = Vector2(26.5625, -1.4375)
-scale = Vector2(0.24463204, 0.20583448)
-texture = ExtResource("2_idle")
-flip_h = true
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=147906435]
-position = Vector2(26.5625, -1.4375)
-shape = SubResource("RectangleShape2D_c422r")
-
-[node name="Camera2D" type="Camera2D" parent="Player" unique_id=1863071342]
-position = Vector2(28, -159)
+[node name="Player" parent="." unique_id=879303707 instance=ExtResource("1_3wv7x")]
+position = Vector2(144, 612)
 
 [node name="Controls" type="Label" parent="." unique_id=870245668]
-offset_left = 1070.0
-offset_top = 40.0
-offset_right = 1270.0
-offset_bottom = 140.0
+offset_left = 912.0
+offset_top = 15.0
+offset_right = 1265.0
+offset_bottom = 194.0
 text = "Play test sandbox
 Movement - A/D
 Jump - W/Space
 Unit tests - Tests/Scenes/UnitTestRunner.tscn"
 horizontal_alignment = 2
+
+[node name="OutofBounds" type="Area2D" parent="." unique_id=1815584366 node_paths=PackedStringArray("spawn_point")]
+position = Vector2(782, 1750)
+collision_mask = 2
+script = ExtResource("2_b5lsa")
+spawn_point = NodePath("OutofBoundsSpawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutofBounds" unique_id=1501967487]
+position = Vector2(462.75, 168.25)
+shape = SubResource("RectangleShape2D_c422r")
+
+[node name="OutofBoundsSpawn" type="Marker2D" parent="OutofBounds" unique_id=457486155]
+position = Vector2(44, -1181)
+
+[node name="OutofBounds2" type="Area2D" parent="." unique_id=896481411 node_paths=PackedStringArray("spawn_point")]
+position = Vector2(-913, 1756)
+collision_mask = 2
+script = ExtResource("2_b5lsa")
+spawn_point = NodePath("OutofBoundsSpawn")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="OutofBounds2" unique_id=991511256]
+position = Vector2(600.25, 172.5)
+shape = SubResource("RectangleShape2D_c422r")
+
+[node name="OutofBoundsSpawn" type="Marker2D" parent="OutofBounds2" unique_id=1054771425]
+position = Vector2(951, -1191)

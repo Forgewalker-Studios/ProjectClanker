@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="DialogueSet" format=3 uid="uid://dlgsetstart01"]
 
-[ext_resource type="Script" path="res://Resources/DialogueSet.gd" id="1"]
-[ext_resource type="Script" path="res://Resources/DialogueEntry.gd" id="2"]
+[ext_resource type="Script" uid="uid://cq72gio8s62uc" path="res://Resources/DialogueSet.gd" id="1"]
+[ext_resource type="Script" uid="uid://qm3let07o163" path="res://Resources/DialogueEntry.gd" id="2"]
 
 [sub_resource type="Resource" id="e1"]
 script = ExtResource("2")
