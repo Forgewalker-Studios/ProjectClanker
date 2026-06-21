@@ -1,0 +1,32 @@
+[gd_scene format=3 uid="uid://enemytype02"]
+
+[ext_resource type="PackedScene" uid="uid://enemybase001" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_base"]
+[ext_resource type="Resource" uid="uid://ryreareublab" path="res://Resources/Enemies/Type02_PursuingEnemyConfig.tres" id="2_config"]
+[ext_resource type="Script" uid="uid://h6uo1uxgn1wu" path="res://Scripts/Enemies/Behaviors/PursuingChargeBehavior.gd" id="3_behavior"]
+
+[node name="Type02_PursuingEnemy" unique_id=1122585598 instance=ExtResource("1_base")]
+config = ExtResource("2_config")
+
+[node name="Sprite2D" parent="." index="0"]
+flip_h = true
+
+[node name="CollisionShape2D" parent="." index="1"]
+position = Vector2(1, -1)
+
+[node name="ContactHurtbox" parent="." index="2"]
+position = Vector2(4, 0)
+
+[node name="AttackHitbox" parent="." index="3"]
+position = Vector2(16, -4)
+
+[node name="LineOfSight" parent="." index="4"]
+position = Vector2(4, 0)
+
+[node name="PatrolPoints" parent="." index="5"]
+position = Vector2(4, 0)
+
+[node name="ProjectileSpawn" parent="." index="6"]
+position = Vector2(24, -8)
+
+[node name="Behavior" parent="." index="7"]
+script = ExtResource("3_behavior")

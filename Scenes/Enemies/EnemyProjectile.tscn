@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://djjimenp1wekm"]
+
+[ext_resource type="Script" uid="uid://dxagiq5dh3r2n" path="res://Scripts/Enemies/EnemyProjectile.gd" id="1_script"]
+[ext_resource type="Texture2D" uid="uid://bdknjmyckkdu5" path="res://Art/Placeholders/PlayerStates/VFX/ATTACK.png" id="2_texture"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_projectile"]
+radius = 8.0
+
+[node name="EnemyProjectile" type="Area2D" unique_id=177879193]
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_script")
+speed = 340.0
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=675823225]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(0.18, 0.18)
+texture = ExtResource("2_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1856420637]
+shape = SubResource("CircleShape2D_projectile")

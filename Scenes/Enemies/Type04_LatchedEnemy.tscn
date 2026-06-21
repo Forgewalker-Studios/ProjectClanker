@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://enemytype04"]
+
+[ext_resource type="PackedScene" uid="uid://enemybase001" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_base"]
+[ext_resource type="Resource" uid="uid://ryreareublad" path="res://Resources/Enemies/Type04_LatchedEnemyConfig.tres" id="2_config"]
+[ext_resource type="Script" uid="uid://dloynycywgto3" path="res://Scripts/Enemies/Behaviors/LatchedProjectileBehavior.gd" id="3_behavior"]
+
+[node name="Type04_LatchedEnemy" unique_id=621897090 instance=ExtResource("1_base")]
+config = ExtResource("2_config")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-4, 0)
+flip_h = true
+
+[node name="PatrolA" parent="PatrolPoints" index="0"]
+position = Vector2(0, 0)
+
+[node name="PatrolB" parent="PatrolPoints" index="1"]
+position = Vector2(0, 0)
+
+[node name="Behavior" parent="." index="7"]
+script = ExtResource("3_behavior")
