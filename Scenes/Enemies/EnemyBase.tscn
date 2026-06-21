@@ -1,0 +1,85 @@
+[gd_scene format=3 uid="uid://enemybase001"]
+
+[ext_resource type="Script" uid="uid://e8pysolo0lqk" path="res://Scripts/Enemies/EnemyBase.gd" id="1_enemy"]
+[ext_resource type="Resource" uid="uid://ryreareublaa" path="res://Resources/Enemies/Type01_RoamingEnemyConfig.tres" id="2_config"]
+[ext_resource type="Texture2D" uid="uid://cnjt2gfldl613" path="res://Art/Placeholders/EnemyStates/IDLE.png" id="3_texture"]
+[ext_resource type="Script" uid="uid://u0xa3kuqshw7" path="res://Scripts/Enemies/EnemyContactHurtbox.gd" id="4_contact"]
+[ext_resource type="Script" uid="uid://dxys8rqlnb7vs" path="res://Scripts/Enemies/EnemyAttackHitbox.gd" id="5_attack"]
+[ext_resource type="Script" uid="uid://d04sh5jy5ws84" path="res://Scripts/Enemies/EnemyLineOfSight.gd" id="6_los"]
+[ext_resource type="Script" uid="uid://dsxathgmn7rba" path="res://Scripts/Enemies/Behaviors/RoamingPatrolBehavior.gd" id="7_behavior"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_body"]
+radius = 14.0
+height = 88.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_contact"]
+radius = 16.0
+height = 92.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_attack"]
+radius = 46.0
+height = 92.0
+
+[node name="EnemyBase" type="CharacterBody2D" unique_id=1607820823]
+light_mask = 4
+visibility_layer = 4
+collision_layer = 4
+collision_mask = 3
+script = ExtResource("1_enemy")
+config = ExtResource("2_config")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1809485795]
+light_mask = 4
+visibility_layer = 4
+scale = Vector2(0.295, 0.27625)
+texture = ExtResource("3_texture")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=56882458]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-3, -1)
+shape = SubResource("CapsuleShape2D_body")
+
+[node name="ContactHurtbox" type="Area2D" parent="." unique_id=812238703]
+light_mask = 4
+visibility_layer = 4
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("4_contact")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ContactHurtbox" unique_id=1466072851]
+position = Vector2(-3, -1)
+shape = SubResource("CapsuleShape2D_contact")
+
+[node name="AttackHitbox" type="Area2D" parent="." unique_id=991095035]
+light_mask = 4
+visibility_layer = 4
+position = Vector2(18, -4)
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
+script = ExtResource("5_attack")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackHitbox" unique_id=22536898]
+rotation = -1.5707964
+shape = SubResource("CapsuleShape2D_attack")
+disabled = true
+
+[node name="LineOfSight" type="RayCast2D" parent="." unique_id=520715015]
+target_position = Vector2(280, 0)
+script = ExtResource("6_los")
+
+[node name="PatrolPoints" type="Node2D" parent="." unique_id=1946913176]
+
+[node name="PatrolA" type="Marker2D" parent="PatrolPoints" unique_id=743823159]
+position = Vector2(-120, 0)
+
+[node name="PatrolB" type="Marker2D" parent="PatrolPoints" unique_id=1921521569]
+position = Vector2(120, 0)
+
+[node name="ProjectileSpawn" type="Marker2D" parent="." unique_id=1942880010]
+position = Vector2(20, -8)
+
+[node name="Behavior" type="Node" parent="." unique_id=1181308095]
+script = ExtResource("7_behavior")

@@ -31,6 +31,9 @@ func _run_all_tests() -> void:
 	_test_dialogue_set_linear_advance()
 	_test_scene_fade_transition_sequence()
 	_test_clanker_settings_round_trip()
+	_test_enemy_config_type01_loads()
+	await _test_enemy_take_damage_reduces_health()
+	await _test_enemy_invulnerability_blocks_damage()
 
 
 func _test_scene_fade_transition_sequence() -> void:
@@ -161,6 +164,80 @@ func _create_test_player() -> Player:
 	add_child(player)
 	await get_tree().process_frame
 	return player
+
+
+func _test_enemy_config_type01_loads() -> void:
+	var config: EnemyConfig = load(
+		"res://Resources/Enemies/Type01_RoamingEnemyConfig.tres"
+	) as EnemyConfig
+	var passed: bool = (
+		config != null
+		and config.display_name == "Roaming Enemy"
+		and config.damage_mode == EnemyConfig.DamageMode.CONTACT
+	)
+	_record_result("Type01 Roaming enemy config loads from resource", passed)
+
+
+func _test_enemy_take_damage_reduces_health() -> void:
+	var enemy: EnemyBase = await _create_test_enemy()
+	enemy.take_damage(2)
+	var passed: bool = enemy.current_health == enemy.config.max_health - 2
+	_record_result("EnemyBase.take_damage reduces current health", passed)
+	enemy.queue_free()
+
+
+func _test_enemy_invulnerability_blocks_damage() -> void:
+	var enemy: EnemyBase = await _create_test_enemy()
+	enemy.set_invulnerable(true)
+	enemy.take_damage(2)
+	var passed: bool = enemy.current_health == enemy.config.max_health
+	_record_result("EnemyBase.set_invulnerable blocks damage", passed)
+	enemy.queue_free()
+
+
+## Build an EnemyBase node with the children required by its onready references.
+## @return: Ready enemy instance attached to the scene tree.
+func _create_test_enemy() -> EnemyBase:
+	var config: EnemyConfig = EnemyConfig.new()
+	config.display_name = "Test Enemy"
+	config.max_health = 5
+	config.damage_mode = EnemyConfig.DamageMode.CONTACT
+
+	var enemy: EnemyBase = EnemyBase.new()
+	enemy.config = config
+
+	var sprite: Sprite2D = Sprite2D.new()
+	sprite.name = "Sprite2D"
+	sprite.texture = preload("res://Art/Placeholders/EnemyStates/IDLE.png")
+
+	var collision_shape: CollisionShape2D = CollisionShape2D.new()
+	collision_shape.name = "CollisionShape2D"
+
+	var contact_hurtbox: EnemyContactHurtbox = EnemyContactHurtbox.new()
+	contact_hurtbox.name = "ContactHurtbox"
+
+	var attack_hitbox: EnemyAttackHitbox = EnemyAttackHitbox.new()
+	attack_hitbox.name = "AttackHitbox"
+
+	var line_of_sight: EnemyLineOfSight = EnemyLineOfSight.new()
+	line_of_sight.name = "LineOfSight"
+
+	var patrol_points: Node2D = Node2D.new()
+	patrol_points.name = "PatrolPoints"
+
+	var behavior: RoamingPatrolBehavior = RoamingPatrolBehavior.new()
+	behavior.name = "Behavior"
+
+	enemy.add_child(sprite)
+	enemy.add_child(collision_shape)
+	enemy.add_child(contact_hurtbox)
+	enemy.add_child(attack_hitbox)
+	enemy.add_child(line_of_sight)
+	enemy.add_child(patrol_points)
+	enemy.add_child(behavior)
+	add_child(enemy)
+	await get_tree().process_frame
+	return enemy
 
 
 func _record_result(test_name: String, passed: bool) -> void:

@@ -1,0 +1,24 @@
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=2 format=3 uid="uid://enemyconfig03a"]
+
+[ext_resource type="Script" path="res://Resources/EnemyConfig.gd" id="1_script"]
+
+[resource]
+script = ExtResource("1_script")
+display_name = "Flying Fixed Enemy"
+max_health = 2
+move_speed = 0.0
+charge_speed = 220.0
+damage_mode = 0
+contact_damage = 1
+attack_damage = 1
+contact_damage_cooldown_sec = 0.45
+attack_active_time_sec = 0.15
+attack_recovery_time_sec = 0.6
+detection_range = 240.0
+lose_target_range = 360.0
+gravity_scale = 0.0
+projectile_cooldown_sec = 2.0
+projectile_speed = 320.0
+boss_defend_duration_sec = 1.2
+boss_defend_interval_sec = 5.0
+boss_defend_chance = 0.25

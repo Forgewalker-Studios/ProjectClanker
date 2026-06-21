@@ -1,6 +1,14 @@
 # Version History
 
-Current version: **0.0.3.0**
+Current version: **0.0.4.0**
+
+## 0.0.4.0 — Enemy archetypes and prefab scenes
+
+- Added `EnemyConfig` resource and per-type configs under `Resources/Enemies/`.
+- Added `EnemyBase` with contact hurtbox, attack hitbox, line-of-sight ray, and composable behavior scripts.
+- Implemented six enemy behaviors: roaming patrol, pursuing charge, flying fixed, flying pursuit, latched projectile, and boss.
+- Added prefab scenes under `Scenes/Enemies/` for each enemy type plus `EnemyProjectile.tscn`.
+- Unit tests cover enemy config load, damage, and boss-style invulnerability.
 
 ## 0.0.3.0 — Silhouette art and Level1 paint scene
 

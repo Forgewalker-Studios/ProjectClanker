@@ -1,0 +1,15 @@
+[gd_scene format=3 uid="uid://enemytype03b"]
+
+[ext_resource type="PackedScene" uid="uid://enemybase001" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_base"]
+[ext_resource type="Resource" uid="uid://ci4vwjpt1rra8" path="res://Resources/Enemies/Type03B_FlyingPursuitEnemyConfig.tres" id="2_config"]
+[ext_resource type="Script" uid="uid://rws54iroejog" path="res://Scripts/Enemies/Behaviors/FlyingPursuitChargeBehavior.gd" id="3_behavior"]
+
+[node name="Type03B_FlyingPursuitEnemy" unique_id=1858536836 instance=ExtResource("1_base")]
+config = ExtResource("2_config")
+
+[node name="Sprite2D" parent="." index="0"]
+position = Vector2(-5, 0)
+flip_h = true
+
+[node name="Behavior" parent="." index="7"]
+script = ExtResource("3_behavior")
