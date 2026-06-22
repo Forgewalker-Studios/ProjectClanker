@@ -54,14 +54,15 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 
 ## Version
 
-See [VERSION.md](VERSION.md) for release history. Current version: **0.0.7.2**.
+See [VERSION.md](VERSION.md) for release history. Current version: **0.0.8.0**.
 
 ## Credits
 
 - A ForgeWalker Studios Production
 - Produced by Jazhikho
 - Written and Directed by KennyLumpia
-- Third-party asset attribution: [Docs/Assets.md](Docs/Assets.md)
+- Detailed art, UI, music, sound, license, and AI-assistance credits are available in the in-game Credits panel.
+- Full third-party source URLs, modification notes, and unresolved provenance: [Docs/Assets.md](Docs/Assets.md)
 
 ## Systems integration
 

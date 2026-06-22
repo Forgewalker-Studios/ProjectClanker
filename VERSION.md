@@ -1,6 +1,13 @@
 # Version History
 
-Current version: **0.0.7.2**
+Current version: **0.0.8.0**
+
+## 0.0.8.0 - Detailed asset credits
+
+- Replaced the short production credit modal with a scrollable, categorized credit roll.
+- Added visible attribution for environment art, UI, music, sound effects, project art, and AI-assisted art tools.
+- Expanded the asset register with exact creators, source URLs, licenses, modifications, and unresolved provenance.
+- Added regression coverage for required player-facing attribution.
 
 ## 0.0.7.2 - Non-blocking hub route triggers
 

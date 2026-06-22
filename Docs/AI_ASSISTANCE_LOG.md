@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Detailed asset credits
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent; PDF text extraction and rendering; itch.io source pages.
+- **Task purpose:** Inventory shipped assets and provide detailed player-facing attribution.
+- **Input materials used:** Repository assets, import/use references, bundled licenses and readmes, itch receipts and source pages, existing credits UI, and user-provided production roles.
+- **AI produced:** Scrollable categorized game credits, expanded provenance and license register, required-attribution regression tests, and synchronized feature version metadata.
+- **User accepted:** Need for substantially more detailed asset credits; final wording and licensing decisions remain pending live review.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human confirmation of undocumented asset provenance and conflicting license metadata before release.
+
 ## 2026-06-22 - Non-blocking hub route triggers
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

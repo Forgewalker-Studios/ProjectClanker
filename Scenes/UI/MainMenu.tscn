@@ -389,9 +389,9 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -280.0
-offset_top = -170.0
+offset_top = -300.0
 offset_right = 280.0
-offset_bottom = 170.0
+offset_bottom = 300.0
 grow_horizontal = 2
 grow_vertical = 2
 
@@ -406,20 +406,74 @@ theme_override_font_sizes/font_size = 28
 text = "Credits"
 horizontal_alignment = 1
 
-[node name="StudioCredit" type="Label" parent="CreditsPanel/CreditsVBox"]
+[node name="CreditsScroll" type="ScrollContainer" parent="CreditsPanel/CreditsVBox"]
+custom_minimum_size = Vector2(0, 460)
 layout_mode = 2
-text = "A ForgeWalker Studios Production"
-horizontal_alignment = 1
+horizontal_scroll_mode = 0
 
-[node name="ProducerCredit" type="Label" parent="CreditsPanel/CreditsVBox"]
+[node name="CreditsBody" type="RichTextLabel" parent="CreditsPanel/CreditsVBox/CreditsScroll"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(510, 1320)
 layout_mode = 2
-text = "Produced by Jazhikho"
-horizontal_alignment = 1
+theme_override_colors/default_color = Color(0.82, 0.88, 0.9, 1)
+theme_override_font_sizes/normal_font_size = 16
+bbcode_enabled = true
+text = "[center][color=#ebba52][font_size=22]Production[/font_size][/color]
+A ForgeWalker Studios Production
+Produced by Jazhikho
+Written and Directed by KennyLumpia
 
-[node name="WriterDirectorCredit" type="Label" parent="CreditsPanel/CreditsVBox"]
-layout_mode = 2
-text = "Written and Directed by KennyLumpia"
-horizontal_alignment = 1
+[color=#ebba52][font_size=22]Art and UI[/font_size][/color]
+2D Sci-Fi Industrial Platform Builder
+LeavarioxStudios
+
+Industrial Parallax Background
+Luis Zuno (Ansimuz) - modified for the game
+
+Complete UI Essential Pack
+Crusenho Agus Hennihuno (Crusenho)
+CC BY 4.0 - modified for the game
+
+Godot default icon - Godot Engine contributors
+MIT license - adapted for the game
+
+Project and AI-assisted art
+ForgeWalker Studios
+Tools: Cursor and OpenAI image generation
+
+[color=#ebba52][font_size=22]Music[/font_size][/color]
+Forgotten Circuits, Protocol of the Clanker,
+and Rust and Retribution
+Created with ElevenLabs by Jazhikho
+
+Music: Talon Trueblood
+Sci-Fi Music Pack Vol. 1
+
+Industrial Theme
+Luis Zuno (Ansimuz)
+
+[color=#ebba52][font_size=22]Sound Effects[/font_size][/color]
+Jump_C_04 - cabled_mess
+Hit Impact - MadPanCake
+male_hurt9 - micahlg
+blip - Ethraiel
+Menu Select - pumodi
+Fire Magic - qubodup
+horror ambient factory #2 and #3 - ZHRØ
+Freesound recordings above licensed CC0
+
+[color=#ebba52][font_size=22]Licenses and Sources[/font_size][/color]
+Complete UI Essential Pack: CC BY 4.0
+creativecommons.org/licenses/by/4.0/
+
+Industrial Parallax download: bundled public license
+and current source metadata differ; human review required.
+
+Full asset URLs, modification notes, and provenance:
+Docs/Assets.md in the project repository.[/center]"
+fit_content = true
+scroll_active = false
+selection_enabled = true
 
 [node name="CreditsBackButton" type="Button" parent="CreditsPanel/CreditsVBox"]
 unique_name_in_owner = true

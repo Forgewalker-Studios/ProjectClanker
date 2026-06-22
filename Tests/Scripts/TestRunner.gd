@@ -85,15 +85,22 @@ func _test_main_menu_credits_present() -> void:
 		"panel",
 		"PanelContainer"
 	) as StyleBoxFlat
-	var credits_text: String = ""
-	for child: Node in credits_panel.get_node("CreditsVBox").get_children():
-		if child is Label:
-			credits_text += (child as Label).text + "\n"
+	var credits_body: RichTextLabel = menu.get_node(
+		"CreditsPanel/CreditsVBox/CreditsScroll/CreditsBody"
+	) as RichTextLabel
+	var credits_text: String = credits_body.text
 	var passed: bool = (
 		menu.get_node_or_null("MarginContainer/CenterColumn/CreditsButton") != null
 		and credits_text.contains("ForgeWalker Studios")
 		and credits_text.contains("Jazhikho")
 		and credits_text.contains("KennyLumpia")
+		and credits_text.contains("LeavarioxStudios")
+		and credits_text.contains("Luis Zuno")
+		and credits_text.contains("Crusenho Agus Hennihuno")
+		and credits_text.contains("Music: Talon Trueblood")
+		and credits_text.contains("Freesound")
+		and credits_text.contains("CC BY 4.0")
+		and credits_panel.size.y >= 500.0
 		and modal_scrim.color.a >= 0.8
 		and panel_style != null
 		and panel_style.bg_color.a == 1.0
