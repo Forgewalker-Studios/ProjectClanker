@@ -16,7 +16,7 @@ compatibility/default_parent_skeleton_in_mesh_instance_3d=true
 
 config/name="ProjectClanker"
 config/description="A GDScript Godot game project."
-config/version="0.0.4.1"
+config/version="0.0.4.2"
 run/main_scene="res://Scenes/UI/MainMenu.tscn"
 config/features=PackedStringArray("4.6", "Forward Plus")
 config/icon="res://Art/Icon.svg"

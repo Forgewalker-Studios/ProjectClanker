@@ -7,14 +7,17 @@ const GAMEPLAY_SCENE_PATH: String = "res://Scenes/Hub/DoorHub.tscn"
 @onready var _start_button: Button = %StartButton
 @onready var _settings_button: Button = %SettingsButton
 @onready var _controls_button: Button = %ControlsButton
+@onready var _credits_button: Button = %CreditsButton
 @onready var _quit_button: Button = %QuitButton
 @onready var _settings_panel: PanelContainer = %SettingsPanel
 @onready var _controls_panel: PanelContainer = %ControlsPanel
+@onready var _credits_panel: PanelContainer = %CreditsPanel
 @onready var _music_slider: HSlider = %MusicSlider
 @onready var _sfx_slider: HSlider = %SfxSlider
 @onready var _mute_button: Button = %MuteButton
 @onready var _settings_back_button: Button = %SettingsBackButton
 @onready var _controls_back_button: Button = %ControlsBackButton
+@onready var _credits_back_button: Button = %CreditsBackButton
 
 var _audio_mix: AudioMixControlSystem
 
@@ -31,9 +34,11 @@ func _wire_buttons() -> void:
 	_start_button.pressed.connect(_on_start_pressed)
 	_settings_button.pressed.connect(_on_settings_pressed)
 	_controls_button.pressed.connect(_on_controls_pressed)
+	_credits_button.pressed.connect(_on_credits_pressed)
 	_quit_button.pressed.connect(_on_quit_pressed)
 	_settings_back_button.pressed.connect(_hide_overlay_panels)
 	_controls_back_button.pressed.connect(_hide_overlay_panels)
+	_credits_back_button.pressed.connect(_hide_overlay_panels)
 
 
 func _setup_audio_mix() -> void:
@@ -71,11 +76,19 @@ func _on_start_pressed() -> void:
 func _on_settings_pressed() -> void:
 	_settings_panel.visible = true
 	_controls_panel.visible = false
+	_credits_panel.visible = false
 
 
 func _on_controls_pressed() -> void:
 	_controls_panel.visible = true
 	_settings_panel.visible = false
+	_credits_panel.visible = false
+
+
+func _on_credits_pressed() -> void:
+	_credits_panel.visible = true
+	_settings_panel.visible = false
+	_controls_panel.visible = false
 
 
 func _on_quit_pressed() -> void:
@@ -85,6 +98,7 @@ func _on_quit_pressed() -> void:
 func _hide_overlay_panels() -> void:
 	_settings_panel.visible = false
 	_controls_panel.visible = false
+	_credits_panel.visible = false
 
 
 func _on_audio_slider_changed(_value: float) -> void:

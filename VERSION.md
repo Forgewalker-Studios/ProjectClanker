@@ -1,6 +1,11 @@
 # Version History
 
-Current version: **0.0.4.1**
+Current version: **0.0.4.2**
+
+## 0.0.4.2 - Production credits
+
+- Added player-visible production credits to the main menu.
+- Documented production credits and linked third-party asset attribution in the README.
 
 ## 0.0.4.1 - Enemy pursuit and ledge safety
 

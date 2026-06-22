@@ -31,6 +31,7 @@ func _run_all_tests() -> void:
 	_test_dialogue_set_linear_advance()
 	_test_scene_fade_transition_sequence()
 	_test_clanker_settings_round_trip()
+	_test_main_menu_credits_present()
 	_test_enemy_config_type01_loads()
 	_test_pursuing_enemy_ranges_are_bounded()
 	await _test_enemy_take_damage_reduces_health()
@@ -69,6 +70,24 @@ func _test_clanker_settings_round_trip() -> void:
 	reloaded.import_state(exported, true)
 	var passed: bool = float(reloaded.get_value("audio", "music_volume", 0.0)) == 0.42
 	_record_result("SettingsPersistenceSystem preserves updated audio volume", passed)
+
+
+func _test_main_menu_credits_present() -> void:
+	var menu_scene: PackedScene = load("res://Scenes/UI/MainMenu.tscn") as PackedScene
+	var menu: Control = menu_scene.instantiate() as Control
+	var credits_panel: PanelContainer = menu.get_node("CreditsPanel") as PanelContainer
+	var credits_text: String = ""
+	for child: Node in credits_panel.get_node("CreditsVBox").get_children():
+		if child is Label:
+			credits_text += (child as Label).text + "\n"
+	var passed: bool = (
+		menu.get_node_or_null("MarginContainer/CenterColumn/CreditsButton") != null
+		and credits_text.contains("ForgeWalker Studios")
+		and credits_text.contains("Jazhikho")
+		and credits_text.contains("KennyLumpia")
+	)
+	_record_result("Main menu exposes required production credits", passed)
+	menu.free()
 
 
 func _test_game_services_version_string() -> void:

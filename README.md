@@ -54,7 +54,14 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 
 ## Version
 
-See [VERSION.md](VERSION.md) for release history. Current version: **0.0.4.1**.
+See [VERSION.md](VERSION.md) for release history. Current version: **0.0.4.2**.
+
+## Credits
+
+- A ForgeWalker Studios Production
+- Produced by Jazhikho
+- Written and Directed by KennyLumpia
+- Third-party asset attribution: [Docs/Assets.md](Docs/Assets.md)
 
 ## Systems integration
 
