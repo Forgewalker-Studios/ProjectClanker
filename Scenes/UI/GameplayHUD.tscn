@@ -87,21 +87,38 @@ show_percentage = false
 theme_override_styles/background = SubResource("StyleHealthBackground")
 theme_override_styles/fill = SubResource("StyleHealthFill")
 
-[node name="ControlsHint" type="Label" parent="."]
-visible = false
-anchors_preset = 3
+[node name="TopRight" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+anchors_preset = 1
 anchor_left = 1.0
-anchor_top = 1.0
 anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -360.0
-offset_top = -120.0
+offset_left = -248.0
+offset_top = 16.0
 offset_right = -16.0
-offset_bottom = -16.0
+offset_bottom = 176.0
 grow_horizontal = 0
-grow_vertical = 0
-text = "Move A/D  Jump W/Space  Interact E  Attack J  Pause Esc"
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleHealthPanel")
+
+[node name="ControlsVBox" type="VBoxContainer" parent="TopRight"]
+layout_mode = 2
+theme_override_constants/separation = 4
+
+[node name="ControlsTitle" type="Label" parent="TopRight/ControlsVBox"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.73, 0.32, 1)
+text = "Controls"
 label_settings = SubResource("LabelSettings_hud")
 horizontal_alignment = 2
-vertical_alignment = 2
+
+[node name="ControlsHint" type="Label" parent="TopRight/ControlsVBox"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Move: A / D or Arrows
+Jump: W / Space
+Interact: E
+Attack: J
+Pause: Esc"
+label_settings = SubResource("LabelSettings_hud")
+horizontal_alignment = 2
 autowrap_mode = 2

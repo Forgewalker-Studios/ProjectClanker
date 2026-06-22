@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Windows and Web itch.io release
+
+- **Model/tool used:** Cursor Agent (Claude); Godot 4.6.1 headless export; itch.io Butler.
+- **Task purpose:** Export Windows and HTML5 builds, publish to itch.io, and push source without build artifacts.
+- **Input materials used:** Existing Windows export preset, itch.io project page, uncommitted HUD and menu scene edits, and Butler credentials on the local machine.
+- **AI produced:** Web export preset, reorganized Windows export path, release version bump, export preset tests, Butler uploads, and git push excluding `Build/`.
+- **User accepted:** Requested dual-platform build, Butler deploy, and git push with build files excluded from commit.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human playtest of exported Windows and browser builds.
+
 ## 2026-06-22 - Detailed asset credits
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent; PDF text extraction and rendering; itch.io source pages.

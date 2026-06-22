@@ -36,6 +36,7 @@ func _run_all_tests() -> void:
 	_test_hub_routes_are_ground_reachable()
 	_test_scene_portals_are_configured()
 	_test_windows_export_preset_exists()
+	_test_web_export_preset_exists()
 	_test_enemy_config_type01_loads()
 	_test_pursuing_enemy_ranges_are_bounded()
 	await _test_enemy_take_damage_reduces_health()
@@ -125,8 +126,9 @@ func _test_hub_routes_are_ground_reachable() -> void:
 		passed = passed and absf(route_bottom - floor_top) <= 1.0
 		passed = passed and route.collision_layer == 0
 	var debug_panel: PanelContainer = hub.get_node("HubProgressionDebug/Panel") as PanelContainer
-	var controls_hint: Label = hub.get_node("GameplayHUD/ControlsHint") as Label
-	passed = passed and debug_panel.anchor_left == 1.0 and not controls_hint.visible
+	var controls_overlay: PanelContainer = hub.get_node("GameplayHUD/TopRight") as PanelContainer
+	var controls_hint: Label = hub.get_node("GameplayHUD/TopRight/ControlsVBox/ControlsHint") as Label
+	passed = passed and debug_panel.anchor_top == 1.0 and controls_overlay.anchor_left == 1.0 and controls_hint.visible
 	_record_result("Hub routes are grounded and HUD overlays are separated", passed)
 	hub.free()
 
@@ -167,9 +169,20 @@ func _test_windows_export_preset_exists() -> void:
 	var passed: bool = (
 		FileAccess.file_exists(preset_path)
 		and preset_text.contains('name="Windows Desktop"')
-		and preset_text.contains('export_path="Build/ProjectClanker.exe"')
+		and preset_text.contains('export_path="Build/Windows/ProjectClanker.exe"')
 	)
 	_record_result("Windows Desktop release export preset is configured", passed)
+
+
+func _test_web_export_preset_exists() -> void:
+	var preset_path: String = "res://export_presets.cfg"
+	var preset_text: String = FileAccess.get_file_as_string(preset_path)
+	var passed: bool = (
+		FileAccess.file_exists(preset_path)
+		and preset_text.contains('name="Web"')
+		and preset_text.contains('export_path="Build/Web/index.html"')
+	)
+	_record_result("Web release export preset is configured", passed)
 
 
 func _test_game_services_version_string() -> void:

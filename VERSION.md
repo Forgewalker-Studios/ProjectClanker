@@ -1,6 +1,13 @@
 # Version History
 
-Current version: **0.0.8.0**
+Current version: **0.1.0.0**
+
+## 0.1.0.0 - Windows and Web itch.io release
+
+- Added a Web export preset alongside the Windows Desktop release preset.
+- Polished gameplay HUD controls overlay and hub debug panel placement.
+- Trimmed redundant credits footer text from the main menu modal.
+- Exported Windows and HTML5 builds and published them to itch.io via Butler.
 
 ## 0.0.8.0 - Detailed asset credits
 
