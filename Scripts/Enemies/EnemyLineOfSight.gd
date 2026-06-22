@@ -3,7 +3,7 @@ extends RayCast2D
 
 ## Checks whether the player is visible without environment occlusion.
 
-var _detection_range: float = 280.0
+var _detection_range: float = 50.0
 
 
 func _ready() -> void:

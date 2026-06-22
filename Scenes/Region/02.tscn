@@ -6,6 +6,9 @@
 [ext_resource type="TileSet" uid="uid://c0uyoqdtodlbf" path="res://Resources/TileSets/LevelPaintTileSet.tres" id="1_tileset"]
 [ext_resource type="Texture2D" uid="uid://bsomst7msvj52" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="2_midground"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="6_t3or0"]
+[ext_resource type="PackedScene" uid="uid://enemytype04" path="res://Scenes/Enemies/Type04_LatchedEnemy.tscn" id="7_la32f"]
+[ext_resource type="PackedScene" uid="uid://enemytype03b" path="res://Scenes/Enemies/Type03B_FlyingPursuitEnemy.tscn" id="7_nvcps"]
+[ext_resource type="PackedScene" uid="uid://enemytype01" path="res://Scenes/Enemies/Type01_RoamingEnemy.tscn" id="9_74ao6"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqy07"]
 size = Vector2(1425, 289)
@@ -435,5 +438,19 @@ position = Vector2(2777, 52)
 position = Vector2(-1, 10.75)
 shape = SubResource("RectangleShape2D_nvcps")
 
+[node name="ENEMY" type="Node" parent="Level" unique_id=1564741858]
+
+[node name="Type04_LatchedEnemy" parent="Level/ENEMY" unique_id=621897090 instance=ExtResource("7_la32f")]
+position = Vector2(2388, 448)
+
+[node name="Type03B_FlyingPursuitEnemy" parent="Level/ENEMY" unique_id=1858536836 instance=ExtResource("7_nvcps")]
+position = Vector2(2153, 373)
+
+[node name="Type01_RoamingEnemy" parent="Level/ENEMY" unique_id=1711006941 instance=ExtResource("9_74ao6")]
+position = Vector2(1051, 412)
+
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
 position = Vector2(-46, 418)
+
+[node name="Type01_RoamingEnemy" parent="." unique_id=236557810 instance=ExtResource("9_74ao6")]
+position = Vector2(3702, 204)

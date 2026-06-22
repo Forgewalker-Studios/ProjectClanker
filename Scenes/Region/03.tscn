@@ -9,6 +9,11 @@
 [ext_resource type="Script" uid="uid://cjsn3l0jy0hrf" path="res://Scripts/Challenge.gd" id="7_82yaa"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="7_jnm5h"]
 [ext_resource type="Script" uid="uid://baubaywyhtxci" path="res://Scripts/Leave.gd" id="8_omafk"]
+[ext_resource type="PackedScene" uid="uid://enemytype02" path="res://Scenes/Enemies/Type02_PursuingEnemy.tscn" id="9_inm0n"]
+[ext_resource type="PackedScene" uid="uid://enemytype05" path="res://Scenes/Enemies/Type05_BossEnemy.tscn" id="11_3ymlh"]
+[ext_resource type="PackedScene" uid="uid://enemytype04" path="res://Scenes/Enemies/Type04_LatchedEnemy.tscn" id="11_jnm5h"]
+[ext_resource type="PackedScene" uid="uid://enemytype01" path="res://Scenes/Enemies/Type01_RoamingEnemy.tscn" id="13_7qgss"]
+[ext_resource type="PackedScene" uid="uid://enemytype03b" path="res://Scenes/Enemies/Type03B_FlyingPursuitEnemy.tscn" id="14_7qgss"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ge04h"]
 size = Vector2(209, 1376)
@@ -569,5 +574,30 @@ text = "Leave?"
 [node name="BossEntrance" type="Marker2D" parent="Level/FEAT/ExitBoss" unique_id=796569870]
 position = Vector2(511, -350)
 
+[node name="ENEMY" type="Node" parent="Level" unique_id=630053894]
+
+[node name="Type02_PursuingEnemy" parent="Level/ENEMY" unique_id=1122585598 instance=ExtResource("9_inm0n")]
+position = Vector2(3286, 2061)
+
+[node name="Type05_BossEnemy" parent="Level/ENEMY" unique_id=224357834 instance=ExtResource("11_3ymlh")]
+position = Vector2(1044, 2271)
+
+[node name="Type04_LatchedEnemy" parent="Level/ENEMY" unique_id=621897090 instance=ExtResource("11_jnm5h")]
+position = Vector2(2521.0002, 1950.0002)
+rotation = 3.1378982
+
+[node name="Type04_LatchedEnemy2" parent="Level/ENEMY" unique_id=96503171 instance=ExtResource("11_jnm5h")]
+position = Vector2(2920.0002, 1948.0001)
+rotation = 3.1378982
+
+[node name="Type01_RoamingEnemy" parent="Level/ENEMY" unique_id=1711006941 instance=ExtResource("13_7qgss")]
+position = Vector2(2845, 1692)
+
+[node name="Type02_PursuingEnemy2" parent="Level/ENEMY" unique_id=821661012 instance=ExtResource("9_inm0n")]
+position = Vector2(1513, 1808)
+
+[node name="Type03B_FlyingPursuitEnemy" parent="Level/ENEMY" unique_id=1858536836 instance=ExtResource("14_7qgss")]
+position = Vector2(269, 857)
+
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("7_jnm5h")]
-position = Vector2(805, -718)
+position = Vector2(838, -673)
