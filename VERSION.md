@@ -1,6 +1,15 @@
 # Version History
 
-Current version: **0.0.4.2**
+Current version: **0.0.5.0**
+
+## 0.0.5.0 - Playable route and Windows export
+
+- Wired all hub routes and authored `MoveTo*` areas through reusable scene portals.
+- Added forward-only area progression and final-dialogue completion behavior.
+- Made the final ending overlay return to the hub view on interact.
+- Added a Windows Desktop release export preset.
+- Excluded macOS resource-fork metadata from Godot imports.
+- Added regression coverage for portal targets and export configuration.
 
 ## 0.0.4.2 - Production credits
 

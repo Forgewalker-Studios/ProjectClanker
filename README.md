@@ -54,7 +54,7 @@ Movement and interaction actions are defined in **Project Settings → Input Map
 
 ## Version
 
-See [VERSION.md](VERSION.md) for release history. Current version: **0.0.4.2**.
+See [VERSION.md](VERSION.md) for release history. Current version: **0.0.5.0**.
 
 ## Credits
 

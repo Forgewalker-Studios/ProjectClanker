@@ -9,6 +9,7 @@
 [ext_resource type="Script" uid="uid://cjsn3l0jy0hrf" path="res://Scripts/Challenge.gd" id="7_82yaa"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="7_jnm5h"]
 [ext_resource type="Script" uid="uid://baubaywyhtxci" path="res://Scripts/Leave.gd" id="8_omafk"]
+[ext_resource type="Script" path="res://Scripts/ScenePortal.gd" id="15_portal"]
 [ext_resource type="PackedScene" uid="uid://enemytype02" path="res://Scenes/Enemies/Type02_PursuingEnemy.tscn" id="9_inm0n"]
 [ext_resource type="PackedScene" uid="uid://enemytype05" path="res://Scenes/Enemies/Type05_BossEnemy.tscn" id="11_3ymlh"]
 [ext_resource type="PackedScene" uid="uid://enemytype04" path="res://Scenes/Enemies/Type04_LatchedEnemy.tscn" id="11_jnm5h"]
@@ -531,6 +532,10 @@ shape = SubResource("RectangleShape2D_34q1h")
 
 [node name="MoveTo2" type="Area2D" parent="Level/FEAT" unique_id=2084937345]
 position = Vector2(2526, 988)
+collision_mask = 2
+script = ExtResource("15_portal")
+target_scene = "res://Scenes/Region/02.tscn"
+progression_state_on_enter = 7
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo2" unique_id=1730479881]
 position = Vector2(5.189209, 39.330566)

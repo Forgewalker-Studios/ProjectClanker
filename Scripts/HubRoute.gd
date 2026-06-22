@@ -11,6 +11,7 @@ const _ProgressionStateScript = preload("res://Autoload/ProgressionState.gd")
 @onready var blocker: CollisionShape2D = $Blocker
 @onready var locked_sign: Label = $LockedSign
 @onready var route_sign: Label = $RouteSign
+@onready var portal: Area2D = get_node_or_null("Portal") as Area2D
 
 
 func _ready() -> void:
@@ -24,6 +25,8 @@ func _ready() -> void:
 func _apply_unlock_state(state: _ProgressionStateScript.State) -> void:
 	var unlocked: bool = int(state) >= int(required_state)
 	blocker.disabled = unlocked
+	if portal != null:
+		portal.set_deferred("monitoring", unlocked)
 	locked_sign.visible = not unlocked
 	if unlocked:
 		route_sign.modulate = Color(0.7, 1.0, 0.7, 1.0)

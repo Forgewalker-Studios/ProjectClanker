@@ -32,6 +32,8 @@ func _run_all_tests() -> void:
 	_test_scene_fade_transition_sequence()
 	_test_clanker_settings_round_trip()
 	_test_main_menu_credits_present()
+	_test_scene_portals_are_configured()
+	_test_windows_export_preset_exists()
 	_test_enemy_config_type01_loads()
 	_test_pursuing_enemy_ranges_are_bounded()
 	await _test_enemy_take_damage_reduces_health()
@@ -88,6 +90,47 @@ func _test_main_menu_credits_present() -> void:
 	)
 	_record_result("Main menu exposes required production credits", passed)
 	menu.free()
+
+
+func _test_scene_portals_are_configured() -> void:
+	var expected_portals: Dictionary = {
+		"res://Scenes/Hub/DoorHub.tscn": [
+			"RouteArea1/Portal",
+			"RouteArea2/Portal",
+			"RouteArea3/Portal",
+			"RouteFinal/Portal",
+		],
+		"res://Scenes/Region/01.tscn": ["Level/FEAT/MoveToHub", "Level/FEAT/MoveTo2"],
+		"res://Scenes/Region/02.tscn": [
+			"Level/FEAT/MoveTo1",
+			"Level/FEAT/MoveTo3A",
+			"Level/FEAT/MoveTo3B",
+			"Level/FEAT/MoveTo4",
+		],
+		"res://Scenes/Region/03.tscn": ["Level/FEAT/MoveTo2"],
+	}
+	var passed: bool = true
+	for scene_path: String in expected_portals:
+		var packed_scene: PackedScene = load(scene_path) as PackedScene
+		var scene: Node = packed_scene.instantiate()
+		for portal_path: String in expected_portals[scene_path]:
+			var portal: ScenePortal = scene.get_node_or_null(portal_path) as ScenePortal
+			passed = passed and portal != null
+			if portal != null:
+				passed = passed and ResourceLoader.exists(portal.target_scene)
+		scene.free()
+	_record_result("All hub and region scene portals target loadable scenes", passed)
+
+
+func _test_windows_export_preset_exists() -> void:
+	var preset_path: String = "res://export_presets.cfg"
+	var preset_text: String = FileAccess.get_file_as_string(preset_path)
+	var passed: bool = (
+		FileAccess.file_exists(preset_path)
+		and preset_text.contains('name="Windows Desktop"')
+		and preset_text.contains('export_path="Build/ProjectClanker.exe"')
+	)
+	_record_result("Windows Desktop release export preset is configured", passed)
 
 
 func _test_game_services_version_string() -> void:

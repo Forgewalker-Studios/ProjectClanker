@@ -6,6 +6,7 @@
 [ext_resource type="TileSet" uid="uid://c0uyoqdtodlbf" path="res://Resources/TileSets/LevelPaintTileSet.tres" id="1_tileset"]
 [ext_resource type="Texture2D" uid="uid://bsomst7msvj52" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="2_midground"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="6_t3or0"]
+[ext_resource type="Script" path="res://Scripts/ScenePortal.gd" id="10_portal"]
 [ext_resource type="PackedScene" uid="uid://enemytype04" path="res://Scenes/Enemies/Type04_LatchedEnemy.tscn" id="7_la32f"]
 [ext_resource type="PackedScene" uid="uid://enemytype03b" path="res://Scenes/Enemies/Type03B_FlyingPursuitEnemy.tscn" id="7_nvcps"]
 [ext_resource type="PackedScene" uid="uid://enemytype01" path="res://Scenes/Enemies/Type01_RoamingEnemy.tscn" id="9_74ao6"]
@@ -402,6 +403,8 @@ shape = SubResource("RectangleShape2D_kge67")
 [node name="MoveTo1" type="Area2D" parent="Level/FEAT" unique_id=890261762]
 position = Vector2(-220, 402)
 collision_mask = 2
+script = ExtResource("10_portal")
+target_scene = "res://Scenes/Region/01.tscn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo1" unique_id=1520434869]
 position = Vector2(-0.25, -28)
@@ -410,6 +413,9 @@ shape = SubResource("RectangleShape2D_aolo8")
 [node name="MoveTo3A" type="Area2D" parent="Level/FEAT" unique_id=1232828925]
 position = Vector2(2223, 3516)
 collision_mask = 2
+script = ExtResource("10_portal")
+target_scene = "res://Scenes/Region/03.tscn"
+progression_state_on_enter = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo3A" unique_id=847138306]
 position = Vector2(241.5, 174)
@@ -418,6 +424,9 @@ shape = SubResource("RectangleShape2D_6id1a")
 [node name="MoveTo3B" type="Area2D" parent="Level/FEAT" unique_id=511846548]
 position = Vector2(4071, 681)
 collision_mask = 2
+script = ExtResource("10_portal")
+target_scene = "res://Scenes/Region/03.tscn"
+progression_state_on_enter = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo3B" unique_id=1612707202]
 position = Vector2(114, 56)
@@ -426,6 +435,9 @@ shape = SubResource("RectangleShape2D_37fwu")
 [node name="MoveTo4" type="Area2D" parent="Level/FEAT" unique_id=981883329]
 position = Vector2(2313, -350)
 collision_mask = 2
+script = ExtResource("10_portal")
+target_scene = "res://Scenes/Hub/DoorHub.tscn"
+progression_state_on_enter = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo4" unique_id=1984305542]
 position = Vector2(86, 0.75)

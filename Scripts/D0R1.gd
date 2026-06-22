@@ -65,6 +65,8 @@ func _on_dialogue_finished(player: Player) -> void:
 
 	if Progression.state == _ProgressionStateScript.State.START:
 		Progression.set_state(_ProgressionStateScript.State.START_COMPLETED)
+	elif Progression.state == _ProgressionStateScript.State.FINAL:
+		Progression.set_state(_ProgressionStateScript.State.FINAL_COMPLETED)
 
 
 ## Update face colors when progression changes.

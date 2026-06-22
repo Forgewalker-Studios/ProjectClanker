@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Playable route and export configuration
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent
+- **Task purpose:** Resolve identified release blockers by wiring hub and region portals and configuring a Windows export.
+- **Input materials used:** Authored hub and region scenes, progression states, scene-transition service, GDD route order, and Godot export configuration.
+- **AI produced:** Reusable scene portal behavior, complete portal target wiring, progression updates, final-dialogue completion and dismissal, Windows Desktop export preset, macOS metadata import exclusion, tests, and version updates.
+- **User accepted:** Implementation of the previously identified hub, `MoveTo*`, and export-preset blockers.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human live-route and exported-build testing.
+
 ## 2026-06-22 - Production credits
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

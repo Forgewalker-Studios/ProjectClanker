@@ -12,6 +12,13 @@ func _ready() -> void:
 	_check_current_state()
 
 
+func _unhandled_input(event: InputEvent) -> void:
+	if not _panel.visible or not event.is_action_pressed("interact"):
+		return
+	_panel.visible = false
+	get_viewport().set_input_as_handled()
+
+
 func _check_current_state() -> void:
 	const ProgressionStateScript = preload("res://Autoload/ProgressionState.gd")
 	if Progression.state == ProgressionStateScript.State.FINAL_COMPLETED:
