@@ -1,6 +1,14 @@
 # Version History
 
-Current version: **0.0.6.0**
+Current version: **0.0.7.0**
+
+## 0.0.7.0 - Hub presentation and grounded routes
+
+- Added the level parallax and gradient background system to the hub.
+- Grounded all four hub routes and moved the player spawn clear of portals.
+- Separated and styled the health and progression overlays for readability.
+- Removed redundant persistent control hints and hid interaction prompts during dialogue.
+- Added regression coverage for grounded routes and separated HUD placement.
 
 ## 0.0.6.0 - Main menu UI polish
 

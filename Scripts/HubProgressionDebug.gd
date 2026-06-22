@@ -29,5 +29,5 @@ func _on_progression_state_changed(new_state: _ProgressionStateScript.State) -> 
 ## Update on-screen progression debug text.
 ## @param state: Current progression phase.
 func _update_labels(state: _ProgressionStateScript.State) -> void:
-	state_label.text = "Progression: %s" % _ProgressionStateScript.State.keys()[state]
-	hint_label.text = "[ ] Advance state (debug) | E Talk | WASD Move"
+	state_label.text = "STATE  %s" % _ProgressionStateScript.State.keys()[state]
+	hint_label.text = "DEBUG  ] Advance progression"

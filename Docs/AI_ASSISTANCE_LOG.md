@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Hub presentation and route accessibility
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent
+- **Task purpose:** Fix unreadable hub overlays, give the hub level-style background art, and make every hub route reachable from the floor.
+- **Input materials used:** User-provided hub screenshot, hub/UI scenes and scripts, authored level background component, player movement constraints, and route collision geometry.
+- **AI produced:** Separated styled HUD panels, dialogue-aware prompt suppression, level parallax background integration, grounded route layout, player spawn adjustment, tests, and rendered hub QA capture.
+- **User accepted:** Requested overlay readability, hub background parity, and ground-level route accessibility; final presentation pending review.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human live hub and transition testing.
+
 ## 2026-06-22 - Main menu UI polish
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

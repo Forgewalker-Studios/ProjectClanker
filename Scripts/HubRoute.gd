@@ -16,8 +16,16 @@ const _ProgressionStateScript = preload("res://Autoload/ProgressionState.gd")
 
 func _ready() -> void:
 	Progression.state_changed.connect(_on_progression_state_changed)
+	_style_route_label(route_sign)
+	_style_route_label(locked_sign)
 	route_sign.text = route_label
 	_apply_unlock_state(Progression.state)
+
+
+func _style_route_label(label: Label) -> void:
+	label.add_theme_constant_override("outline_size", 5)
+	label.add_theme_color_override("font_outline_color", Color(0.02, 0.03, 0.04, 1.0))
+	label.add_theme_font_size_override("font_size", 18)
 
 
 ## Toggle collision and locked visuals from progression.

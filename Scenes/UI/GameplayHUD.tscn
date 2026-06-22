@@ -1,10 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://gameplayhudclanker"]
+[gd_scene load_steps=6 format=3 uid="uid://gameplayhudclanker"]
 
 [ext_resource type="Script" path="res://Scripts/GameplayHUD.gd" id="1_hud"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_hud"]
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleHealthPanel"]
+content_margin_left = 14.0
+content_margin_top = 10.0
+content_margin_right = 14.0
+content_margin_bottom = 10.0
+bg_color = Color(0.025, 0.045, 0.06, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.67, 0.72, 0.9)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleHealthBackground"]
+bg_color = Color(0.08, 0.12, 0.14, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="StyleBoxFlat" id="StyleHealthFill"]
+bg_color = Color(0.22, 0.72, 0.66, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
 
 [node name="GameplayHUD" type="CanvasLayer"]
 script = ExtResource("1_hud")
@@ -29,12 +59,13 @@ grow_vertical = 2
 mouse_filter = 2
 color = Color(0.267, 0.957, 0.361, 0)
 
-[node name="TopLeft" type="MarginContainer" parent="."]
+[node name="TopLeft" type="PanelContainer" parent="."]
 anchors_preset = 0
-offset_right = 320.0
-offset_bottom = 80.0
-theme_override_constants/margin_left = 16
-theme_override_constants/margin_top = 16
+offset_left = 16.0
+offset_top = 16.0
+offset_right = 286.0
+offset_bottom = 92.0
+theme_override_styles/panel = SubResource("StyleHealthPanel")
 
 [node name="HealthVBox" type="VBoxContainer" parent="TopLeft"]
 layout_mode = 2
@@ -53,8 +84,11 @@ layout_mode = 2
 max_value = 10.0
 value = 10.0
 show_percentage = false
+theme_override_styles/background = SubResource("StyleHealthBackground")
+theme_override_styles/fill = SubResource("StyleHealthFill")
 
 [node name="ControlsHint" type="Label" parent="."]
+visible = false
 anchors_preset = 3
 anchor_left = 1.0
 anchor_top = 1.0

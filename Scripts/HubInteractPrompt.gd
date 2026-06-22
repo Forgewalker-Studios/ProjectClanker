@@ -14,4 +14,7 @@ func _process(_delta: float) -> void:
 	if player == null:
 		prompt_label.text = ""
 		return
+	if player.dialogue_movement_locked:
+		prompt_label.text = ""
+		return
 	prompt_label.text = player.get_interact_prompt()

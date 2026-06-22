@@ -32,6 +32,7 @@ func _run_all_tests() -> void:
 	_test_scene_fade_transition_sequence()
 	_test_clanker_settings_round_trip()
 	_test_main_menu_credits_present()
+	_test_hub_routes_are_ground_reachable()
 	_test_scene_portals_are_configured()
 	_test_windows_export_preset_exists()
 	_test_enemy_config_type01_loads()
@@ -98,6 +99,27 @@ func _test_main_menu_credits_present() -> void:
 	)
 	_record_result("Main menu exposes credits and opaque polished modals", passed)
 	menu.free()
+
+
+func _test_hub_routes_are_ground_reachable() -> void:
+	var hub_scene: PackedScene = load("res://Scenes/Hub/DoorHub.tscn") as PackedScene
+	var hub: Node2D = hub_scene.instantiate() as Node2D
+	var floor_body: StaticBody2D = hub.get_node("Floor") as StaticBody2D
+	var floor_shape_node: CollisionShape2D = floor_body.get_node("CollisionShape2D") as CollisionShape2D
+	var floor_shape: RectangleShape2D = floor_shape_node.shape as RectangleShape2D
+	var floor_top: float = floor_body.position.y - floor_shape.size.y * 0.5
+	var passed: bool = hub.get_node_or_null("ParallaxBackground") != null
+	for route_path: String in ["RouteArea1", "RouteArea2", "RouteArea3", "RouteFinal"]:
+		var route: StaticBody2D = hub.get_node(route_path) as StaticBody2D
+		var blocker_node: CollisionShape2D = route.get_node("Blocker") as CollisionShape2D
+		var blocker_shape: RectangleShape2D = blocker_node.shape as RectangleShape2D
+		var route_bottom: float = route.position.y + blocker_shape.size.y * 0.5
+		passed = passed and absf(route_bottom - floor_top) <= 1.0
+	var debug_panel: PanelContainer = hub.get_node("HubProgressionDebug/Panel") as PanelContainer
+	var controls_hint: Label = hub.get_node("GameplayHUD/ControlsHint") as Label
+	passed = passed and debug_panel.anchor_left == 1.0 and not controls_hint.visible
+	_record_result("Hub routes are grounded and HUD overlays are separated", passed)
+	hub.free()
 
 
 func _test_scene_portals_are_configured() -> void:

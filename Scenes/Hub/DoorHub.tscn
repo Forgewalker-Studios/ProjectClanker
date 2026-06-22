@@ -15,6 +15,8 @@
 [ext_resource type="PackedScene" uid="uid://drx85hfsav11f" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
 [ext_resource type="PackedScene" uid="uid://cr514xbtit8cj" path="res://Scenes/UI/EndingScreen.tscn" id="14_ending"]
 [ext_resource type="Script" path="res://Scripts/ScenePortal.gd" id="15_portal"]
+[ext_resource type="Script" path="res://Scripts/LevelPaintBackground.gd" id="16_background"]
+[ext_resource type="Texture2D" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="17_midground"]
 
 [sub_resource type="RectangleShape2D" id="floor_shape"]
 size = Vector2(1200, 40)
@@ -25,8 +27,28 @@ size = Vector2(120, 140)
 [sub_resource type="RectangleShape2D" id="route_blocker"]
 size = Vector2(48, 120)
 
+[sub_resource type="StyleBoxFlat" id="StyleDebugPanel"]
+content_margin_left = 16.0
+content_margin_top = 10.0
+content_margin_right = 16.0
+content_margin_bottom = 10.0
+bg_color = Color(0.025, 0.045, 0.06, 0.94)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.22, 0.67, 0.72, 0.9)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
 [node name="DoorHub" type="Node2D" unique_id=801293592]
 script = ExtResource("1_hub")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+script = ExtResource("16_background")
+midground_texture = ExtResource("17_midground")
 
 [node name="Background" type="ColorRect" parent="." unique_id=1130390120]
 visible = false
@@ -45,7 +67,7 @@ color = Color(0.35, 0.38, 0.45, 1)
 polygon = PackedVector2Array(-600, -20, 600, -20, 600, 20, -600, 20)
 
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("2_3mox2")]
-position = Vector2(331, 603)
+position = Vector2(500, 603)
 
 [node name="D0R1" type="Area2D" parent="."]
 position = Vector2(640, 520)
@@ -108,7 +130,7 @@ wait_time = 3.0
 autostart = true
 
 [node name="RouteArea1" type="StaticBody2D" parent="." unique_id=1578328176]
-position = Vector2(120, 560)
+position = Vector2(100, 570)
 script = ExtResource("8_route")
 route_label = "Area 1"
 
@@ -147,7 +169,7 @@ progression_state_on_enter = 2
 shape = SubResource("route_blocker")
 
 [node name="RouteArea2" type="StaticBody2D" parent="." unique_id=1776425264]
-position = Vector2(640, 280)
+position = Vector2(350, 570)
 script = ExtResource("8_route")
 required_state = 3
 route_label = "Area 2"
@@ -187,7 +209,7 @@ progression_state_on_enter = 4
 shape = SubResource("route_blocker")
 
 [node name="RouteArea3" type="StaticBody2D" parent="." unique_id=874164664]
-position = Vector2(1160, 560)
+position = Vector2(1180, 570)
 script = ExtResource("8_route")
 required_state = 5
 route_label = "Area 3"
@@ -227,7 +249,7 @@ progression_state_on_enter = 6
 shape = SubResource("route_blocker")
 
 [node name="RouteFinal" type="StaticBody2D" parent="." unique_id=177007091]
-position = Vector2(980, 280)
+position = Vector2(930, 570)
 script = ExtResource("8_route")
 required_state = 7
 route_label = "Final"
@@ -276,21 +298,29 @@ visible = false
 script = ExtResource("9_debug")
 
 [node name="Panel" type="PanelContainer" parent="HubProgressionDebug" unique_id=2030557743]
-offset_left = 16.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -396.0
 offset_top = 16.0
-offset_right = 420.0
-offset_bottom = 96.0
+offset_right = -16.0
+offset_bottom = 104.0
+grow_horizontal = 0
+theme_override_styles/panel = SubResource("StyleDebugPanel")
 
 [node name="VBox" type="VBoxContainer" parent="HubProgressionDebug/Panel" unique_id=1631422062]
 layout_mode = 2
 
 [node name="StateLabel" type="Label" parent="HubProgressionDebug/Panel/VBox" unique_id=1077636442]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.73, 0.32, 1)
+theme_override_font_sizes/font_size = 16
 text = "Progression: START"
 
 [node name="HintLabel" type="Label" parent="HubProgressionDebug/Panel/VBox" unique_id=1799920454]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.8, 0.85, 1)
+theme_override_colors/font_color = Color(0.72, 0.84, 0.87, 1)
+theme_override_font_sizes/font_size = 14
 text = "[ ] Advance state (debug)"
 
 [node name="HubInteractPrompt" type="CanvasLayer" parent="." unique_id=1980739766]
