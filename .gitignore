@@ -26,8 +26,7 @@ Thumbs.db
 *.tmp
 
 # Asset pack receipts, zip debris, and source masters (runtime PNG/OGG committed)
-**/__MACOSX/*
-!**/__MACOSX/.gdignore
+**/__MACOSX/
 **/.itch/
 **/*.psd
 **/*.xcf
