@@ -20,6 +20,10 @@ func tick_physics(enemy: EnemyBase, _delta: float) -> void:
 
 	var target: Marker2D = _patrol_points[_current_point_index]
 	var direction_to_target: float = _get_direction_to_point(enemy, target)
+	if not enemy.has_floor_ahead(direction_to_target):
+		enemy.velocity.x = 0.0
+		_advance_patrol_index()
+		return
 	enemy.velocity.x = direction_to_target * enemy.config.move_speed
 	enemy.face_direction(direction_to_target)
 

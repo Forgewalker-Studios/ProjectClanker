@@ -1,4 +1,4 @@
-[gd_scene format=4 uid="uid://d2iidvx55h8ae"]
+[gd_scene format=4 uid="uid://bk8f3m2q7v1x9"]
 
 [ext_resource type="Script" uid="uid://bvjrftc4vifg4" path="res://Scripts/Reset.gd" id="1_4apoi"]
 [ext_resource type="Script" uid="uid://dkfe0ah2ixx7r" path="res://Scripts/LevelPaintBackground.gd" id="1_bg"]

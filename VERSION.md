@@ -1,6 +1,14 @@
 # Version History
 
-Current version: **0.0.4.0**
+Current version: **0.0.4.1**
+
+## 0.0.4.1 - Enemy pursuit and ledge safety
+
+- Reduced ground and flying pursuit acquisition and leash ranges.
+- Added a forward floor probe so grounded patrol and charge enemies stop at platform edges.
+- Added regression coverage for bounded pursuit ranges and repaired the player test fixture.
+- Assigned Region 02 a unique scene UID.
+- Restored the missing D0R1 hub actor and fixed its dialogue binding.
 
 ## 0.0.4.0 — Enemy archetypes and prefab scenes
 

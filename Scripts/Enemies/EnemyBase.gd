@@ -4,6 +4,9 @@ extends CharacterBody2D
 ## Shared enemy health, damage reception, reset, and behavior delegation.
 
 const GRAVITY: float = 800.0
+const FLOOR_LOOKAHEAD_DISTANCE: float = 28.0
+const FLOOR_PROBE_DEPTH: float = 64.0
+const ENVIRONMENT_COLLISION_MASK: int = 1
 
 enum EnemyState {
 	IDLE,
@@ -224,6 +227,28 @@ func get_player_distance_squared() -> float:
 	if player == null:
 		return INF
 	return global_position.distance_squared_to(player.global_position)
+
+
+## Return whether environment collision exists ahead of grounded horizontal movement.
+## @param direction: Horizontal movement direction.
+## @return: True while airborne or when the floor continues ahead.
+func has_floor_ahead(direction: float) -> bool:
+	if direction == 0.0 or not is_on_floor():
+		return true
+
+	var probe_start: Vector2 = global_position + Vector2(
+		signf(direction) * FLOOR_LOOKAHEAD_DISTANCE,
+		0.0
+	)
+	var probe_end: Vector2 = probe_start + Vector2.DOWN * FLOOR_PROBE_DEPTH
+	var query: PhysicsRayQueryParameters2D = PhysicsRayQueryParameters2D.create(
+		probe_start,
+		probe_end,
+		ENVIRONMENT_COLLISION_MASK,
+		[get_rid()]
+	)
+	var hit: Dictionary = get_world_2d().direct_space_state.intersect_ray(query)
+	return not hit.is_empty()
 
 
 ## Flip the sprite to face the given horizontal direction.

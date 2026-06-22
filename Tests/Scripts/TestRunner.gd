@@ -32,6 +32,7 @@ func _run_all_tests() -> void:
 	_test_scene_fade_transition_sequence()
 	_test_clanker_settings_round_trip()
 	_test_enemy_config_type01_loads()
+	_test_pursuing_enemy_ranges_are_bounded()
 	await _test_enemy_take_damage_reduces_health()
 	await _test_enemy_invulnerability_blocks_damage()
 
@@ -159,8 +160,22 @@ func _create_test_player() -> Player:
 	shape.size = Vector2(35.125, 53.125)
 	collision_shape.shape = shape
 
+	var melee: Node2D = Node2D.new()
+	melee.name = "Melee"
+	var hit_detection: Area2D = Area2D.new()
+	hit_detection.name = "HitDetection"
+	var hit_box: CollisionShape2D = CollisionShape2D.new()
+	hit_box.name = "HitBox"
+	hit_box.shape = RectangleShape2D.new()
+	var melee_visual: Sprite2D = Sprite2D.new()
+	melee_visual.name = "MeleeVisual"
+
 	player.add_child(sprite)
 	player.add_child(collision_shape)
+	player.add_child(melee)
+	melee.add_child(hit_detection)
+	hit_detection.add_child(hit_box)
+	melee.add_child(melee_visual)
 	add_child(player)
 	await get_tree().process_frame
 	return player
@@ -176,6 +191,24 @@ func _test_enemy_config_type01_loads() -> void:
 		and config.damage_mode == EnemyConfig.DamageMode.CONTACT
 	)
 	_record_result("Type01 Roaming enemy config loads from resource", passed)
+
+
+func _test_pursuing_enemy_ranges_are_bounded() -> void:
+	var ground_config: EnemyConfig = load(
+		"res://Resources/Enemies/Type02_PursuingEnemyConfig.tres"
+	) as EnemyConfig
+	var flying_config: EnemyConfig = load(
+		"res://Resources/Enemies/Type03B_FlyingPursuitEnemyConfig.tres"
+	) as EnemyConfig
+	var passed: bool = (
+		ground_config != null
+		and ground_config.detection_range <= 200.0
+		and ground_config.lose_target_range <= 300.0
+		and flying_config != null
+		and flying_config.detection_range <= 200.0
+		and flying_config.lose_target_range <= 300.0
+	)
+	_record_result("Pursuing enemies use bounded detection and leash ranges", passed)
 
 
 func _test_enemy_take_damage_reduces_health() -> void:

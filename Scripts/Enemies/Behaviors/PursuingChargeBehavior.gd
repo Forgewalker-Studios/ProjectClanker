@@ -55,6 +55,9 @@ func _run_chase(enemy: EnemyBase) -> void:
 	var direction: float = signf(player.global_position.x - enemy.global_position.x)
 	if direction == 0.0:
 		direction = enemy.facing_direction
+	if not enemy.has_floor_ahead(direction):
+		enemy.velocity.x = 0.0
+		return
 
 	enemy.face_direction(direction)
 	enemy.velocity.x = direction * enemy.config.charge_speed
@@ -71,6 +74,10 @@ func _run_patrol(enemy: EnemyBase) -> void:
 
 	var target: Marker2D = _patrol_points[_current_point_index]
 	var direction_to_target: float = _get_direction_to_point(enemy, target)
+	if not enemy.has_floor_ahead(direction_to_target):
+		enemy.velocity.x = 0.0
+		_advance_patrol_index()
+		return
 	enemy.velocity.x = direction_to_target * enemy.config.move_speed
 	enemy.face_direction(direction_to_target)
 
