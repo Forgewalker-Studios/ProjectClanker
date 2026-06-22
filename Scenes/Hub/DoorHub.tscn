@@ -14,7 +14,6 @@
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="12_hud"]
 [ext_resource type="PackedScene" uid="uid://drx85hfsav11f" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
 [ext_resource type="PackedScene" uid="uid://cr514xbtit8cj" path="res://Scenes/UI/EndingScreen.tscn" id="14_ending"]
-[ext_resource type="Script" path="res://Scripts/ScenePortal.gd" id="15_portal"]
 [ext_resource type="Script" path="res://Scripts/LevelPaintBackground.gd" id="16_background"]
 [ext_resource type="Texture2D" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="17_midground"]
 
@@ -129,12 +128,18 @@ shape = SubResource("d0r1_interact")
 wait_time = 3.0
 autostart = true
 
-[node name="RouteArea1" type="StaticBody2D" parent="." unique_id=1578328176]
+[node name="RouteArea1" type="Area2D" parent="." unique_id=1578328176]
 position = Vector2(100, 570)
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+monitorable = false
 script = ExtResource("8_route")
 route_label = "Area 1"
+target_scene = "res://Scenes/Region/01.tscn"
+progression_state_on_enter = 2
 
-[node name="Blocker" type="CollisionShape2D" parent="RouteArea1" unique_id=1227668116]
+[node name="Trigger" type="CollisionShape2D" parent="RouteArea1" unique_id=1227668116]
 shape = SubResource("route_blocker")
 
 [node name="LockedSign" type="Label" parent="RouteArea1" unique_id=1733365794]
@@ -157,24 +162,19 @@ horizontal_alignment = 1
 color = Color(0.45, 0.3, 0.3, 1)
 polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
 
-[node name="Portal" type="Area2D" parent="RouteArea1"]
+[node name="RouteArea2" type="Area2D" parent="." unique_id=1776425264]
+position = Vector2(350, 570)
 collision_layer = 0
 collision_mask = 2
 monitoring = false
-script = ExtResource("15_portal")
-target_scene = "res://Scenes/Region/01.tscn"
-progression_state_on_enter = 2
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RouteArea1/Portal"]
-shape = SubResource("route_blocker")
-
-[node name="RouteArea2" type="StaticBody2D" parent="." unique_id=1776425264]
-position = Vector2(350, 570)
+monitorable = false
 script = ExtResource("8_route")
 required_state = 3
 route_label = "Area 2"
+target_scene = "res://Scenes/Region/02.tscn"
+progression_state_on_enter = 4
 
-[node name="Blocker" type="CollisionShape2D" parent="RouteArea2" unique_id=1621254291]
+[node name="Trigger" type="CollisionShape2D" parent="RouteArea2" unique_id=1621254291]
 shape = SubResource("route_blocker")
 
 [node name="LockedSign" type="Label" parent="RouteArea2" unique_id=646637888]
@@ -197,24 +197,19 @@ horizontal_alignment = 1
 color = Color(0.45, 0.3, 0.3, 1)
 polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
 
-[node name="Portal" type="Area2D" parent="RouteArea2"]
+[node name="RouteArea3" type="Area2D" parent="." unique_id=874164664]
+position = Vector2(1180, 570)
 collision_layer = 0
 collision_mask = 2
 monitoring = false
-script = ExtResource("15_portal")
-target_scene = "res://Scenes/Region/02.tscn"
-progression_state_on_enter = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RouteArea2/Portal"]
-shape = SubResource("route_blocker")
-
-[node name="RouteArea3" type="StaticBody2D" parent="." unique_id=874164664]
-position = Vector2(1180, 570)
+monitorable = false
 script = ExtResource("8_route")
 required_state = 5
 route_label = "Area 3"
+target_scene = "res://Scenes/Region/03.tscn"
+progression_state_on_enter = 6
 
-[node name="Blocker" type="CollisionShape2D" parent="RouteArea3" unique_id=1321346542]
+[node name="Trigger" type="CollisionShape2D" parent="RouteArea3" unique_id=1321346542]
 shape = SubResource("route_blocker")
 
 [node name="LockedSign" type="Label" parent="RouteArea3" unique_id=66261567]
@@ -237,24 +232,19 @@ horizontal_alignment = 1
 color = Color(0.45, 0.3, 0.3, 1)
 polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
 
-[node name="Portal" type="Area2D" parent="RouteArea3"]
+[node name="RouteFinal" type="Area2D" parent="." unique_id=177007091]
+position = Vector2(930, 570)
 collision_layer = 0
 collision_mask = 2
 monitoring = false
-script = ExtResource("15_portal")
-target_scene = "res://Scenes/Region/03.tscn"
-progression_state_on_enter = 6
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RouteArea3/Portal"]
-shape = SubResource("route_blocker")
-
-[node name="RouteFinal" type="StaticBody2D" parent="." unique_id=177007091]
-position = Vector2(930, 570)
+monitorable = false
 script = ExtResource("8_route")
 required_state = 7
 route_label = "Final"
+target_scene = "res://Scenes/Hub/DoorHub.tscn"
+progression_state_on_enter = 8
 
-[node name="Blocker" type="CollisionShape2D" parent="RouteFinal" unique_id=303851244]
+[node name="Trigger" type="CollisionShape2D" parent="RouteFinal" unique_id=303851244]
 shape = SubResource("route_blocker")
 
 [node name="LockedSign" type="Label" parent="RouteFinal" unique_id=562848371]
@@ -276,17 +266,6 @@ horizontal_alignment = 1
 [node name="DoorPrimitive" type="Polygon2D" parent="RouteFinal" unique_id=643039189]
 color = Color(0.5, 0.2, 0.55, 1)
 polygon = PackedVector2Array(-24, -60, 24, -60, 24, 60, -24, 60)
-
-[node name="Portal" type="Area2D" parent="RouteFinal"]
-collision_layer = 0
-collision_mask = 2
-monitoring = false
-script = ExtResource("15_portal")
-target_scene = "res://Scenes/Hub/DoorHub.tscn"
-progression_state_on_enter = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="RouteFinal/Portal"]
-shape = SubResource("route_blocker")
 
 [node name="DialogueController" type="Node" parent="." unique_id=1523649512]
 script = ExtResource("6_controller")

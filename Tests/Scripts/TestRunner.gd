@@ -111,11 +111,12 @@ func _test_hub_routes_are_ground_reachable() -> void:
 	var floor_top: float = floor_body.position.y - floor_shape.size.y * 0.5
 	var passed: bool = hub.get_node_or_null("ParallaxBackground") != null
 	for route_path: String in ["RouteArea1", "RouteArea2", "RouteArea3", "RouteFinal"]:
-		var route: StaticBody2D = hub.get_node(route_path) as StaticBody2D
-		var blocker_node: CollisionShape2D = route.get_node("Blocker") as CollisionShape2D
-		var blocker_shape: RectangleShape2D = blocker_node.shape as RectangleShape2D
-		var route_bottom: float = route.position.y + blocker_shape.size.y * 0.5
+		var route: Area2D = hub.get_node(route_path) as Area2D
+		var trigger_node: CollisionShape2D = route.get_node("Trigger") as CollisionShape2D
+		var trigger_shape: RectangleShape2D = trigger_node.shape as RectangleShape2D
+		var route_bottom: float = route.position.y + trigger_shape.size.y * 0.5
 		passed = passed and absf(route_bottom - floor_top) <= 1.0
+		passed = passed and route.collision_layer == 0
 	var debug_panel: PanelContainer = hub.get_node("HubProgressionDebug/Panel") as PanelContainer
 	var controls_hint: Label = hub.get_node("GameplayHUD/ControlsHint") as Label
 	passed = passed and debug_panel.anchor_left == 1.0 and not controls_hint.visible
@@ -126,10 +127,10 @@ func _test_hub_routes_are_ground_reachable() -> void:
 func _test_scene_portals_are_configured() -> void:
 	var expected_portals: Dictionary = {
 		"res://Scenes/Hub/DoorHub.tscn": [
-			"RouteArea1/Portal",
-			"RouteArea2/Portal",
-			"RouteArea3/Portal",
-			"RouteFinal/Portal",
+			"RouteArea1",
+			"RouteArea2",
+			"RouteArea3",
+			"RouteFinal",
 		],
 		"res://Scenes/Region/01.tscn": ["Level/FEAT/MoveToHub", "Level/FEAT/MoveTo2"],
 		"res://Scenes/Region/02.tscn": [

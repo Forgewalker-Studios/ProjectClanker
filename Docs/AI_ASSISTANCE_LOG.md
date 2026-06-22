@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Non-blocking hub route triggers
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent
+- **Task purpose:** Prevent locked hub doors from blocking travel to other ground-level routes.
+- **Input materials used:** User runtime report, hub route scene geometry, HubRoute behavior, ScenePortal abstraction, and progression thresholds.
+- **AI produced:** Area2D-based route inheritance, non-solid locked routes, direct shared portal configuration, tests, and synchronized patch version metadata.
+- **User accepted:** Requested conversion of hub doors from rigid collision bodies to areas; final behavior pending live review.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human hub traversal and route transition testing.
+
 ## 2026-06-22 - Dialogue completion input fix
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

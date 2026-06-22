@@ -1,6 +1,13 @@
 # Version History
 
-Current version: **0.0.7.1**
+Current version: **0.0.7.2**
+
+## 0.0.7.2 - Non-blocking hub route triggers
+
+- Converted all hub route roots from static bodies to area triggers.
+- Locked routes no longer physically block travel across the hub floor.
+- Unlocked routes monitor player entry and transition through the shared portal behavior.
+- Added regression coverage ensuring every route has a zero collision layer.
 
 ## 0.0.7.1 - Dialogue completion input fix
 
