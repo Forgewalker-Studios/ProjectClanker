@@ -49,6 +49,7 @@ var is_attacking: bool = false
 var hit_targets: Array[Node] = []
 var is_dead: bool = false
 var dialogue_movement_locked: bool = false
+var _interact_release_required: bool = false
 
 var _interact_target: Interactable2D = null
 
@@ -119,7 +120,7 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("test_full_heal"):
 		heal(max_health)
 
-	if Input.is_action_just_pressed("interact"):
+	if _should_trigger_interaction():
 		_try_interact()
 
 	if Input.is_action_just_pressed("melee_attack"):
@@ -409,9 +410,22 @@ func respawn_at(respawn_position: Vector2) -> void:
 ## Lock or unlock movement while dialogue is active.
 ## @param locked: True when dialogue should freeze movement.
 func set_dialogue_movement_locked(locked: bool) -> void:
+	var was_locked: bool = dialogue_movement_locked
 	dialogue_movement_locked = locked
 	if locked:
 		velocity = Vector2.ZERO
+	elif was_locked:
+		_interact_release_required = true
+
+
+## Consume the dialogue-closing interact until the player releases the key.
+## @return: True only for a fresh interact press after any release latch clears.
+func _should_trigger_interaction() -> bool:
+	if _interact_release_required:
+		if not Input.is_action_pressed("interact"):
+			_interact_release_required = false
+		return false
+	return Input.is_action_just_pressed("interact")
 
 
 ## Register the interactable currently in range.

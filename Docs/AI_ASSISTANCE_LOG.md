@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Dialogue completion input fix
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent
+- **Task purpose:** Stop D0R1 dialogue from immediately restarting when the final line is closed with E.
+- **Input materials used:** User runtime report and the Player, DialogueBox, DialogueController, and D0R1 input flow.
+- **AI produced:** Interaction release latch, keyboard-repeat guard, regression test, and synchronized patch version metadata.
+- **User accepted:** Requested correction of the end-of-dialogue loop; final behavior pending live review.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human dialogue playtest.
+
 ## 2026-06-22 - Hub presentation and route accessibility
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

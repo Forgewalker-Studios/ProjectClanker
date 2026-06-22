@@ -33,6 +33,8 @@ func hide_dialogue() -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	if not visible:
 		return
+	if event is InputEventKey and (event as InputEventKey).echo:
+		return
 	if event.is_action_pressed("interact"):
 		advance_requested.emit()
 		get_viewport().set_input_as_handled()

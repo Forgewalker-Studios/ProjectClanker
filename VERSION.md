@@ -1,6 +1,12 @@
 # Version History
 
-Current version: **0.0.7.0**
+Current version: **0.0.7.1**
+
+## 0.0.7.1 - Dialogue completion input fix
+
+- Prevented the final dialogue E press from immediately restarting D0R1 interaction.
+- Ignored keyboard auto-repeat events while advancing dialogue.
+- Added regression coverage for the dialogue interaction release latch.
 
 ## 0.0.7.0 - Hub presentation and grounded routes
 

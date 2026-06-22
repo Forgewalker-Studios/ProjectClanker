@@ -27,6 +27,7 @@ func _run_all_tests() -> void:
 	await _test_player_take_damage_reduces_health()
 	await _test_player_heal_restores_health()
 	await _test_player_lethal_damage_skips_invulnerability()
+	await _test_dialogue_unlock_requires_interact_release()
 	_test_dialogue_registry_maps_start_state()
 	_test_dialogue_set_linear_advance()
 	_test_scene_fade_transition_sequence()
@@ -201,6 +202,22 @@ func _test_player_lethal_damage_skips_invulnerability() -> void:
 	await get_tree().process_frame
 	var passed: bool = player.is_dead and not player.is_invulnerable
 	_record_result("Player.take_damage skips invulnerability on lethal damage", passed)
+	player.queue_free()
+
+
+func _test_dialogue_unlock_requires_interact_release() -> void:
+	var player: Player = await _create_test_player()
+	Input.action_release("interact")
+	player.set_dialogue_movement_locked(true)
+	player.set_dialogue_movement_locked(false)
+	var latch_was_set: bool = player._interact_release_required
+	var closing_press_reused: bool = player._should_trigger_interaction()
+	var passed: bool = (
+		latch_was_set
+		and not closing_press_reused
+		and not player._interact_release_required
+	)
+	_record_result("Dialogue unlock consumes interact until key release", passed)
 	player.queue_free()
 
 
