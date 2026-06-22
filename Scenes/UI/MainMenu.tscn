@@ -1,11 +1,144 @@
-[gd_scene load_steps=3 format=3 uid="uid://mainmenuclanker"]
+[gd_scene load_steps=13 format=3 uid="uid://mainmenuclanker"]
 
 [ext_resource type="Script" path="res://Scripts/MainMenu.gd" id="1_menu"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_title"]
-font_size = 40
-outline_size = 6
-outline_color = Color(0, 0, 0, 1)
+font_size = 48
+font_color = Color(0.92, 0.73, 0.32, 1)
+outline_size = 8
+outline_color = Color(0.025, 0.035, 0.045, 1)
+
+[sub_resource type="Gradient" id="Gradient_background"]
+offsets = PackedFloat32Array(0, 0.55, 1)
+colors = PackedColorArray(0.035, 0.055, 0.075, 1, 0.07, 0.1, 0.125, 1, 0.025, 0.035, 0.045, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture_background"]
+gradient = SubResource("Gradient_background")
+width = 1280
+height = 720
+fill_from = Vector2(0.1, 0)
+fill_to = Vector2(0.9, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleButton_normal"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.075, 0.105, 0.13, 0.96)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.25, 0.39, 0.46, 0.8)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleButton_hover"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.09, 0.23, 0.28, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.3, 0.84, 0.9, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleButton_pressed"]
+content_margin_left = 22.0
+content_margin_top = 10.0
+content_margin_right = 22.0
+content_margin_bottom = 10.0
+bg_color = Color(0.05, 0.42, 0.48, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.55, 0.95, 0.98, 1)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleButton_focus"]
+bg_color = Color(0, 0, 0, 0)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.92, 0.73, 0.32, 1)
+corner_radius_top_left = 6
+corner_radius_top_right = 6
+corner_radius_bottom_right = 6
+corner_radius_bottom_left = 6
+expand_margin_left = 2.0
+expand_margin_top = 2.0
+expand_margin_right = 2.0
+expand_margin_bottom = 2.0
+
+[sub_resource type="StyleBoxFlat" id="StylePanel_modal"]
+content_margin_left = 32.0
+content_margin_top = 28.0
+content_margin_right = 32.0
+content_margin_bottom = 28.0
+bg_color = Color(0.035, 0.06, 0.075, 1)
+border_width_left = 2
+border_width_top = 2
+border_width_right = 2
+border_width_bottom = 2
+border_color = Color(0.22, 0.67, 0.72, 1)
+corner_radius_top_left = 8
+corner_radius_top_right = 8
+corner_radius_bottom_right = 8
+corner_radius_bottom_left = 8
+shadow_color = Color(0, 0, 0, 0.7)
+shadow_size = 16
+
+[sub_resource type="StyleBoxFlat" id="StylePanel_main"]
+bg_color = Color(0.025, 0.045, 0.06, 0.9)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.17, 0.32, 0.38, 0.8)
+corner_radius_top_left = 10
+corner_radius_top_right = 10
+corner_radius_bottom_right = 10
+corner_radius_bottom_left = 10
+shadow_color = Color(0, 0, 0, 0.45)
+shadow_size = 20
+
+[sub_resource type="StyleBoxFlat" id="StyleSlider"]
+content_margin_top = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.11, 0.18, 0.21, 1)
+corner_radius_top_left = 4
+corner_radius_top_right = 4
+corner_radius_bottom_right = 4
+corner_radius_bottom_left = 4
+
+[sub_resource type="Theme" id="Theme_main_menu"]
+default_font_size = 18
+Button/colors/font_color = Color(0.84, 0.91, 0.93, 1)
+Button/colors/font_hover_color = Color(0.94, 1, 1, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_focus_color = Color(1, 1, 1, 1)
+Button/font_sizes/font_size = 18
+Button/styles/normal = SubResource("StyleButton_normal")
+Button/styles/hover = SubResource("StyleButton_hover")
+Button/styles/pressed = SubResource("StyleButton_pressed")
+Button/styles/focus = SubResource("StyleButton_focus")
+PanelContainer/styles/panel = SubResource("StylePanel_modal")
+HSlider/styles/slider = SubResource("StyleSlider")
+HSlider/styles/grabber_area = SubResource("StyleSlider")
+HSlider/styles/grabber_area_highlight = SubResource("StyleButton_hover")
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -14,6 +147,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = SubResource("Theme_main_menu")
 script = ExtResource("1_menu")
 
 [node name="Background" type="ColorRect" parent="."]
@@ -23,7 +157,35 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-color = Color(0.08, 0.09, 0.11, 1)
+color = Color(0.025, 0.035, 0.045, 1)
+
+[node name="BackgroundGradient" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+texture = SubResource("GradientTexture_background")
+expand_mode = 1
+stretch_mode = 6
+
+[node name="MainCard" type="PanelContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -310.0
+offset_right = 250.0
+offset_bottom = 310.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StylePanel_main")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 1
@@ -38,10 +200,11 @@ theme_override_constants/margin_right = 64
 theme_override_constants/margin_bottom = 64
 
 [node name="CenterColumn" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_constants/separation = 14
+theme_override_constants/separation = 12
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/CenterColumn"]
 layout_mode = 2
@@ -51,57 +214,85 @@ horizontal_alignment = 1
 
 [node name="SubtitleLabel" type="Label" parent="MarginContainer/CenterColumn"]
 layout_mode = 2
-theme_override_colors/font_color = Color(0.75, 0.78, 0.82, 1)
+theme_override_colors/font_color = Color(0.48, 0.7, 0.75, 1)
+theme_override_font_sizes/font_size = 20
 text = "The Door Remembers"
 horizontal_alignment = 1
 
+[node name="MenuDivider" type="ColorRect" parent="MarginContainer/CenterColumn"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+mouse_filter = 2
+color = Color(0.22, 0.67, 0.72, 0.8)
+
 [node name="StartButton" type="Button" parent="MarginContainer/CenterColumn"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 48)
 layout_mode = 2
 text = "Start Game"
 
 [node name="SettingsButton" type="Button" parent="MarginContainer/CenterColumn"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 48)
 layout_mode = 2
 text = "Settings"
 
 [node name="ControlsButton" type="Button" parent="MarginContainer/CenterColumn"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 48)
 layout_mode = 2
 text = "Controls"
 
 [node name="CreditsButton" type="Button" parent="MarginContainer/CenterColumn"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 48)
 layout_mode = 2
 text = "Credits"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/CenterColumn"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(340, 48)
 layout_mode = 2
 text = "Quit"
+
+[node name="ModalScrim" type="ColorRect" parent="."]
+unique_name_in_owner = true
+visible = false
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 0
+color = Color(0.005, 0.01, 0.015, 0.82)
 
 [node name="SettingsPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 11
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -220.0
-offset_top = -160.0
-offset_right = 220.0
-offset_bottom = 160.0
+offset_left = -270.0
+offset_top = -210.0
+offset_right = 270.0
+offset_bottom = 210.0
 grow_horizontal = 2
 grow_vertical = 2
 
 [node name="SettingsVBox" type="VBoxContainer" parent="SettingsPanel"]
 layout_mode = 2
-theme_override_constants/separation = 10
+theme_override_constants/separation = 14
 
 [node name="SettingsTitle" type="Label" parent="SettingsPanel/SettingsVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.73, 0.32, 1)
+theme_override_font_sizes/font_size = 28
 text = "Audio Settings"
 horizontal_alignment = 1
 
@@ -111,6 +302,7 @@ text = "Music Volume"
 
 [node name="MusicSlider" type="HSlider" parent="SettingsPanel/SettingsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 max_value = 1.0
 step = 0.02
@@ -122,6 +314,7 @@ text = "SFX Volume"
 
 [node name="SfxSlider" type="HSlider" parent="SettingsPanel/SettingsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 30)
 layout_mode = 2
 max_value = 1.0
 step = 0.02
@@ -129,17 +322,20 @@ value = 0.75
 
 [node name="MuteButton" type="Button" parent="SettingsPanel/SettingsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "Mute all"
 
 [node name="SettingsBackButton" type="Button" parent="SettingsPanel/SettingsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "Back"
 
 [node name="ControlsPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 11
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -159,11 +355,15 @@ theme_override_constants/separation = 8
 
 [node name="ControlsTitle" type="Label" parent="ControlsPanel/ControlsVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.73, 0.32, 1)
+theme_override_font_sizes/font_size = 28
 text = "Controls"
 horizontal_alignment = 1
 
 [node name="ControlsBody" type="Label" parent="ControlsPanel/ControlsVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.78, 0.88, 0.9, 1)
+theme_override_font_sizes/font_size = 18
 text = "Move: A / D or Arrow Keys
 Jump: W / Space
 Interact: E
@@ -174,12 +374,14 @@ autowrap_mode = 2
 
 [node name="ControlsBackButton" type="Button" parent="ControlsPanel/ControlsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "Back"
 
 [node name="CreditsPanel" type="PanelContainer" parent="."]
 unique_name_in_owner = true
 visible = false
+z_index = 11
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -199,6 +401,7 @@ theme_override_constants/separation = 16
 
 [node name="CreditsTitle" type="Label" parent="CreditsPanel/CreditsVBox"]
 layout_mode = 2
+theme_override_colors/font_color = Color(0.92, 0.73, 0.32, 1)
 theme_override_font_sizes/font_size = 28
 text = "Credits"
 horizontal_alignment = 1
@@ -220,5 +423,6 @@ horizontal_alignment = 1
 
 [node name="CreditsBackButton" type="Button" parent="CreditsPanel/CreditsVBox"]
 unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 46)
 layout_mode = 2
 text = "Back"

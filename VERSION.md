@@ -1,6 +1,13 @@
 # Version History
 
-Current version: **0.0.5.0**
+Current version: **0.0.6.0**
+
+## 0.0.6.0 - Main menu UI polish
+
+- Added a dark industrial menu theme with cyan and amber accents.
+- Added a framed menu card, consistent button states, spacing, and keyboard focus.
+- Made Settings, Controls, and Credits true opaque modals with background dimming.
+- Added Escape-to-close behavior and regression coverage for modal readability.
 
 ## 0.0.5.0 - Playable route and Windows export
 

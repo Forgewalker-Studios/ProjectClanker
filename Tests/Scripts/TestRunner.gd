@@ -78,6 +78,11 @@ func _test_main_menu_credits_present() -> void:
 	var menu_scene: PackedScene = load("res://Scenes/UI/MainMenu.tscn") as PackedScene
 	var menu: Control = menu_scene.instantiate() as Control
 	var credits_panel: PanelContainer = menu.get_node("CreditsPanel") as PanelContainer
+	var modal_scrim: ColorRect = menu.get_node("ModalScrim") as ColorRect
+	var panel_style: StyleBoxFlat = menu.theme.get_stylebox(
+		"panel",
+		"PanelContainer"
+	) as StyleBoxFlat
 	var credits_text: String = ""
 	for child: Node in credits_panel.get_node("CreditsVBox").get_children():
 		if child is Label:
@@ -87,8 +92,11 @@ func _test_main_menu_credits_present() -> void:
 		and credits_text.contains("ForgeWalker Studios")
 		and credits_text.contains("Jazhikho")
 		and credits_text.contains("KennyLumpia")
+		and modal_scrim.color.a >= 0.8
+		and panel_style != null
+		and panel_style.bg_color.a == 1.0
 	)
-	_record_result("Main menu exposes required production credits", passed)
+	_record_result("Main menu exposes credits and opaque polished modals", passed)
 	menu.free()
 
 

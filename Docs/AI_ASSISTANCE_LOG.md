@@ -1,5 +1,16 @@
 # AI Assistance Log
 
+## 2026-06-22 - Main menu UI polish
+
+- **Model/tool used:** OpenAI Codex, GPT-5 coding agent
+- **Task purpose:** Improve main-menu presentation and fix unreadable overlapping Settings UI shown in the user screenshot.
+- **Input materials used:** User-provided screenshot, existing MainMenu scene/script, project color direction, and Godot-native UI components.
+- **AI produced:** Industrial menu theme, gradient background, framed menu card, styled controls, opaque modal panels, background scrim, focus handling, Escape dismissal, tests, and rendered QA captures.
+- **User accepted:** General request to polish the UI; final visual presentation pending review.
+- **User rejected:** None.
+- **User changed:** None.
+- **Final approval:** Pending human review of the rendered and live UI.
+
 ## 2026-06-22 - Playable route and export configuration
 
 - **Model/tool used:** OpenAI Codex, GPT-5 coding agent

@@ -9,6 +9,8 @@ const GAMEPLAY_SCENE_PATH: String = "res://Scenes/Hub/DoorHub.tscn"
 @onready var _controls_button: Button = %ControlsButton
 @onready var _credits_button: Button = %CreditsButton
 @onready var _quit_button: Button = %QuitButton
+@onready var _menu_column: VBoxContainer = %CenterColumn
+@onready var _modal_scrim: ColorRect = %ModalScrim
 @onready var _settings_panel: PanelContainer = %SettingsPanel
 @onready var _controls_panel: PanelContainer = %ControlsPanel
 @onready var _credits_panel: PanelContainer = %CreditsPanel
@@ -28,6 +30,13 @@ func _ready() -> void:
 	_setup_audio_mix()
 	_hide_overlay_panels()
 	ClankerSettings.settings_changed.connect(_sync_sliders_from_settings)
+	_start_button.grab_focus()
+
+
+func _unhandled_input(event: InputEvent) -> void:
+	if event.is_action_pressed("pause") and _is_overlay_visible():
+		_hide_overlay_panels()
+		get_viewport().set_input_as_handled()
 
 
 func _wire_buttons() -> void:
@@ -74,21 +83,27 @@ func _on_start_pressed() -> void:
 
 
 func _on_settings_pressed() -> void:
+	_show_modal(_settings_panel)
 	_settings_panel.visible = true
 	_controls_panel.visible = false
 	_credits_panel.visible = false
+	_settings_back_button.grab_focus()
 
 
 func _on_controls_pressed() -> void:
+	_show_modal(_controls_panel)
 	_controls_panel.visible = true
 	_settings_panel.visible = false
 	_credits_panel.visible = false
+	_controls_back_button.grab_focus()
 
 
 func _on_credits_pressed() -> void:
+	_show_modal(_credits_panel)
 	_credits_panel.visible = true
 	_settings_panel.visible = false
 	_controls_panel.visible = false
+	_credits_back_button.grab_focus()
 
 
 func _on_quit_pressed() -> void:
@@ -99,6 +114,19 @@ func _hide_overlay_panels() -> void:
 	_settings_panel.visible = false
 	_controls_panel.visible = false
 	_credits_panel.visible = false
+	_modal_scrim.visible = false
+	_menu_column.modulate = Color.WHITE
+	_start_button.grab_focus()
+
+
+func _show_modal(panel: PanelContainer) -> void:
+	_modal_scrim.visible = true
+	_menu_column.modulate = Color(0.45, 0.5, 0.52, 1.0)
+	panel.visible = true
+
+
+func _is_overlay_visible() -> bool:
+	return _settings_panel.visible or _controls_panel.visible or _credits_panel.visible
 
 
 func _on_audio_slider_changed(_value: float) -> void:
