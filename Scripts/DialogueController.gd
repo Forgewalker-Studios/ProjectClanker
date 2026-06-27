@@ -78,7 +78,7 @@ func _show_current_entry() -> void:
 	if entry == null:
 		_finish_dialogue()
 		return
-	dialogue_box.show_line("D-0R1", entry.text)
+	dialogue_box.show_line("", entry.text)
 
 
 ## End the conversation and run the completion callback.

@@ -13,6 +13,9 @@ enum BossState {
 const CHARGE_RANGE: float = 180.0
 const SWIPE_RANGE: float = 72.0
 
+@export var starts_active: bool = false
+
+var is_active: bool = false
 var _boss_state: BossState = BossState.IDLE
 var _state_timer_sec: float = 0.0
 var _defend_cooldown_sec: float = 0.0
@@ -21,12 +24,19 @@ var _rng: RandomNumberGenerator = RandomNumberGenerator.new()
 
 func setup(enemy: EnemyBase) -> void:
 	_rng.randomize()
+	is_active = starts_active
 	_boss_state = BossState.IDLE
 	_state_timer_sec = 0.4
 	_defend_cooldown_sec = enemy.config.boss_defend_interval_sec
 
+	if not is_active:
+		_put_boss_to_sleep(enemy)
 
 func tick_physics(enemy: EnemyBase, delta: float) -> void:
+	if not is_active:
+		enemy.velocity.x = 0.0
+		return
+
 	enemy.face_player()
 
 	if _defend_cooldown_sec > 0.0:
@@ -58,6 +68,62 @@ func reset_behavior(enemy: EnemyBase) -> void:
 	_defend_cooldown_sec = enemy.config.boss_defend_interval_sec
 	enemy.set_invulnerable(false)
 	enemy.contact_hurtbox.reset_cooldown()
+
+
+func activate_boss() -> void:
+	is_active = true
+
+	var enemy: EnemyBase = get_parent() as EnemyBase
+	if enemy == null:
+		return
+
+	_boss_state = BossState.IDLE
+	_state_timer_sec = 0.4
+	_defend_cooldown_sec = enemy.config.boss_defend_interval_sec
+
+	_wake_boss(enemy)
+	AudioDirector.enter_boss_fight()
+
+
+func deactivate_boss() -> void:
+	is_active = false
+
+	var enemy: EnemyBase = get_parent() as EnemyBase
+	if enemy == null:
+		return
+
+	_put_boss_to_sleep(enemy)
+	AudioDirector.exit_boss_fight()
+
+
+func _put_boss_to_sleep(enemy: EnemyBase) -> void:
+	enemy.velocity.x = 0.0
+	enemy.set_invulnerable(true)
+	enemy.remove_from_group("boss")
+
+	var contact_hurtbox: Area2D = enemy.get_node_or_null("ContactHurtbox") as Area2D
+	if contact_hurtbox != null:
+		contact_hurtbox.monitoring = false
+		contact_hurtbox.monitorable = false
+
+	var attack_hitbox: Area2D = enemy.get_node_or_null("AttackHitbox") as Area2D
+	if attack_hitbox != null:
+		attack_hitbox.monitoring = false
+		attack_hitbox.monitorable = false
+
+
+func _wake_boss(enemy: EnemyBase) -> void:
+	enemy.add_to_group("boss")
+	enemy.set_invulnerable(false)
+
+	var contact_hurtbox: Area2D = enemy.get_node_or_null("ContactHurtbox") as Area2D
+	if contact_hurtbox != null:
+		contact_hurtbox.monitoring = true
+		contact_hurtbox.monitorable = true
+
+	var attack_hitbox: Area2D = enemy.get_node_or_null("AttackHitbox") as Area2D
+	if attack_hitbox != null:
+		attack_hitbox.monitorable = true
 
 
 func _choose_next_action(enemy: EnemyBase) -> void:

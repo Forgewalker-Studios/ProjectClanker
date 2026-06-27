@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://qjd5l7rgk5a3"]
 
 [ext_resource type="Script" uid="uid://dcooidyp8hla7" path="res://Scripts/DoorHub.gd" id="1_hub"]
-[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="2_3mox2"]
-[ext_resource type="Script" path="res://Scripts/D0R1.gd" id="4_d0r1"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="2_3mox2"]
+[ext_resource type="Script" uid="uid://dobcui0r3k6fi" path="res://Scripts/D0R1.gd" id="4_d0r1"]
 [ext_resource type="Resource" uid="uid://dlgregistry01" path="res://Resources/DialogueRegistry.tres" id="5_registry"]
 [ext_resource type="Script" uid="uid://crcoeg0stpqpu" path="res://Scripts/DialogueController.gd" id="6_controller"]
 [ext_resource type="PackedScene" uid="uid://b16bxam8vbism" path="res://Scenes/UI/DialogueBox.tscn" id="7_dialogue_box"]
@@ -14,8 +14,8 @@
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="12_hud"]
 [ext_resource type="PackedScene" uid="uid://drx85hfsav11f" path="res://Scenes/UI/BossHealthBar.tscn" id="13_bossbar"]
 [ext_resource type="PackedScene" uid="uid://cr514xbtit8cj" path="res://Scenes/UI/EndingScreen.tscn" id="14_ending"]
-[ext_resource type="Script" path="res://Scripts/LevelPaintBackground.gd" id="16_background"]
-[ext_resource type="Texture2D" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="17_midground"]
+[ext_resource type="Script" uid="uid://dkfe0ah2ixx7r" path="res://Scripts/LevelPaintBackground.gd" id="16_background"]
+[ext_resource type="Texture2D" uid="uid://bsomst7msvj52" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="17_midground"]
 
 [sub_resource type="RectangleShape2D" id="floor_shape"]
 size = Vector2(1200, 40)
@@ -45,7 +45,7 @@ corner_radius_bottom_left = 5
 [node name="DoorHub" type="Node2D" unique_id=801293592]
 script = ExtResource("1_hub")
 
-[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+[node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=247366223]
 script = ExtResource("16_background")
 midground_texture = ExtResource("17_midground")
 
@@ -54,6 +54,11 @@ visible = false
 offset_right = 1280.0
 offset_bottom = 720.0
 color = Color(0.2, 0.21960784, 0.2784314, 0)
+
+[node name="RespawnPoints" type="Node2D" parent="." unique_id=626721645]
+
+[node name="HubSpawn" type="Marker2D" parent="RespawnPoints" unique_id=1633796160]
+position = Vector2(502, 596)
 
 [node name="Floor" type="StaticBody2D" parent="." unique_id=479023472]
 position = Vector2(640, 650)
@@ -68,51 +73,54 @@ polygon = PackedVector2Array(-600, -20, 600, -20, 600, 20, -600, 20)
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("2_3mox2")]
 position = Vector2(500, 603)
 
-[node name="D0R1" type="Area2D" parent="."]
+[node name="D0R1" type="Area2D" parent="." unique_id=923647211]
 position = Vector2(640, 520)
 collision_layer = 0
 collision_mask = 2
 script = ExtResource("4_d0r1")
 dialogue_registry = ExtResource("5_registry")
 
-[node name="DoorFrame" type="Polygon2D" parent="D0R1"]
+[node name="DoorFrame" type="Polygon2D" parent="D0R1" unique_id=897102913]
 color = Color(0.55, 0.58, 0.65, 1)
 polygon = PackedVector2Array(-80, -120, 80, -120, 80, 120, -80, 120)
 
-[node name="Dori" parent="D0R1" instance=ExtResource("7_dori")]
+[node name="Dori" parent="D0R1" unique_id=2023595629 instance=ExtResource("7_dori")]
 z_index = 1
 position = Vector2(-123, -132)
 scale = Vector2(0.5, 0.5)
 
-[node name="FacePanel" type="ColorRect" parent="D0R1"]
+[node name="FacePanel" type="ColorRect" parent="D0R1" unique_id=756756050]
 visible = false
 offset_left = -50.0
 offset_top = -70.0
 offset_right = 50.0
 offset_bottom = 30.0
 
-[node name="LeftEye" type="Label" parent="D0R1/FacePanel"]
+[node name="LeftEye" type="Label" parent="D0R1/FacePanel" unique_id=959185933]
+layout_mode = 0
 offset_left = 8.0
 offset_top = 12.0
 offset_right = 32.0
 offset_bottom = 40.0
 text = "o"
 
-[node name="RightEye" type="Label" parent="D0R1/FacePanel"]
+[node name="RightEye" type="Label" parent="D0R1/FacePanel" unique_id=1959947993]
+layout_mode = 0
 offset_left = 68.0
 offset_top = 12.0
 offset_right = 92.0
 offset_bottom = 40.0
 text = "o"
 
-[node name="Mouth" type="Label" parent="D0R1/FacePanel"]
+[node name="Mouth" type="Label" parent="D0R1/FacePanel" unique_id=447266255]
+layout_mode = 0
 offset_left = 30.0
 offset_top = 52.0
 offset_right = 70.0
 offset_bottom = 80.0
 text = "o"
 
-[node name="NameLabel" type="Label" parent="D0R1"]
+[node name="NameLabel" type="Label" parent="D0R1" unique_id=1968637702]
 offset_left = -40.0
 offset_top = -145.0
 offset_right = 40.0
@@ -120,11 +128,11 @@ offset_bottom = -120.0
 text = "D-0R1"
 horizontal_alignment = 1
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="D0R1"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="D0R1" unique_id=844912288]
 position = Vector2(0, 10)
 shape = SubResource("d0r1_interact")
 
-[node name="BlinkTimer" type="Timer" parent="D0R1"]
+[node name="BlinkTimer" type="Timer" parent="D0R1" unique_id=1678753570]
 wait_time = 3.0
 autostart = true
 
@@ -325,7 +333,8 @@ horizontal_alignment = 1
 [node name="PauseMenu" parent="." unique_id=1552720419 instance=ExtResource("11_pause")]
 visible = false
 
-[node name="GameplayHUD" parent="." unique_id=317113366 instance=ExtResource("12_hud")]
+[node name="GameplayHUD" parent="." unique_id=317113366 node_paths=PackedStringArray("player") instance=ExtResource("12_hud")]
+player = NodePath("../Player")
 
 [node name="BossHealthBar" parent="." unique_id=706923893 instance=ExtResource("13_bossbar")]
 

@@ -1,0 +1,21 @@
+[gd_resource type="Resource" script_class="DialogueSet" format=3 uid="uid://d2p6vnbf0x1qy"]
+
+[ext_resource type="Script" uid="uid://cq72gio8s62uc" path="res://Resources/DialogueSet.gd" id="1"]
+[ext_resource type="Script" uid="uid://qm3let07o163" path="res://Resources/DialogueEntry.gd" id="2"]
+
+[sub_resource type="Resource" id="e1"]
+script = ExtResource("2")
+text = "Dang..."
+
+[sub_resource type="Resource" id="e2"]
+script = ExtResource("2")
+text = "If only I had some chicken."
+
+[sub_resource type="Resource" id="e3"]
+script = ExtResource("2")
+text = "Then it'd been a'ight."
+
+[resource]
+script = ExtResource("1")
+dialogue_entries = Array[ExtResource("2")]([SubResource("e1"), SubResource("e2"), SubResource("e3")])
+metadata/_custom_type_script = "uid://cq72gio8s62uc"

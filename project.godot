@@ -32,6 +32,9 @@ Progression="*res://Autoload/ProgressionState.gd"
 ClankerSettings="*res://Autoload/ClankerSettings.gd"
 AudioDirector="*res://Autoload/AudioDirector.gd"
 SceneTransition="*res://Scripts/SceneTransitionController.gd"
+SceneSpawn="*uid://c3si5jrfbmood"
+PlayerStats="*uid://2i4we5ght80k"
+BossProgress="*uid://8sbksg2nomgt"
 
 [display]
 

@@ -29,6 +29,7 @@ signal boss_defeated
 @export var disable_on_death: bool = false
 ## When true, registers with the boss group and boss music on spawn.
 @export var is_boss: bool = false
+@export var boss_id: StringName = &"room_03_type05_boss"
 
 @onready var sprite: Sprite2D = $Sprite2D
 @onready var collision_shape: CollisionShape2D = $CollisionShape2D
@@ -52,6 +53,10 @@ var _behavior_ready: bool = false
 func _ready() -> void:
 	add_to_group("Resettable")
 	start_position = global_position
+
+	if is_boss and boss_id != &"room_03_type05_boss" and BossProgress.is_boss_defeated(boss_id):
+		call_deferred("queue_free")
+		return
 
 	if config == null:
 		push_error("EnemyBase._ready: config is required on %s." % name)
@@ -100,7 +105,11 @@ func _physics_process(delta: float) -> void:
 
 
 ## Reset enemy health, position, and behavior after player respawn.
+## Also separates boss entities from reset.
 func reset() -> void:
+	if is_boss and boss_id != &"" and BossProgress.is_boss_defeated(boss_id):
+		call_deferred("queue_free")
+		return
 	is_dead = false
 	is_invulnerable = false
 	is_attacking = false
@@ -167,6 +176,7 @@ func show_damage_feedback() -> void:
 
 
 ## Handle enemy death, optional removal, and boss defeat signaling.
+## Bosses now tied to BossProgress Autoload.
 func die() -> void:
 	if is_dead:
 		return
@@ -176,7 +186,10 @@ func die() -> void:
 	dead.emit()
 
 	if is_boss:
-		boss_defeated.emit()
+		if boss_id != &"":
+			BossProgress.mark_boss_defeated(boss_id)
+
+	boss_defeated.emit()
 
 	change_state(EnemyState.DOWN)
 	sprite.modulate = Color.WHITE

@@ -5,6 +5,9 @@ signal interact_requested(player: Player)
 
 ## Prompt shown while the player is in range.
 @export var prompt_text: String = "[E] Interact"
+@export var prompt_label_path: NodePath = ^"PromptLabel"
+
+@onready var prompt_label: Label = get_node_or_null(prompt_label_path) as Label
 
 
 func _ready() -> void:
@@ -12,6 +15,10 @@ func _ready() -> void:
 	monitorable = false
 	body_entered.connect(_on_body_entered)
 	body_exited.connect(_on_body_exited)
+
+	if prompt_label != null:
+		prompt_label.text = prompt_text
+		prompt_label.visible = false
 
 
 ## Register this target when the player enters range.
@@ -21,6 +28,9 @@ func _on_body_entered(body: Node2D) -> void:
 		var player: Player = body as Player
 		player.set_interact_target(self )
 
+		if prompt_label != null:
+			prompt_label.visible = true
+
 
 ## Clear this target when the player leaves range.
 ## @param body: Body that exited the area.
@@ -29,6 +39,8 @@ func _on_body_exited(body: Node2D) -> void:
 		var player: Player = body as Player
 		player.clear_interact_target(self )
 
+		if prompt_label != null:
+			prompt_label.visible = false
 
 ## Return the prompt for HUD display.
 ## @return: Interaction prompt text.

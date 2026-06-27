@@ -4,9 +4,11 @@
 [ext_resource type="Script" uid="uid://dkfe0ah2ixx7r" path="res://Scripts/LevelPaintBackground.gd" id="1_bg"]
 [ext_resource type="Script" uid="uid://dtvov58f6a244" path="res://Scripts/LevelPaintGrid.gd" id="1_grid"]
 [ext_resource type="TileSet" uid="uid://c0uyoqdtodlbf" path="res://Resources/TileSets/LevelPaintTileSet.tres" id="1_tileset"]
+[ext_resource type="PackedScene" uid="uid://w4n8b7evjpm4" path="res://Scenes/UI/PauseMenu.tscn" id="2_jjqpy"]
 [ext_resource type="Texture2D" uid="uid://bsomst7msvj52" path="res://Art/Environment/Parallax/MidgroundLevel.png" id="2_midground"]
-[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/Player.tscn" id="6_t3or0"]
-[ext_resource type="Script" path="res://Scripts/ScenePortal.gd" id="7_portal"]
+[ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="3_4wpmo"]
+[ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="6_t3or0"]
+[ext_resource type="Script" uid="uid://dkkosturff3kv" path="res://Scripts/ScenePortal.gd" id="7_portal"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj5wv"]
 size = Vector2(1790, 106.5)
@@ -53,6 +55,12 @@ size = Vector2(185, 188)
 [node name="LevelPaint" type="Node2D" unique_id=424177803]
 script = ExtResource("1_4apoi")
 
+[node name="PauseMenu" parent="." unique_id=2067872321 instance=ExtResource("2_jjqpy")]
+visible = false
+
+[node name="GameplayHUD" parent="." unique_id=2086650987 node_paths=PackedStringArray("player") instance=ExtResource("3_4wpmo")]
+player = NodePath("../Player")
+
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1141769864]
 script = ExtResource("1_bg")
 midground_texture = ExtResource("2_midground")
@@ -72,10 +80,14 @@ position = Vector2(9600, 0)
 
 [node name="RespawnPoints" type="Node2D" parent="." unique_id=1260776170]
 
-[node name="MainSpawn" type="Marker2D" parent="RespawnPoints" unique_id=444527319]
-position = Vector2(96, 581)
+[node name="FromHub" type="Marker2D" parent="RespawnPoints" unique_id=444527319]
+position = Vector2(-1, 581)
+
+[node name="From2" type="Marker2D" parent="RespawnPoints" unique_id=390205339]
+position = Vector2(1259, 380)
 
 [node name="PaintGrid" type="Node2D" parent="." unique_id=884422110]
+visible = false
 z_index = -20
 script = ExtResource("1_grid")
 
@@ -231,6 +243,7 @@ position = Vector2(-178, 476)
 collision_mask = 2
 script = ExtResource("7_portal")
 target_scene = "res://Scenes/Hub/DoorHub.tscn"
+target_spawn_name = &"HubSpawn"
 progression_state_on_enter = 3
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveToHub" unique_id=1747539532]
@@ -249,4 +262,4 @@ position = Vector2(26, -9)
 shape = SubResource("RectangleShape2D_qmol0")
 
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
-position = Vector2(70, 589)
+position = Vector2(-18, 586)

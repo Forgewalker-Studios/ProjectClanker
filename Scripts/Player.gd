@@ -42,6 +42,7 @@ signal player_left_bounds
 
 var start_position: Vector2
 var current_health: int
+var death_respawn_override: Marker2D = null
 var current_state: PlayerState = PlayerState.IDLE
 var facing_direction: float = 1.0
 var is_invulnerable: bool = false
@@ -56,8 +57,10 @@ var _interact_target: Interactable2D = null
 
 func _ready() -> void:
 	add_to_group("player")
+	_apply_scene_spawn()
 	start_position = global_position
-	current_health = max_health
+	PlayerStats.setup_health(max_health)
+	_sync_health_from_stats()
 	health_changed.emit(current_health, max_health)
 
 	hit_detection.monitoring = false
@@ -68,6 +71,29 @@ func _ready() -> void:
 
 	hit_detection.body_entered.connect(_on_attack_area_body_entered)
 	hit_detection.area_entered.connect(_on_attack_area_area_entered)
+
+
+## Spawn according to designated Marker2D using ScenePortal.gd
+func _apply_scene_spawn() -> void:
+	var spawn_name: StringName = SceneSpawn.consume_spawn_name()
+	var current_scene: Node = get_tree().current_scene
+
+	if current_scene == null:
+		return
+
+	var spawn_point: Node2D = current_scene.find_child(str(spawn_name), true, false) as Node2D
+
+	if spawn_point == null:
+		push_warning("Player: Could not find spawn point named '%s' in scene '%s'." % [spawn_name, current_scene.name])
+		return
+
+	global_position = spawn_point.global_position
+
+
+## Apply stored HP data to current scene
+func _sync_health_from_stats() -> void:
+	max_health = PlayerStats.max_health
+	current_health = PlayerStats.current_health
 
 
 ## Apply movement, gravity, jump, attack, and debug health inputs.
@@ -274,8 +300,8 @@ func take_damage(amount: int) -> void:
 	if is_invulnerable:
 		return
 
-	current_health -= amount
-	current_health = clampi(current_health, 0, max_health)
+	PlayerStats.take_damage(amount)
+	_sync_health_from_stats()
 
 	health_changed.emit(current_health, max_health)
 	damage_taken.emit(amount)
@@ -327,8 +353,8 @@ func start_invulnerability() -> void:
 ## Restore health and notify listeners.
 ## @param amount: Health to add.
 func heal(amount: int) -> void:
-	current_health += amount
-	current_health = clampi(current_health, 0, max_health)
+	PlayerStats.heal(amount)
+	_sync_health_from_stats()
 
 	health_changed.emit(current_health, max_health)
 	health_healed.emit(amount)
@@ -345,9 +371,11 @@ func die() -> void:
 	else:
 		change_state(PlayerState.DOWNFALL)
 	var fade_data: Dictionary = await fade_to_black()
-	current_health = max_health
+	PlayerStats.refill_health()
+	_sync_health_from_stats()
 	health_changed.emit(current_health, max_health)
-	respawn_at(start_position)
+	var respawn_position: Vector2 = _get_death_respawn_position()
+	respawn_at(respawn_position)
 	player_died.emit()
 	is_dead = false
 	current_state = PlayerState.IDLE
@@ -405,6 +433,21 @@ func respawn_at(respawn_position: Vector2) -> void:
 	velocity = Vector2.ZERO
 	if respawn_position != start_position:
 		player_left_bounds.emit()
+
+
+func set_death_respawn_override(marker: Marker2D) -> void:
+	death_respawn_override = marker
+
+
+func clear_death_respawn_override() -> void:
+	death_respawn_override = null
+
+
+func _get_death_respawn_position() -> Vector2:
+	if death_respawn_override != null and is_instance_valid(death_respawn_override):
+		return death_respawn_override.global_position
+
+	return start_position
 
 
 ## Lock or unlock movement while dialogue is active.

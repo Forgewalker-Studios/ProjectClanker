@@ -1,15 +1,15 @@
-[gd_scene load_steps=3 format=3 uid="uid://bosshealthbarclanker"]
+[gd_scene format=3 uid="uid://drx85hfsav11f"]
 
-[ext_resource type="Script" path="res://Scripts/BossHealthBar.gd" id="1_bossbar"]
+[ext_resource type="Script" uid="uid://bupbd8rk8aoi1" path="res://Scripts/BossHealthBar.gd" id="1_bossbar"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_boss"]
 outline_size = 4
 outline_color = Color(0, 0, 0, 1)
 
-[node name="BossHealthBar" type="CanvasLayer"]
+[node name="BossHealthBar" type="CanvasLayer" unique_id=1231083500]
 script = ExtResource("1_bossbar")
 
-[node name="BossPanel" type="PanelContainer" parent="."]
+[node name="BossPanel" type="PanelContainer" parent="." unique_id=1475069832]
 unique_name_in_owner = true
 anchors_preset = 5
 anchor_left = 0.5
@@ -20,18 +20,18 @@ offset_right = 220.0
 offset_bottom = 72.0
 grow_horizontal = 2
 
-[node name="BossVBox" type="VBoxContainer" parent="BossPanel"]
+[node name="BossVBox" type="VBoxContainer" parent="BossPanel" unique_id=1758431962]
 layout_mode = 2
 theme_override_constants/separation = 4
 
-[node name="BossNameLabel" type="Label" parent="BossPanel/BossVBox"]
+[node name="BossNameLabel" type="Label" parent="BossPanel/BossVBox" unique_id=1577562502]
 unique_name_in_owner = true
 layout_mode = 2
 text = "Boss"
 label_settings = SubResource("LabelSettings_boss")
 horizontal_alignment = 1
 
-[node name="BossHealthBar" type="ProgressBar" parent="BossPanel/BossVBox"]
+[node name="BossHealthBar" type="ProgressBar" parent="BossPanel/BossVBox" unique_id=818308645]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(360, 20)
 layout_mode = 2
