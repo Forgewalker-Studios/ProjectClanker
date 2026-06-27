@@ -3,20 +3,44 @@
 [ext_resource type="PackedScene" uid="uid://enemybase001" path="res://Scenes/Enemies/EnemyBase.tscn" id="1_base"]
 [ext_resource type="Resource" uid="uid://ryreareublae" path="res://Resources/Enemies/Type05_BossEnemyConfig.tres" id="2_config"]
 [ext_resource type="Script" uid="uid://ds1vcnskydnqp" path="res://Scripts/Enemies/Behaviors/BossBehavior.gd" id="3_behavior"]
+[ext_resource type="Texture2D" uid="uid://3ni0w0ucfy0q" path="res://Art/Environment/Silhouettes/Environment Extras/Floor Light Projection.png" id="3_i1ame"]
 
 [node name="Type05_BossEnemy" unique_id=224357834 instance=ExtResource("1_base")]
+collision_layer = 0
+collision_mask = 1
 config = ExtResource("2_config")
 is_boss = true
+uses_hit_stun_on_damage = false
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=1809485795]
 position = Vector2(-6, 0)
 flip_h = true
 
-[node name="PatrolA" parent="PatrolPoints" index="0"]
+[node name="DefendVisual" type="Sprite2D" parent="." index="1" unique_id=819412951]
+visible = false
+modulate = Color(0.16862746, 0.23921569, 1, 0.5882353)
+light_mask = 4
+visibility_layer = 4
+position = Vector2(-4, -12.999999)
+scale = Vector2(0.23849502, 0.3251882)
+texture = ExtResource("3_i1ame")
+
+[node name="CollisionShape2D" parent="AttackHitbox" parent_id_path=PackedInt32Array(991095035) index="0" unique_id=22536898]
+position = Vector2(9, 0)
+
+[node name="PatrolA" parent="PatrolPoints" parent_id_path=PackedInt32Array(1946913176) index="0" unique_id=743823159]
 position = Vector2(0, 0)
 
-[node name="PatrolB" parent="PatrolPoints" index="1"]
+[node name="PatrolB" parent="PatrolPoints" parent_id_path=PackedInt32Array(1946913176) index="1" unique_id=1921521569]
 position = Vector2(0, 0)
 
-[node name="Behavior" parent="." index="7"]
+[node name="ProjectileSpawn" parent="." index="7" unique_id=1942880010]
+position = Vector2(1, -33)
+
+[node name="Behavior" parent="." index="8" unique_id=1181308095]
 script = ExtResource("3_behavior")
+starts_active = null
+projectile_burst_count = null
+projectile_arc_spread_degrees = null
+projectile_burst_interval_sec = null
+projectile_prediction_strength = null

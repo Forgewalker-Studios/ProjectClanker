@@ -7,9 +7,12 @@
 [node name="Type03B_FlyingPursuitEnemy" unique_id=1858536836 instance=ExtResource("1_base")]
 config = ExtResource("2_config")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=1809485795]
 position = Vector2(-5, 0)
 flip_h = true
 
-[node name="Behavior" parent="." index="7"]
+[node name="CollisionShape2D" parent="AttackHitbox" parent_id_path=PackedInt32Array(991095035) index="0" unique_id=22536898]
+position = Vector2(9, 0)
+
+[node name="Behavior" parent="." index="7" unique_id=1181308095]
 script = ExtResource("3_behavior")

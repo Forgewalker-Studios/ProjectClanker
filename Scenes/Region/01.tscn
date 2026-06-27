@@ -9,6 +9,8 @@
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="3_4wpmo"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="6_t3or0"]
 [ext_resource type="Script" uid="uid://dkkosturff3kv" path="res://Scripts/ScenePortal.gd" id="7_portal"]
+[ext_resource type="Script" uid="uid://ckl5hk5wber56" path="res://Scripts/HealthPickup.gd" id="9_r5ls0"]
+[ext_resource type="Texture2D" uid="uid://clhdwred02nj5" path="res://Assets/2d-sci-fi-industrial-platform-builder/2D Sci-Fi Industrial Platform Builder/2-PNG Files/Environment Extras/Wall Sign.png" id="10_stkla"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_tj5wv"]
 size = Vector2(1790, 106.5)
@@ -51,6 +53,9 @@ size = Vector2(213, 261)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qmol0"]
 size = Vector2(185, 188)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pjd1e"]
+size = Vector2(67.625, 60.125)
 
 [node name="LevelPaint" type="Node2D" unique_id=424177803]
 script = ExtResource("1_4apoi")
@@ -260,6 +265,20 @@ progression_state_on_enter = 3
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/MoveTo2" unique_id=948441875]
 position = Vector2(26, -9)
 shape = SubResource("RectangleShape2D_qmol0")
+
+[node name="HP" type="Area2D" parent="Level/FEAT" unique_id=11877119]
+position = Vector2(817, 103)
+collision_mask = 2
+script = ExtResource("9_r5ls0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/HP" unique_id=1053470264]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_pjd1e")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/FEAT/HP" unique_id=834127736]
+rotation = -0.6981317
+scale = Vector2(0.10449225, 0.11132811)
+texture = ExtResource("10_stkla")
 
 [node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
 position = Vector2(-18, 586)

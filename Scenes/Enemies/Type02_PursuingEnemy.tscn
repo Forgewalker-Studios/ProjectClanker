@@ -7,26 +7,29 @@
 [node name="Type02_PursuingEnemy" unique_id=1122585598 instance=ExtResource("1_base")]
 config = ExtResource("2_config")
 
-[node name="Sprite2D" parent="." index="0"]
+[node name="Sprite2D" parent="." index="0" unique_id=1809485795]
 flip_h = true
 
-[node name="CollisionShape2D" parent="." index="1"]
+[node name="CollisionShape2D" parent="." index="1" unique_id=56882458]
 position = Vector2(1, -1)
 
-[node name="ContactHurtbox" parent="." index="2"]
+[node name="ContactHurtbox" parent="." index="2" unique_id=812238703]
 position = Vector2(4, 0)
 
-[node name="AttackHitbox" parent="." index="3"]
+[node name="AttackHitbox" parent="." index="3" unique_id=991095035]
 position = Vector2(16, -4)
 
-[node name="LineOfSight" parent="." index="4"]
+[node name="CollisionShape2D" parent="AttackHitbox" index="0" unique_id=22536898]
+position = Vector2(15, 0)
+
+[node name="LineOfSight" parent="." index="4" unique_id=520715015]
 position = Vector2(4, 0)
 
-[node name="PatrolPoints" parent="." index="5"]
+[node name="PatrolPoints" parent="." index="5" unique_id=1946913176]
 position = Vector2(4, 0)
 
-[node name="ProjectileSpawn" parent="." index="6"]
+[node name="ProjectileSpawn" parent="." index="6" unique_id=1942880010]
 position = Vector2(24, -8)
 
-[node name="Behavior" parent="." index="7"]
+[node name="Behavior" parent="." index="7" unique_id=1181308095]
 script = ExtResource("3_behavior")

@@ -9,9 +9,10 @@
 [ext_resource type="PackedScene" uid="uid://cxl67kjepbpif" path="res://Scenes/UI/GameplayHUD.tscn" id="3_hgcha"]
 [ext_resource type="PackedScene" uid="uid://m08ydqcdcoxp" path="res://Scenes/player.tscn" id="6_t3or0"]
 [ext_resource type="PackedScene" uid="uid://enemytype04" path="res://Scenes/Enemies/Type04_LatchedEnemy.tscn" id="7_la32f"]
-[ext_resource type="PackedScene" uid="uid://enemytype03b" path="res://Scenes/Enemies/Type03B_FlyingPursuitEnemy.tscn" id="7_nvcps"]
 [ext_resource type="PackedScene" uid="uid://enemytype01" path="res://Scenes/Enemies/Type01_RoamingEnemy.tscn" id="9_74ao6"]
+[ext_resource type="Script" uid="uid://ckl5hk5wber56" path="res://Scripts/HealthPickup.gd" id="10_hkr4b"]
 [ext_resource type="Script" uid="uid://dkkosturff3kv" path="res://Scripts/ScenePortal.gd" id="10_portal"]
+[ext_resource type="Texture2D" uid="uid://clhdwred02nj5" path="res://Assets/2d-sci-fi-industrial-platform-builder/2D Sci-Fi Industrial Platform Builder/2-PNG Files/Environment Extras/Wall Sign.png" id="11_hkr4b"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bqy07"]
 size = Vector2(1425, 289)
@@ -112,6 +113,9 @@ size = Vector2(298, 183.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nvcps"]
 size = Vector2(64, 114.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_x2au5"]
+size = Vector2(67.625, 60.125)
+
 [node name="LevelPaint" type="Node2D" unique_id=424177803]
 script = ExtResource("1_4apoi")
 
@@ -124,6 +128,9 @@ player = NodePath("../Player")
 [node name="ParallaxBackground" type="ParallaxBackground" parent="." unique_id=1141769864]
 script = ExtResource("1_bg")
 midground_texture = ExtResource("2_midground")
+
+[node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
+position = Vector2(-39, 425)
 
 [node name="LevelBounds" type="Node2D" parent="." unique_id=1260776171]
 
@@ -173,7 +180,7 @@ collision_enabled = false
 
 [node name="Foreground" type="TileMapLayer" parent="LevelPaint" unique_id=50546545]
 z_index = 1
-tile_map_data = PackedByteArray("AACgABkAAAAGAAQAAAA=")
+tile_map_data = PackedByteArray("AACgABkAAAAGAAQAAACtAAEAAAAFAAAAAFCtAAUAAAAFAAAAAFA=")
 tile_set = ExtResource("1_tileset")
 collision_enabled = false
 
@@ -462,19 +469,41 @@ position = Vector2(2777, 52)
 position = Vector2(-1, 10.75)
 shape = SubResource("RectangleShape2D_nvcps")
 
+[node name="HP" type="Area2D" parent="Level/FEAT" unique_id=1592706333]
+position = Vector2(2242, 556)
+collision_mask = 2
+script = ExtResource("10_hkr4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/HP" unique_id=805435518]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_x2au5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/FEAT/HP" unique_id=1929853814]
+rotation = -0.6981317
+scale = Vector2(0.10449225, 0.11132811)
+texture = ExtResource("11_hkr4b")
+
+[node name="HP2" type="Area2D" parent="Level/FEAT" unique_id=1810677969]
+position = Vector2(3144, 75)
+collision_mask = 2
+script = ExtResource("10_hkr4b")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Level/FEAT/HP2" unique_id=2043224577]
+position = Vector2(-1, -1)
+shape = SubResource("RectangleShape2D_x2au5")
+
+[node name="Sprite2D" type="Sprite2D" parent="Level/FEAT/HP2" unique_id=2003272599]
+rotation = -0.6981317
+scale = Vector2(0.10449225, 0.11132811)
+texture = ExtResource("11_hkr4b")
+
 [node name="ENEMY" type="Node" parent="Level" unique_id=1564741858]
 
 [node name="Type04_LatchedEnemy" parent="Level/ENEMY" unique_id=621897090 instance=ExtResource("7_la32f")]
 position = Vector2(2388, 448)
 
-[node name="Type03B_FlyingPursuitEnemy" parent="Level/ENEMY" unique_id=1858536836 instance=ExtResource("7_nvcps")]
-position = Vector2(1844, 389)
-
 [node name="Type01_RoamingEnemy" parent="Level/ENEMY" unique_id=1711006941 instance=ExtResource("9_74ao6")]
-position = Vector2(1051, 412)
+position = Vector2(600, 413)
 
 [node name="Type01_RoamingEnemy2" parent="Level/ENEMY" unique_id=236557810 instance=ExtResource("9_74ao6")]
 position = Vector2(3702, 204)
-
-[node name="Player" parent="." unique_id=879303707 instance=ExtResource("6_t3or0")]
-position = Vector2(-39, 425)

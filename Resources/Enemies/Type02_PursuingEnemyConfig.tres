@@ -1,24 +1,15 @@
-[gd_resource type="Resource" script_class="EnemyConfig" load_steps=2 format=3 uid="uid://enemyconfig02"]
+[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://ryreareublab"]
 
-[ext_resource type="Script" path="res://Resources/EnemyConfig.gd" id="1_script"]
+[ext_resource type="Script" uid="uid://uvlwp0tvmtba" path="res://Resources/EnemyConfig.gd" id="1_script"]
 
 [resource]
 script = ExtResource("1_script")
 display_name = "Pursuing Enemy"
 max_health = 4
 move_speed = 70.0
-charge_speed = 260.0
+charge_speed = 300.0
 damage_mode = 1
-contact_damage = 1
-attack_damage = 1
-contact_damage_cooldown_sec = 0.5
 attack_active_time_sec = 0.18
 attack_recovery_time_sec = 0.7
 detection_range = 180.0
 lose_target_range = 260.0
-gravity_scale = 1.0
-projectile_cooldown_sec = 2.0
-projectile_speed = 320.0
-boss_defend_duration_sec = 1.2
-boss_defend_interval_sec = 5.0
-boss_defend_chance = 0.25

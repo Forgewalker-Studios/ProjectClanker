@@ -47,3 +47,5 @@ enum DamageMode {
 @export var boss_defend_interval_sec: float = 5.0
 ## Chance per attack cycle that the boss chooses defend instead of an attack.
 @export var boss_defend_chance: float = 0.25
+## When true, this enemy's projectiles ignore environment collision and only hit the player.
+@export var projectile_ignores_environment: bool = false
