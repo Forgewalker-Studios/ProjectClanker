@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://ryreareublae"]
 
 [ext_resource type="Script" uid="uid://uvlwp0tvmtba" path="res://Resources/EnemyConfig.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://djjimenp1wekm" path="res://Scenes/Enemies/EnemyProjectile.tscn" id="2_projectile"]
+[ext_resource type="PackedScene" uid="uid://enemyprojectile001" path="res://Scenes/Enemies/EnemyProjectile.tscn" id="2_projectile"]
 
 [resource]
 script = ExtResource("1_script")
@@ -15,9 +15,10 @@ attack_active_time_sec = 0.22
 attack_recovery_time_sec = 0.85
 detection_range = 9999.0
 lose_target_range = 9999.0
-projectile_scene = ExtResource("2_projectile")
-projectile_speed = 340.0
 boss_defend_duration_sec = 1.4
 boss_defend_interval_sec = 4.5
 boss_defend_chance = 0.3
+projectile_scene = ExtResource("2_projectile")
+projectile_speed = 350.0
+projectile_cooldown_sec = 2.0
 projectile_ignores_environment = true

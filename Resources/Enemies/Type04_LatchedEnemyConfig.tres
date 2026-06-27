@@ -1,16 +1,26 @@
-[gd_resource type="Resource" script_class="EnemyConfig" format=3 uid="uid://ryreareublad"]
+[gd_resource type="Resource" script_class="EnemyConfig" load_steps=3 format=3 uid="uid://enemyconfig04"]
 
-[ext_resource type="Script" uid="uid://uvlwp0tvmtba" path="res://Resources/EnemyConfig.gd" id="1_script"]
-[ext_resource type="PackedScene" uid="uid://djjimenp1wekm" path="res://Scenes/Enemies/EnemyProjectile.tscn" id="2_projectile"]
+[ext_resource type="Script" path="res://Resources/EnemyConfig.gd" id="1_script"]
+[ext_resource type="PackedScene" uid="uid://enemyprojectile001" path="res://Scenes/Enemies/EnemyProjectile.tscn" id="2_projectile"]
 
 [resource]
 script = ExtResource("1_script")
 display_name = "Latched Enemy"
 max_health = 2
 move_speed = 0.0
+charge_speed = 220.0
 damage_mode = 2
+contact_damage = 1
+attack_damage = 1
+contact_damage_cooldown_sec = 0.5
+attack_active_time_sec = 0.15
+attack_recovery_time_sec = 0.6
 detection_range = 400.0
+lose_target_range = 420.0
 gravity_scale = 0.0
 projectile_scene = ExtResource("2_projectile")
 projectile_cooldown_sec = 1.8
-projectile_speed = 340.0
+projectile_speed = 320.0
+boss_defend_duration_sec = 1.2
+boss_defend_interval_sec = 5.0
+boss_defend_chance = 0.25
